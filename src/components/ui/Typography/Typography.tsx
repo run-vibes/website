@@ -67,7 +67,7 @@ const textVariants = cva('', {
   },
 })
 
-type TextElement = 'p' | 'span' | 'div' | 'label'
+type TextElement = 'p' | 'span' | 'div'
 
 interface TextProps
   extends Omit<ComponentProps<'p'>, 'ref'>,
