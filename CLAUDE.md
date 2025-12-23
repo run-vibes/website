@@ -115,7 +115,74 @@ We follow Test-Driven Development for component and utility code:
 
 All checks must pass before work is considered done.
 
-## Git Conventions
+## Git Commit Conventions
 
-- Do not add "Generated with Claude Code" to commit messages
-- Do not add "Co-Authored-By" trailers to commits
+Follow [Conventional Commits](https://www.conventionalcommits.org/) format:
+
+```
+<type>: <description>
+
+[optional body]
+```
+
+**Types:**
+- `feat:` — New feature or functionality
+- `fix:` — Bug fix
+- `docs:` — Documentation changes only
+- `style:` — Formatting, whitespace (no code change)
+- `refactor:` — Code restructuring (no behavior change)
+- `test:` — Adding or updating tests
+- `chore:` — Build, tooling, dependencies
+
+**Guidelines:**
+- Use imperative mood: "add feature" not "added feature"
+- Keep subject line under 72 characters
+- No period at end of subject line
+- Separate subject from body with blank line
+- Body explains *what* and *why*, not *how*
+
+**Do NOT include:**
+- "Generated with Claude Code" footers
+- "Co-Authored-By" trailers
+
+**Examples:**
+```
+feat: add user authentication flow
+
+fix: prevent form submission on empty input
+
+refactor: extract validation logic to shared utility
+```
+
+## Pull Request Conventions
+
+**Title format:** Same as commit message (`<type>: <description>`)
+
+**Body structure:**
+```markdown
+## Summary
+- Bullet points describing what changed (2-4 items)
+
+## Test Plan
+- [ ] Verification steps as checklist
+```
+
+**Guidelines:**
+- Title should describe the overall change, not individual commits
+- Summary bullets focus on *what* changed, not *how*
+- Test plan includes both automated checks and manual verification
+- Link related issues with "Fixes #123" or "Closes #123"
+
+**Example:**
+```markdown
+## Summary
+- Add login form with email/password validation
+- Implement session persistence with secure cookies
+- Add logout button to navigation
+
+## Test Plan
+- [x] All unit tests passing (`pnpm test`)
+- [x] TypeScript and lint checks pass (`just check`)
+- [ ] Manual test: login flow works end-to-end
+- [ ] Manual test: session persists across page refresh
+```
