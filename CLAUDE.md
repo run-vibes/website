@@ -17,6 +17,12 @@ Marketing website for Vibes, an agentic consulting & development studio. Positio
 
 ## Development Commands
 
+**Important:** All `pnpm` commands must run inside the Nix dev shell. Either:
+1. Enter the shell first: `nix develop`
+2. Or prefix commands: `nix develop --command pnpm <command>`
+
+If using direnv, the shell activates automatically when entering the project directory.
+
 ```bash
 # Enter dev environment
 nix develop
@@ -27,11 +33,27 @@ pnpm install
 # Start dev server
 pnpm dev
 
+# Run tests
+pnpm test              # unit tests (Vitest)
+pnpm e2e               # E2E tests (Playwright)
+
+# Code quality
+pnpm typecheck         # TypeScript
+pnpm lint              # Biome linter
+pnpm format            # Biome formatter
+
 # Build for production
 pnpm build
 
 # Deploy to Cloudflare Pages
 pnpm deploy
+```
+
+**Using Just (task runner):**
+```bash
+just                   # List available commands
+just dev               # Start dev server
+just check             # Run all checks (typecheck, lint, test)
 ```
 
 ## Architecture
