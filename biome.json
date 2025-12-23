@@ -23,6 +23,6 @@
   },
   "files": {
     "include": ["src/**", "workers/**", "e2e/**", "*.ts", "*.tsx", "*.js", "*.json"],
-    "ignore": ["dist", "node_modules", ".vinxi", ".output", "*.gen.ts", "/nix/**"]
+    "ignore": ["dist", "node_modules", ".vinxi", ".output", ".tanstack", "*.gen.ts", "/nix/**"]
   }
 }

@@ -13,6 +13,8 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      - uses: extractions/setup-just@v2
+
       - uses: pnpm/action-setup@v4
         with:
           version: 9
@@ -25,17 +27,11 @@ jobs:
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
 
-      - name: Type check
-        run: pnpm typecheck
-
-      - name: Lint
-        run: pnpm lint
-
-      - name: Test
-        run: pnpm test
+      - name: Run checks
+        run: just check
 
       - name: Build
-        run: pnpm build
+        run: just build
 
   e2e:
     name: E2E Tests
@@ -43,6 +39,8 @@ jobs:
     needs: check
     steps:
       - uses: actions/checkout@v4
+
+      - uses: extractions/setup-just@v2
 
       - uses: pnpm/action-setup@v4
         with:
@@ -60,10 +58,10 @@ jobs:
         run: pnpm exec playwright install --with-deps chromium
 
       - name: Build
-        run: pnpm build
+        run: just build
 
       - name: Run E2E tests
-        run: pnpm e2e
+        run: just e2e
 
       - uses: actions/upload-artifact@v4
         if: always()

@@ -108,10 +108,18 @@ We follow Test-Driven Development for component and utility code:
    - `pnpm lint` — Biome linting
    - `pnpm test` — Unit tests
 
-2. **`just ladle`** — Visual component review:
+2. **`just dev`** — Verify dev server starts:
+   - Confirm no startup errors
+   - Check that the page loads at http://localhost:3000
+
+3. **`just ladle`** — Visual component review:
    - Verify components render correctly in isolation
    - Check variants and edge cases visually
    - Confirm no visual regressions
+
+4. **`just e2e`** — End-to-end tests:
+   - Run Playwright tests against the built app
+   - Verify critical user journeys work
 
 All checks must pass before work is considered done.
 
