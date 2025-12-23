@@ -17,6 +17,12 @@ Marketing website for Vibes, an agentic consulting & development studio. Positio
 
 ## Development Commands
 
+**Important:** All `pnpm` commands must run inside the Nix dev shell. Either:
+1. Enter the shell first: `nix develop`
+2. Or prefix commands: `nix develop --command pnpm <command>`
+
+If using direnv, the shell activates automatically when entering the project directory.
+
 ```bash
 # Enter dev environment
 nix develop
@@ -27,11 +33,27 @@ pnpm install
 # Start dev server
 pnpm dev
 
+# Run tests
+pnpm test              # unit tests (Vitest)
+pnpm e2e               # E2E tests (Playwright)
+
+# Code quality
+pnpm typecheck         # TypeScript
+pnpm lint              # Biome linter
+pnpm format            # Biome formatter
+
 # Build for production
 pnpm build
 
 # Deploy to Cloudflare Pages
 pnpm deploy
+```
+
+**Using Just (task runner):**
+```bash
+just                   # List available commands
+just dev               # Start dev server
+just check             # Run all checks (typecheck, lint, test)
 ```
 
 ## Architecture
@@ -48,7 +70,127 @@ pnpm deploy
 
 See `docs/PRD.md` for full product requirements.
 
-## Git Conventions
+## Testing Philosophy (TDD)
 
-- Do not add "Generated with Claude Code" to commit messages
-- Do not add "Co-Authored-By" trailers to commits
+**REQUIRED:** Use the `superpowers:test-driven-development` skill when implementing any feature or fix. Invoke it with the Skill tool before writing implementation code.
+
+We follow Test-Driven Development for component and utility code:
+
+1. **Write the failing test first** — Define expected behavior before implementation
+2. **Run the test to verify it fails** — Confirms the test is actually testing something
+3. **Write minimal code to pass** — Only implement what's needed to make the test green
+4. **Run tests to verify they pass** — Confirm implementation is correct
+5. **Commit** — Small, frequent commits after each passing test
+
+**Test structure:**
+- Unit tests live next to components: `Button.test.tsx` beside `Button.tsx`
+- E2E tests in `e2e/` folder for user journey testing
+- Use `@testing-library/react` for component tests (test behavior, not implementation)
+- Use Playwright for E2E tests
+
+**What to test:**
+- Component rendering and variants
+- User interactions (clicks, input)
+- Conditional rendering
+- Props pass-through and className merging
+
+**What NOT to test:**
+- Implementation details (internal state, private methods)
+- Styling (covered by visual review in Ladle)
+- Third-party library behavior
+
+## Verification Before Completing Work
+
+**REQUIRED:** Always run these verification steps before marking work complete:
+
+1. **`just check`** — Run all code quality checks:
+   - `pnpm typecheck` — TypeScript type checking
+   - `pnpm lint` — Biome linting
+   - `pnpm test` — Unit tests
+
+2. **`just dev`** — Verify dev server starts:
+   - Confirm no startup errors
+   - Check that the page loads at http://localhost:3000
+
+3. **`just ladle`** — Visual component review:
+   - Verify components render correctly in isolation
+   - Check variants and edge cases visually
+   - Confirm no visual regressions
+
+4. **`just e2e`** — End-to-end tests:
+   - Run Playwright tests against the built app
+   - Verify critical user journeys work
+
+All checks must pass before work is considered done.
+
+## Git Commit Conventions
+
+Follow [Conventional Commits](https://www.conventionalcommits.org/) format:
+
+```
+<type>: <description>
+
+[optional body]
+```
+
+**Types:**
+- `feat:` — New feature or functionality
+- `fix:` — Bug fix
+- `docs:` — Documentation changes only
+- `style:` — Formatting, whitespace (no code change)
+- `refactor:` — Code restructuring (no behavior change)
+- `test:` — Adding or updating tests
+- `chore:` — Build, tooling, dependencies
+
+**Guidelines:**
+- Use imperative mood: "add feature" not "added feature"
+- Keep subject line under 72 characters
+- No period at end of subject line
+- Separate subject from body with blank line
+- Body explains *what* and *why*, not *how*
+
+**Do NOT include:**
+- "Generated with Claude Code" footers
+- "Co-Authored-By" trailers
+
+**Examples:**
+```
+feat: add user authentication flow
+
+fix: prevent form submission on empty input
+
+refactor: extract validation logic to shared utility
+```
+
+## Pull Request Conventions
+
+**Title format:** Same as commit message (`<type>: <description>`)
+
+**Body structure:**
+```markdown
+## Summary
+- Bullet points describing what changed (2-4 items)
+
+## Test Plan
+- [ ] Verification steps as checklist
+```
+
+**Guidelines:**
+- Title should describe the overall change, not individual commits
+- Summary bullets focus on *what* changed, not *how*
+- Test plan includes both automated checks and manual verification
+- Link related issues with "Fixes #123" or "Closes #123"
+
+**Example:**
+```markdown
+## Summary
+- Add login form with email/password validation
+- Implement session persistence with secure cookies
+- Add logout button to navigation
+
+## Test Plan
+- [x] All unit tests passing (`pnpm test`)
+- [x] TypeScript and lint checks pass (`just check`)
+- [ ] Manual test: login flow works end-to-end
+- [ ] Manual test: session persists across page refresh
+```
