@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vibes — Daybreak Dark 3D Theme</title>
+  <link rel="stylesheet" href="../shared/reset.css">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+  <!-- Navigation -->
+  <nav class="nav">
+    <div class="nav-container">
+      <a href="#" class="nav-logo">Vibes</a>
+      <div class="nav-links">
+        <a href="#services">Services</a>
+        <a href="#work">Work</a>
+        <a href="#industries">Industries</a>
+        <a href="#insights">Insights</a>
+        <a href="#contact" class="nav-cta">Let's Talk</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero -->
+  <section class="hero" id="hero">
+    <div class="hero-shapes" id="shapes"></div>
+    <div class="hero-content" data-animate>
+      <h1 class="hero-headline"></h1>
+      <p class="hero-subheadline"></p>
+      <p class="hero-description"></p>
+      <div class="hero-ctas">
+        <button class="btn btn-primary"></button>
+        <button class="btn btn-secondary"></button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Social Proof -->
+  <section class="social-proof" data-animate>
+    <div class="container">
+      <p class="social-proof-label">Trusted by innovative teams</p>
+      <div class="social-proof-logos">
+        <div class="logo-placeholder"></div>
+        <div class="logo-placeholder"></div>
+        <div class="logo-placeholder"></div>
+        <div class="logo-placeholder"></div>
+        <div class="logo-placeholder"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Services -->
+  <section class="services" id="services">
+    <div class="container">
+      <h2 class="section-title" data-animate>What We Build</h2>
+      <div class="services-grid" data-animate data-stagger>
+      </div>
+    </div>
+  </section>
+
+  <!-- Featured Work -->
+  <section class="work" id="work">
+    <div class="container">
+      <h2 class="section-title" data-animate>Featured Work</h2>
+      <div class="work-grid" data-animate data-stagger>
+      </div>
+      <div class="work-cta" data-animate>
+        <a href="#" class="btn btn-secondary">View All Work</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Industries -->
+  <section class="industries" id="industries">
+    <div class="container">
+      <h2 class="section-title" data-animate>Industries We Serve</h2>
+      <div class="industries-grid" data-animate data-stagger>
+      </div>
+    </div>
+  </section>
+
+  <!-- Insights -->
+  <section class="insights" id="insights">
+    <div class="container">
+      <h2 class="section-title" data-animate>Latest Insights</h2>
+      <div class="insights-grid" data-animate data-stagger>
+      </div>
+      <div class="insights-newsletter" data-animate>
+        <p>Get insights delivered to your inbox</p>
+        <form class="newsletter-form">
+          <input type="email" placeholder="your@email.com" class="newsletter-input">
+          <button type="submit" class="btn btn-primary">Subscribe</button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- Final CTA -->
+  <section class="final-cta" id="contact">
+    <div class="container" data-animate>
+      <h2 class="final-cta-headline"></h2>
+      <p class="final-cta-description"></p>
+      <div class="final-cta-buttons">
+        <button class="btn btn-primary btn-large"></button>
+        <button class="btn btn-secondary"></button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-content">
+        <span class="footer-copyright"></span>
+        <div class="footer-links">
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../shared/content.js"></script>
+  <script src="../shared/animations.js"></script>
+  <script src="objects3d.js"></script>
+  <script>
+    AnimUtils.onReady(() => {
+      // Hero
+      document.querySelector('.hero-headline').textContent = CONTENT.hero.headline;
+      document.querySelector('.hero-subheadline').textContent = CONTENT.hero.subheadline;
+      document.querySelector('.hero-description').textContent = CONTENT.hero.description;
+      document.querySelector('.hero-ctas .btn-primary').textContent = CONTENT.hero.primaryCta;
+      document.querySelector('.hero-ctas .btn-secondary').textContent = CONTENT.hero.secondaryCta;
+
+      // Services
+      const servicesGrid = document.querySelector('.services-grid');
+      CONTENT.services.forEach(service => {
+        servicesGrid.innerHTML += `
+          <div class="service-card" data-animate-child>
+            <div class="service-icon" data-icon="${service.icon}"></div>
+            <h3 class="service-title">${service.title}</h3>
+            <p class="service-tagline">${service.tagline}</p>
+            <p class="service-description">${service.description}</p>
+          </div>
+        `;
+      });
+
+      // Case Studies
+      const workGrid = document.querySelector('.work-grid');
+      CONTENT.caseStudies.forEach(study => {
+        workGrid.innerHTML += `
+          <div class="work-card" data-animate-child>
+            <span class="work-industry">${study.industry}</span>
+            <h3 class="work-title">${study.title}</h3>
+            <p class="work-challenge">${study.challenge}</p>
+            <div class="work-outcome">
+              <span class="work-metric">${study.metrics[0]}</span>
+              <span class="work-metric-label">${study.metrics[1]}</span>
+            </div>
+          </div>
+        `;
+      });
+
+      // Industries
+      const industriesGrid = document.querySelector('.industries-grid');
+      CONTENT.industries.forEach(industry => {
+        industriesGrid.innerHTML += `
+          <div class="industry-card" data-animate-child>
+            <div class="industry-icon" data-icon="${industry.icon}"></div>
+            <span class="industry-name">${industry.name}</span>
+          </div>
+        `;
+      });
+
+      // Insights
+      const insightsGrid = document.querySelector('.insights-grid');
+      CONTENT.insights.forEach(insight => {
+        insightsGrid.innerHTML += `
+          <div class="insight-card" data-animate-child>
+            <span class="insight-category">${insight.category}</span>
+            <h3 class="insight-title">${insight.title}</h3>
+            <span class="insight-read-time">${insight.readTime} read</span>
+          </div>
+        `;
+      });
+
+      // Final CTA
+      document.querySelector('.final-cta-headline').textContent = CONTENT.finalCta.headline;
+      document.querySelector('.final-cta-description').textContent = CONTENT.finalCta.description;
+      document.querySelector('.final-cta-buttons .btn-primary').textContent = CONTENT.finalCta.primaryCta;
+      document.querySelector('.final-cta-buttons .btn-secondary').textContent = CONTENT.finalCta.secondaryCta;
+
+      // Footer
+      document.querySelector('.footer-copyright').textContent = CONTENT.footer.copyright;
+      const footerLinks = document.querySelector('.footer-links');
+      CONTENT.footer.links.forEach(link => {
+        footerLinks.innerHTML += `<a href="#">${link}</a>`;
+      });
+
+      // Initialize
+      AnimUtils.initScrollAnimations();
+      init3DObjects();
+    });
+  </script>
+</body>
+</html>
