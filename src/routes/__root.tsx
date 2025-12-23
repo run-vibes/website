@@ -1,12 +1,6 @@
 import { Footer, Navbar } from '@/components/navigation'
 import globalCss from '@/styles/global.css?url'
-import {
-  HeadContent,
-  Outlet,
-  Scripts,
-  ScrollRestoration,
-  createRootRoute,
-} from '@tanstack/react-router'
+import { HeadContent, Outlet, Scripts, createRootRoute } from '@tanstack/react-router'
 import type { ReactNode } from 'react'
 
 export const Route = createRootRoute({
@@ -47,7 +41,6 @@ function RootDocument({ children }: { children: ReactNode }) {
       </head>
       <body className="min-h-screen bg-background font-body text-foreground antialiased">
         {children}
-        <ScrollRestoration />
         <Scripts />
       </body>
     </html>
