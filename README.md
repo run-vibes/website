@@ -59,8 +59,8 @@ workers/
 ## Documentation
 
 - [Product Requirements (PRD)](docs/PRD.md)
-- [Scaffolding Design](docs/plans/01-scaffolding/design.md)
-- [Implementation Plan](docs/plans/01-scaffolding/implementation.md)
+- [Planning Conventions](docs/PLAN.md)
+- [Plans Index](docs/plans/README.md)
 
 ## License
 
