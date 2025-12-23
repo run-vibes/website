@@ -96,19 +96,19 @@ function initShapes3D() {
 
   // Mixed shapes: cubes, wireframes, pyramids
   const configs = [
-    // Cubes
-    { type: 'cube', x: 10, y: 20, speedY: 0.3, bobSpeed: 0.8, scale: 1, colorClass: 'primary' },
-    { type: 'cube', x: 85, y: 65, speedY: -0.4, bobSpeed: 1.1, scale: 0.9, colorClass: 'secondary' },
-    { type: 'cube', x: 50, y: 75, speedY: 0.25, speedZ: 0.1, bobSpeed: 0.7, scale: 0.85, colorClass: 'tertiary' },
+    // Cubes - larger scales for visibility
+    { type: 'cube', x: 8, y: 18, speedY: 0.3, bobSpeed: 0.8, scale: 2.2, colorClass: 'primary' },
+    { type: 'cube', x: 82, y: 60, speedY: -0.4, bobSpeed: 1.1, scale: 1.8, colorClass: 'secondary' },
+    { type: 'cube', x: 45, y: 72, speedY: 0.25, speedZ: 0.1, bobSpeed: 0.7, scale: 1.6, colorClass: 'tertiary' },
 
-    // Wireframes
-    { type: 'wireframe', x: 75, y: 18, speedY: 0.5, speedZ: 0.15, bobSpeed: 1.2, scale: 1.1, colorClass: 'primary' },
-    { type: 'wireframe', x: 20, y: 70, speedY: -0.35, bobSpeed: 0.9, scale: 0.95, colorClass: 'secondary' },
+    // Wireframes - larger scales
+    { type: 'wireframe', x: 72, y: 15, speedY: 0.5, speedZ: 0.15, bobSpeed: 1.2, scale: 2.4, colorClass: 'primary' },
+    { type: 'wireframe', x: 18, y: 65, speedY: -0.35, bobSpeed: 0.9, scale: 2.0, colorClass: 'secondary' },
 
-    // Pyramids
-    { type: 'pyramid', x: 88, y: 40, speedY: 0.45, speedX: 0.2, bobSpeed: 1, scale: 1, colorClass: 'primary' },
-    { type: 'pyramid', x: 15, y: 45, speedY: -0.5, speedX: 0.15, bobSpeed: 0.85, scale: 0.9, colorClass: 'tertiary' },
-    { type: 'pyramid', x: 60, y: 25, speedY: 0.35, bobSpeed: 0.75, scale: 0.8, colorClass: 'secondary' },
+    // Pyramids - larger scales
+    { type: 'pyramid', x: 85, y: 38, speedY: 0.45, speedX: 0.2, bobSpeed: 1, scale: 2.2, colorClass: 'primary' },
+    { type: 'pyramid', x: 12, y: 42, speedY: -0.5, speedX: 0.15, bobSpeed: 0.85, scale: 1.9, colorClass: 'tertiary' },
+    { type: 'pyramid', x: 55, y: 22, speedY: 0.35, bobSpeed: 0.75, scale: 1.7, colorClass: 'secondary' },
   ];
 
   configs.forEach(config => {
