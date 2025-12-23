@@ -1,6 +1,6 @@
-import { cva, type VariantProps } from 'class-variance-authority'
-import type { ComponentProps } from 'react'
 import { cn } from '@/lib/cn'
+import { type VariantProps, cva } from 'class-variance-authority'
+import type { ComponentProps } from 'react'
 
 const sectionVariants = cva('', {
   variants: {
@@ -19,12 +19,7 @@ interface SectionProps
   extends Omit<ComponentProps<'section'>, 'ref'>,
     VariantProps<typeof sectionVariants> {}
 
-export function Section({
-  size,
-  className,
-  children,
-  ...props
-}: SectionProps) {
+export function Section({ size, className, children, ...props }: SectionProps) {
   return (
     <section className={cn(sectionVariants({ size }), className)} {...props}>
       {children}

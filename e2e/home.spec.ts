@@ -8,9 +8,7 @@ test.describe('Home Page', () => {
 
   test('displays hero section', async ({ page }) => {
     await page.goto('/')
-    await expect(
-      page.getByRole('heading', { name: /AI agents come to life/i })
-    ).toBeVisible()
+    await expect(page.getByRole('heading', { name: /AI agents come to life/i })).toBeVisible()
   })
 
   test('displays navigation', async ({ page }) => {

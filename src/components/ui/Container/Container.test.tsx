@@ -21,13 +21,21 @@ describe('Container', () => {
   })
 
   it('applies size variant', () => {
-    render(<Container size="sm" data-testid="container">Content</Container>)
+    render(
+      <Container size="sm" data-testid="container">
+        Content
+      </Container>,
+    )
     const container = screen.getByTestId('container')
     expect(container).toHaveClass('max-w-3xl')
   })
 
   it('merges custom className', () => {
-    render(<Container className="custom" data-testid="container">Content</Container>)
+    render(
+      <Container className="custom" data-testid="container">
+        Content
+      </Container>,
+    )
     expect(screen.getByTestId('container')).toHaveClass('custom')
   })
 })

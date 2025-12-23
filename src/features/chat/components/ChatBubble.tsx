@@ -1,6 +1,6 @@
-import { cva, type VariantProps } from 'class-variance-authority'
-import type { ComponentProps } from 'react'
 import { cn } from '@/lib/cn'
+import { type VariantProps, cva } from 'class-variance-authority'
+import type { ComponentProps } from 'react'
 
 const chatBubbleVariants = cva('max-w-[80%] rounded-2xl px-4 py-2', {
   variants: {
@@ -18,12 +18,7 @@ interface ChatBubbleProps
   extends Omit<ComponentProps<'div'>, 'ref'>,
     VariantProps<typeof chatBubbleVariants> {}
 
-export function ChatBubble({
-  sender,
-  className,
-  children,
-  ...props
-}: ChatBubbleProps) {
+export function ChatBubble({ sender, className, children, ...props }: ChatBubbleProps) {
   return (
     <div className={cn(chatBubbleVariants({ sender }), className)} {...props}>
       {children}

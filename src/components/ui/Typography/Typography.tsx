@@ -1,6 +1,6 @@
-import { cva, type VariantProps } from 'class-variance-authority'
-import type { ComponentProps, ElementType } from 'react'
 import { cn } from '@/lib/cn'
+import { type VariantProps, cva } from 'class-variance-authority'
+import type { ComponentProps, ElementType } from 'react'
 
 const headingVariants = cva('font-heading font-bold tracking-tight', {
   variants: {
@@ -25,13 +25,7 @@ interface HeadingProps
   level?: HeadingLevel
 }
 
-export function Heading({
-  level = 1,
-  size,
-  className,
-  children,
-  ...props
-}: HeadingProps) {
+export function Heading({ level = 1, size, className, children, ...props }: HeadingProps) {
   const Tag = `h${level}` as ElementType
   return (
     <Tag className={cn(headingVariants({ size }), className)} {...props}>
@@ -69,9 +63,7 @@ const textVariants = cva('', {
 
 type TextElement = 'p' | 'span' | 'div'
 
-interface TextProps
-  extends Omit<ComponentProps<'p'>, 'ref'>,
-    VariantProps<typeof textVariants> {
+interface TextProps extends Omit<ComponentProps<'p'>, 'ref'>, VariantProps<typeof textVariants> {
   as?: TextElement
 }
 
@@ -85,10 +77,7 @@ export function Text({
   ...props
 }: TextProps) {
   return (
-    <Tag
-      className={cn(textVariants({ size, variant, weight }), className)}
-      {...props}
-    >
+    <Tag className={cn(textVariants({ size, variant, weight }), className)} {...props}>
       {children}
     </Tag>
   )
