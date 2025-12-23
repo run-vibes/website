@@ -1,0 +1,16 @@
+name = "vibes-chat-api"
+main = "src/index.ts"
+compatibility_date = "2024-01-01"
+
+[vars]
+ALLOWED_ORIGIN = "https://www.vibes.run"
+
+# Rate limiting
+[placement]
+mode = "smart"
+
+# D1 Database (uncomment when ready)
+# [[d1_databases]]
+# binding = "DB"
+# database_name = "vibes-chat"
+# database_id = "your-database-id"
