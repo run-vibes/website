@@ -1,52 +1,37 @@
-# Aurora
+# Aurora Theme
 
-**Mood:** Gradient-Rich
+A gradient-rich, immersive dark theme with aurora borealis-inspired color transitions.
 
-A flowing, dynamic aesthetic with continuous color transitions. Feels modern and creative without being corporate — distinctive and artistic.
+## Design Philosophy
 
----
+Aurora embraces the mystique of northern lights with deep purples, teals, and golds layered through subtle gradients. The theme creates depth through glassmorphism effects and flowing color transitions.
 
-## Visual Identity
+## Color Palette
 
-| Element | Value |
-|---------|-------|
-| Background | Gradient: `#1a1a2e` → `#16213e` → `#0f3460` |
-| Surface | `rgba(255,255,255,0.05)` with backdrop blur |
-| Gradient Range | Purple `#a855f7` → Teal `#14b8a6` → Gold `#f59e0b` |
-| Headline Text | `#ffffff` |
-| Body Text | `#d1d5db` |
+| Role | Color | Hex |
+|------|-------|-----|
+| Background Base | Deep Navy | `#1a1a2e` |
+| Background Mid | Dark Blue | `#16213e` |
+| Background Deep | Ocean Blue | `#0f3460` |
+| Gradient Purple | Vibrant Purple | `#a855f7` |
+| Gradient Teal | Bright Teal | `#14b8a6` |
+| Gradient Gold | Warm Gold | `#f59e0b` |
+
+## Key Visual Elements
+
+- **Gradient backgrounds** — Multi-stop color transitions that shift as you scroll
+- **Glassmorphism** — Semi-transparent surfaces with backdrop blur
+- **Floating orbs** — Ambient animated shapes with gradient fills
+- **Glow effects** — Soft color halos around interactive elements
 
 ## Typography
 
-- **Headlines:** Clash Display or Cabinet Grotesk, 700 weight
-- **Body:** Inter, 400 weight
-- **Accents:** Gradient text effect on key headlines (purple → teal)
+- **Display font:** Inter (Bold 800)
+- **Body font:** Inter (Regular 400, Medium 500)
 
-## Hero Visual: Generative Mesh Gradient
+## Use Cases
 
-WebGL or canvas-based mesh gradient that:
-
-- Continuously morphs between color states (slow, organic transitions)
-- Responds to mouse position (colors shift and flow toward cursor)
-- Creates an aurora borealis / northern lights effect
-- Soft blur and glow create depth without hard edges
-
-## Interaction Style
-
-| Element | Behavior |
-|---------|----------|
-| Cards | Glassmorphism: translucent backgrounds, subtle borders, backdrop blur |
-| Primary Button | Gradient fill (purple → teal) |
-| Secondary Button | Glass effect (translucent with border) |
-| Dividers | Soft gradient fades rather than hard lines |
-| Icons | Outlined with gradient strokes |
-
-## Scroll Animations
-
-- Sections emerge with a soft blur-to-clear transition
-- Parallax on background gradient (moves slower than content)
-- Easing: floating, dreamy curves (longer duration, gentle deceleration)
-
-## Best For
-
-Teams wanting a distinctive, artistic impression. Appeals to innovation leads and creative directors who value unique aesthetics.
+Best suited for:
+- Creative agencies wanting a premium, artistic feel
+- AI/tech companies embracing futuristic aesthetics
+- Brands wanting to evoke innovation and creativity

@@ -1,54 +1,37 @@
-# Daybreak
+# Daybreak Theme
 
-**Mood:** Light & Bold
+A light, bold theme with warm coral accents and clean, confident typography.
 
-A confident, accessible aesthetic with punchy colors on clean backgrounds. Energetic and optimistic without being corporate.
+## Design Philosophy
 
----
+Daybreak represents the optimism of a new day. It uses bright, airy backgrounds with punchy accent colors to create an energetic, approachable feel. The design prioritizes clarity and readability while maintaining visual impact.
 
-## Visual Identity
+## Color Palette
 
-| Element | Value |
-|---------|-------|
-| Background | `#fafafa` (warm white) |
-| Surface | `#ffffff` (cards with subtle shadow) |
-| Primary Accent | `#ff4d4d` (vibrant coral) |
-| Secondary Accent | `#4338ca` (deep indigo) |
-| Headline Text | `#111111` |
-| Body Text | `#555555` |
+| Role | Color | Hex |
+|------|-------|-----|
+| Background Primary | Off-White | `#fafafa` |
+| Background Surface | Pure White | `#ffffff` |
+| Background Alt | Light Gray | `#f5f5f5` |
+| Accent Primary | Coral Red | `#ff4d4d` |
+| Accent Secondary | Deep Indigo | `#4338ca` |
+| Text Primary | Near Black | `#111111` |
+
+## Key Visual Elements
+
+- **Bold typography** — Large, impactful headlines with tight letter-spacing
+- **Soft shadows** — Subtle depth without heavy darkness
+- **Card elevations** — Hover states that lift elements off the page
+- **Clean geometry** — Sharp corners balanced with gentle border radii
 
 ## Typography
 
-- **Headlines:** Satoshi or General Sans, 800 weight, slightly condensed
-- **Body:** System sans-serif stack, 400 weight
-- **Accents:** Bold, coral-colored highlights for emphasis
+- **Display font:** Inter (Extra Bold 800)
+- **Body font:** Inter (Regular 400, Medium 500)
 
-## Hero Visual: Geometric Shapes
+## Use Cases
 
-SVG-based animated composition featuring:
-
-- Bold overlapping shapes (circles, rounded rectangles, abstract forms)
-- Shapes slowly rotate, scale, and shift position
-- Mouse movement creates subtle parallax (foreground/background layers)
-- Solid fills in coral, indigo, and soft grays
-- Clean, confident aesthetic — no gradients or glow effects
-
-## Interaction Style
-
-| Element | Behavior |
-|---------|----------|
-| Cards | Crisp shadow expansion on hover |
-| Primary Button | Solid coral fill, white text |
-| Secondary Button | Indigo outline |
-| Section Backgrounds | Alternating: white → `#f5f5f5` → white |
-| Icons | Bold filled icons, coral accent color |
-
-## Scroll Animations
-
-- Sections slide in from left or right (alternating)
-- Cards scale up slightly from 0.95 → 1 on reveal
-- Easing: snappy, energetic curves (shorter duration)
-
-## Best For
-
-Teams wanting an approachable yet confident feel. Appeals to business executives and founders who value clarity and energy.
+Best suited for:
+- Professional services wanting approachable confidence
+- Startups seeking modern, trustworthy aesthetics
+- Brands prioritizing clarity and ease of use
