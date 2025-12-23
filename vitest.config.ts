@@ -3,6 +3,7 @@ import tsconfigPaths from 'vite-tsconfig-paths'
 import { defineConfig } from 'vitest/config'
 
 export default defineConfig({
+  // @ts-expect-error - Vite version mismatch between vitest and project
   plugins: [react(), tsconfigPaths()],
   test: {
     environment: 'jsdom',

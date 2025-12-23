@@ -28,19 +28,16 @@ export default {
     // Chat endpoint
     if (url.pathname === '/chat' && request.method === 'POST') {
       try {
-        const body = await request.json() as { message: string }
+        const body = (await request.json()) as { message: string }
 
         if (!body.message) {
-          return new Response(
-            JSON.stringify({ error: 'Message is required' }),
-            {
-              status: 400,
-              headers: {
-                'Content-Type': 'application/json',
-                ...getCorsHeaders(env.ALLOWED_ORIGIN),
-              },
-            }
-          )
+          return new Response(JSON.stringify({ error: 'Message is required' }), {
+            status: 400,
+            headers: {
+              'Content-Type': 'application/json',
+              ...getCorsHeaders(env.ALLOWED_ORIGIN),
+            },
+          })
         }
 
         // TODO: Implement rate limiting with D1
@@ -56,19 +53,16 @@ export default {
               'Content-Type': 'application/json',
               ...getCorsHeaders(env.ALLOWED_ORIGIN),
             },
-          }
+          },
         )
       } catch {
-        return new Response(
-          JSON.stringify({ error: 'Invalid request body' }),
-          {
-            status: 400,
-            headers: {
-              'Content-Type': 'application/json',
-              ...getCorsHeaders(env.ALLOWED_ORIGIN),
-            },
-          }
-        )
+        return new Response(JSON.stringify({ error: 'Invalid request body' }), {
+          status: 400,
+          headers: {
+            'Content-Type': 'application/json',
+            ...getCorsHeaders(env.ALLOWED_ORIGIN),
+          },
+        })
       }
     }
 

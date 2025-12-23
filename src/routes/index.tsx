@@ -1,5 +1,16 @@
+import {
+  Button,
+  Card,
+  CardContent,
+  CardHeader,
+  CardTitle,
+  Container,
+  Grid,
+  Heading,
+  Section,
+  Text,
+} from '@/components/ui'
 import { createFileRoute } from '@tanstack/react-router'
-import { Container, Section, Heading, Text, Button, Grid, Card, CardHeader, CardTitle, CardContent } from '@/components/ui'
 
 export const Route = createFileRoute('/')({
   component: HomePage,
@@ -15,8 +26,8 @@ function HomePage() {
             The studio where AI agents come to life
           </Heading>
           <Text size="lg" variant="muted" className="mb-8 max-w-2xl mx-auto">
-            Delivering impact you can measure. We build intelligent agents that
-            understand your business and drive real results.
+            Delivering impact you can measure. We build intelligent agents that understand your
+            business and drive real results.
           </Text>
           <div className="flex gap-4 justify-center">
             <Button variant="primary" size="lg">
@@ -47,8 +58,8 @@ function HomePage() {
               </CardHeader>
               <CardContent>
                 <Text variant="muted">
-                  AI agents that work independently, making decisions and taking
-                  actions to achieve your goals.
+                  AI agents that work independently, making decisions and taking actions to achieve
+                  your goals.
                 </Text>
               </CardContent>
             </Card>
@@ -58,8 +69,8 @@ function HomePage() {
               </CardHeader>
               <CardContent>
                 <Text variant="muted">
-                  Streamline complex workflows with intelligent automation that
-                  adapts to changing conditions.
+                  Streamline complex workflows with intelligent automation that adapts to changing
+                  conditions.
                 </Text>
               </CardContent>
             </Card>
@@ -69,8 +80,8 @@ function HomePage() {
               </CardHeader>
               <CardContent>
                 <Text variant="muted">
-                  Connect AI capabilities with your existing tools and systems
-                  for seamless operation.
+                  Connect AI capabilities with your existing tools and systems for seamless
+                  operation.
                 </Text>
               </CardContent>
             </Card>

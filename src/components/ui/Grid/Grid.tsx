@@ -1,6 +1,6 @@
-import { cva, type VariantProps } from 'class-variance-authority'
-import type { ComponentProps } from 'react'
 import { cn } from '@/lib/cn'
+import { type VariantProps, cva } from 'class-variance-authority'
+import type { ComponentProps } from 'react'
 
 const gridVariants = cva('grid', {
   variants: {
@@ -22,9 +22,7 @@ const gridVariants = cva('grid', {
   },
 })
 
-interface GridProps
-  extends Omit<ComponentProps<'div'>, 'ref'>,
-    VariantProps<typeof gridVariants> {}
+interface GridProps extends Omit<ComponentProps<'div'>, 'ref'>, VariantProps<typeof gridVariants> {}
 
 export function Grid({ cols, gap, className, children, ...props }: GridProps) {
   return (

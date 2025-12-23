@@ -1,11 +1,7 @@
-import {
-  Outlet,
-  ScrollRestoration,
-  createRootRoute,
-} from '@tanstack/react-router'
-import { Meta, Scripts } from '@tanstack/react-start'
+import { Footer, Navbar } from '@/components/navigation'
+import { Outlet, ScrollRestoration, createRootRoute } from '@tanstack/react-router'
+import { Meta, Scripts } from '@tanstack/react-start/client'
 import type { ReactNode } from 'react'
-import { Navbar, Footer } from '@/components/navigation'
 import '@/styles/global.css'
 
 export const Route = createRootRoute({

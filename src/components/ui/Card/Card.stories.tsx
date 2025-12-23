@@ -1,6 +1,6 @@
 import type { Story } from '@ladle/react'
-import { Card, CardHeader, CardTitle, CardContent, CardFooter } from './Card'
 import { Button } from '../Button'
+import { Card, CardContent, CardFooter, CardHeader, CardTitle } from './Card'
 
 export const Default: Story = () => (
   <Card className="w-80">
@@ -54,8 +54,7 @@ export const FeatureCard: Story = () => (
     </CardHeader>
     <CardContent>
       <p className="text-muted-foreground">
-        Build intelligent agents that understand your business and deliver
-        measurable results.
+        Build intelligent agents that understand your business and deliver measurable results.
       </p>
     </CardContent>
     <CardFooter>

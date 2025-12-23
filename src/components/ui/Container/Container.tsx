@@ -1,6 +1,6 @@
-import { cva, type VariantProps } from 'class-variance-authority'
-import type { ComponentProps } from 'react'
 import { cn } from '@/lib/cn'
+import { type VariantProps, cva } from 'class-variance-authority'
+import type { ComponentProps } from 'react'
 
 const containerVariants = cva('mx-auto px-4 sm:px-6 lg:px-8', {
   variants: {
@@ -20,12 +20,7 @@ interface ContainerProps
   extends Omit<ComponentProps<'div'>, 'ref'>,
     VariantProps<typeof containerVariants> {}
 
-export function Container({
-  size,
-  className,
-  children,
-  ...props
-}: ContainerProps) {
+export function Container({ size, className, children, ...props }: ContainerProps) {
   return (
     <div className={cn(containerVariants({ size }), className)} {...props}>
       {children}

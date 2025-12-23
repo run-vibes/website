@@ -72,6 +72,8 @@ See `docs/PRD.md` for full product requirements.
 
 ## Testing Philosophy (TDD)
 
+**REQUIRED:** Use the `superpowers:test-driven-development` skill when implementing any feature or fix. Invoke it with the Skill tool before writing implementation code.
+
 We follow Test-Driven Development for component and utility code:
 
 1. **Write the failing test first** — Define expected behavior before implementation
@@ -96,6 +98,22 @@ We follow Test-Driven Development for component and utility code:
 - Implementation details (internal state, private methods)
 - Styling (covered by visual review in Ladle)
 - Third-party library behavior
+
+## Verification Before Completing Work
+
+**REQUIRED:** Always run these verification steps before marking work complete:
+
+1. **`just check`** — Run all code quality checks:
+   - `pnpm typecheck` — TypeScript type checking
+   - `pnpm lint` — Biome linting
+   - `pnpm test` — Unit tests
+
+2. **`just ladle`** — Visual component review:
+   - Verify components render correctly in isolation
+   - Check variants and edge cases visually
+   - Confirm no visual regressions
+
+All checks must pass before work is considered done.
 
 ## Git Conventions
 

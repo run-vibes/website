@@ -22,6 +22,7 @@
     }
   },
   "files": {
-    "ignore": ["dist", "node_modules", ".vinxi", "*.gen.ts"]
+    "include": ["src/**", "workers/**", "e2e/**", "*.ts", "*.tsx", "*.js", "*.json"],
+    "ignore": ["dist", "node_modules", ".vinxi", ".output", "*.gen.ts", "/nix/**"]
   }
 }

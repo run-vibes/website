@@ -1,6 +1,6 @@
-import { cva, type VariantProps } from 'class-variance-authority'
-import type { ComponentProps } from 'react'
 import { cn } from '@/lib/cn'
+import { type VariantProps, cva } from 'class-variance-authority'
+import type { ComponentProps } from 'react'
 
 const cardVariants = cva('rounded-lg', {
   variants: {
@@ -22,17 +22,9 @@ const cardVariants = cva('rounded-lg', {
   },
 })
 
-interface CardProps
-  extends Omit<ComponentProps<'div'>, 'ref'>,
-    VariantProps<typeof cardVariants> {}
+interface CardProps extends Omit<ComponentProps<'div'>, 'ref'>, VariantProps<typeof cardVariants> {}
 
-export function Card({
-  variant,
-  padding,
-  className,
-  children,
-  ...props
-}: CardProps) {
+export function Card({ variant, padding, className, children, ...props }: CardProps) {
   return (
     <div className={cn(cardVariants({ variant, padding }), className)} {...props}>
       {children}
@@ -40,11 +32,7 @@ export function Card({
   )
 }
 
-export function CardHeader({
-  className,
-  children,
-  ...props
-}: Omit<ComponentProps<'div'>, 'ref'>) {
+export function CardHeader({ className, children, ...props }: Omit<ComponentProps<'div'>, 'ref'>) {
   return (
     <div className={cn('p-6 pb-0', className)} {...props}>
       {children}
@@ -52,26 +40,15 @@ export function CardHeader({
   )
 }
 
-export function CardTitle({
-  className,
-  children,
-  ...props
-}: Omit<ComponentProps<'h3'>, 'ref'>) {
+export function CardTitle({ className, children, ...props }: Omit<ComponentProps<'h3'>, 'ref'>) {
   return (
-    <h3
-      className={cn('text-xl font-semibold tracking-tight', className)}
-      {...props}
-    >
+    <h3 className={cn('text-xl font-semibold tracking-tight', className)} {...props}>
       {children}
     </h3>
   )
 }
 
-export function CardContent({
-  className,
-  children,
-  ...props
-}: Omit<ComponentProps<'div'>, 'ref'>) {
+export function CardContent({ className, children, ...props }: Omit<ComponentProps<'div'>, 'ref'>) {
   return (
     <div className={cn('p-6', className)} {...props}>
       {children}
@@ -79,11 +56,7 @@ export function CardContent({
   )
 }
 
-export function CardFooter({
-  className,
-  children,
-  ...props
-}: Omit<ComponentProps<'div'>, 'ref'>) {
+export function CardFooter({ className, children, ...props }: Omit<ComponentProps<'div'>, 'ref'>) {
   return (
     <div className={cn('p-6 pt-0 flex items-center gap-2', className)} {...props}>
       {children}

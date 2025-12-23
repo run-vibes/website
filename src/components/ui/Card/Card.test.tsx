@@ -1,6 +1,6 @@
 import { render, screen } from '@testing-library/react'
 import { describe, expect, it } from 'vitest'
-import { Card, CardHeader, CardTitle, CardContent, CardFooter } from './Card'
+import { Card, CardContent, CardFooter, CardHeader, CardTitle } from './Card'
 
 describe('Card', () => {
   it('renders children', () => {
@@ -15,13 +15,21 @@ describe('Card', () => {
   })
 
   it('applies outlined variant', () => {
-    render(<Card variant="outlined" data-testid="card">Content</Card>)
+    render(
+      <Card variant="outlined" data-testid="card">
+        Content
+      </Card>,
+    )
     const card = screen.getByTestId('card')
     expect(card).toHaveClass('border')
   })
 
   it('merges custom className', () => {
-    render(<Card className="custom-class" data-testid="card">Content</Card>)
+    render(
+      <Card className="custom-class" data-testid="card">
+        Content
+      </Card>,
+    )
     const card = screen.getByTestId('card')
     expect(card).toHaveClass('custom-class')
   })
@@ -36,7 +44,7 @@ describe('Card composition', () => {
         </CardHeader>
         <CardContent>Body content</CardContent>
         <CardFooter>Footer content</CardFooter>
-      </Card>
+      </Card>,
     )
 
     expect(screen.getByText('Title')).toBeInTheDocument()

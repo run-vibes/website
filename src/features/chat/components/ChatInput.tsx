@@ -1,6 +1,6 @@
+import { cn } from '@/lib/cn'
 import { useState } from 'react'
 import type { FormEvent } from 'react'
-import { cn } from '@/lib/cn'
 
 interface ChatInputProps {
   onSend: (message: string) => void
@@ -21,10 +21,7 @@ export function ChatInput({ onSend, loading, className }: ChatInputProps) {
   }
 
   return (
-    <form
-      onSubmit={handleSubmit}
-      className={cn('flex gap-2', className)}
-    >
+    <form onSubmit={handleSubmit} className={cn('flex gap-2', className)}>
       <input
         type="text"
         value={value}
