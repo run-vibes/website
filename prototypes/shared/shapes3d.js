@@ -94,21 +94,21 @@ function initShapes3D() {
     }
   }
 
-  // Mixed shapes: cubes, wireframes, pyramids
+  // Mixed shapes: cubes, wireframes, pyramids - 10x larger
   const configs = [
-    // Cubes - larger scales for visibility
-    { type: 'cube', x: 8, y: 18, speedY: 0.3, bobSpeed: 0.8, scale: 2.2, colorClass: 'primary' },
-    { type: 'cube', x: 82, y: 60, speedY: -0.4, bobSpeed: 1.1, scale: 1.8, colorClass: 'secondary' },
-    { type: 'cube', x: 45, y: 72, speedY: 0.25, speedZ: 0.1, bobSpeed: 0.7, scale: 1.6, colorClass: 'tertiary' },
+    // Cubes
+    { type: 'cube', x: 5, y: 15, speedY: 0.3, bobSpeed: 0.8, scale: 12, colorClass: 'primary' },
+    { type: 'cube', x: 78, y: 55, speedY: -0.4, bobSpeed: 1.1, scale: 10, colorClass: 'secondary' },
+    { type: 'cube', x: 40, y: 70, speedY: 0.25, speedZ: 0.1, bobSpeed: 0.7, scale: 8, colorClass: 'tertiary' },
 
-    // Wireframes - larger scales
-    { type: 'wireframe', x: 72, y: 15, speedY: 0.5, speedZ: 0.15, bobSpeed: 1.2, scale: 2.4, colorClass: 'primary' },
-    { type: 'wireframe', x: 18, y: 65, speedY: -0.35, bobSpeed: 0.9, scale: 2.0, colorClass: 'secondary' },
+    // Wireframes
+    { type: 'wireframe', x: 70, y: 12, speedY: 0.5, speedZ: 0.15, bobSpeed: 1.2, scale: 14, colorClass: 'primary' },
+    { type: 'wireframe', x: 15, y: 60, speedY: -0.35, bobSpeed: 0.9, scale: 11, colorClass: 'secondary' },
 
-    // Pyramids - larger scales
-    { type: 'pyramid', x: 85, y: 38, speedY: 0.45, speedX: 0.2, bobSpeed: 1, scale: 2.2, colorClass: 'primary' },
-    { type: 'pyramid', x: 12, y: 42, speedY: -0.5, speedX: 0.15, bobSpeed: 0.85, scale: 1.9, colorClass: 'tertiary' },
-    { type: 'pyramid', x: 55, y: 22, speedY: 0.35, bobSpeed: 0.75, scale: 1.7, colorClass: 'secondary' },
+    // Pyramids
+    { type: 'pyramid', x: 82, y: 35, speedY: 0.45, speedX: 0.2, bobSpeed: 1, scale: 12, colorClass: 'primary' },
+    { type: 'pyramid', x: 8, y: 40, speedY: -0.5, speedX: 0.15, bobSpeed: 0.85, scale: 10, colorClass: 'tertiary' },
+    { type: 'pyramid', x: 50, y: 20, speedY: 0.35, bobSpeed: 0.75, scale: 9, colorClass: 'secondary' },
   ];
 
   configs.forEach(config => {
