@@ -1,8 +1,13 @@
 import { Footer, Navbar } from '@/components/navigation'
-import { Outlet, ScrollRestoration, createRootRoute } from '@tanstack/react-router'
-import { Meta, Scripts } from '@tanstack/react-start/client'
+import globalCss from '@/styles/global.css?url'
+import {
+  HeadContent,
+  Outlet,
+  Scripts,
+  ScrollRestoration,
+  createRootRoute,
+} from '@tanstack/react-router'
 import type { ReactNode } from 'react'
-import '@/styles/global.css'
 
 export const Route = createRootRoute({
   head: () => ({
@@ -16,21 +21,21 @@ export const Route = createRootRoute({
           'Agentic consulting & development studio delivering AI solutions with measurable impact.',
       },
     ],
+    links: [{ rel: 'stylesheet', href: globalCss }],
   }),
   component: RootComponent,
+  shellComponent: RootDocument,
 })
 
 function RootComponent() {
   return (
-    <RootDocument>
-      <div className="flex min-h-screen flex-col">
-        <Navbar />
-        <main className="flex-1">
-          <Outlet />
-        </main>
-        <Footer />
-      </div>
-    </RootDocument>
+    <div className="flex min-h-screen flex-col">
+      <Navbar />
+      <main className="flex-1">
+        <Outlet />
+      </main>
+      <Footer />
+    </div>
   )
 }
 
@@ -38,7 +43,7 @@ function RootDocument({ children }: { children: ReactNode }) {
   return (
     <html lang="en">
       <head>
-        <Meta />
+        <HeadContent />
       </head>
       <body className="min-h-screen bg-background font-body text-foreground antialiased">
         {children}
