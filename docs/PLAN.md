@@ -20,18 +20,7 @@ Skip planning for:
 
 ## Plan Directory Structure
 
-Plans live in `docs/plans/` with numbered directories:
-
-```
-docs/plans/
-├── 01-scaffolding/
-│   ├── design.md
-│   └── implementation.md
-├── 02-chat-backend/
-│   ├── design.md
-│   └── implementation.md
-└── ...
-```
+Plans live in `docs/plans/` with numbered directories. See [Plans Index](plans/README.md) for the current structure and list of plans.
 
 **Naming:**
 - Prefix with zero-padded number (01, 02, 03...)
@@ -262,27 +251,7 @@ Then invoke:
 
 ### Verification Workflow
 
-After completing all tasks:
-
-1. Run all checks:
-   ```bash
-   just check
-   ```
-
-2. Verify dev server:
-   ```bash
-   just dev
-   ```
-
-3. Visual review (if UI changes):
-   ```bash
-   just ladle
-   ```
-
-4. Run E2E tests:
-   ```bash
-   just e2e
-   ```
+Follow the verification steps in [CLAUDE.md](../CLAUDE.md#verification-before-completing-work), then update [PROGRESS.md](PROGRESS.md) with completed tasks and PR numbers.
 
 ## Best Practices
 
