@@ -1,53 +1,37 @@
-# Midnight
+# Midnight Theme
 
-**Mood:** Dark & Electric
+A dark, electric theme with cyan and magenta accents for a cyberpunk-inspired aesthetic.
 
-A premium, tech-forward aesthetic with deep backgrounds and vibrant accents. Suggests sophistication and technical depth.
+## Design Philosophy
 
----
+Midnight embraces the energy of neon-lit cityscapes. Deep blacks provide the canvas for electric cyan and hot pink accents that pulse with energy. The theme balances darkness with vibrancy, creating a futuristic, tech-forward feel.
 
-## Visual Identity
+## Color Palette
 
-| Element | Value |
-|---------|-------|
-| Background | `#0a0a14` (near-black with blue undertone) |
-| Surface | `#12121f` (cards, elevated elements) |
-| Primary Accent | `#00d4ff` (electric cyan) |
-| Secondary Accent | `#ff2d7a` (hot magenta) |
-| Headline Text | `#ffffff` |
-| Body Text | `#a0a0b0` |
+| Role | Color | Hex |
+|------|-------|-----|
+| Background Primary | Deep Black | `#0a0a14` |
+| Background Surface | Dark Navy | `#12121f` |
+| Background Elevated | Charcoal | `#1a1a2a` |
+| Accent Primary | Electric Cyan | `#00d4ff` |
+| Accent Secondary | Hot Pink | `#ff2d7a` |
+| Text Primary | Pure White | `#ffffff` |
+
+## Key Visual Elements
+
+- **Neon glows** — Cyan and pink light effects on interactive elements
+- **Dark depth** — Layered dark surfaces for visual hierarchy
+- **Grid patterns** — Subtle geometric backgrounds
+- **High contrast** — Sharp text against dark backgrounds
 
 ## Typography
 
-- **Headlines:** Inter or Space Grotesk, 700 weight, tight letter-spacing
-- **Body:** Inter, 400 weight, line-height 1.6
-- **Accents:** Uppercase, tracked out, smaller size for labels
+- **Display font:** Space Grotesk (Bold)
+- **Body font:** Inter (Regular 400, Medium 500)
 
-## Hero Visual: Particle Flow System
+## Use Cases
 
-Canvas-based animation with interconnected particles that:
-
-- Drift slowly in a field, connected by faint lines when near each other
-- React to mouse position (particles gently attract/repel from cursor)
-- Glow with cyan/magenta accent colors
-- Fade at edges for seamless integration with content
-
-## Interaction Style
-
-| Element | Behavior |
-|---------|----------|
-| Cards | Subtle cyan glow on hover |
-| Primary Button | Solid cyan fill, white text |
-| Secondary Button | Ghost outline (cyan border, transparent fill) |
-| Dividers | Gradient lines (cyan → magenta) |
-| Icons | Line-art style with glow effect |
-
-## Scroll Animations
-
-- Sections fade up with 20px translate as they enter viewport
-- Staggered timing on card grids (each card delays 100ms)
-- Easing: smooth, elegant curves
-
-## Best For
-
-Teams wanting a premium, cutting-edge impression. Appeals to technical leaders who appreciate sophisticated, modern aesthetics.
+Best suited for:
+- Tech companies wanting cutting-edge aesthetics
+- Gaming and entertainment brands
+- AI/ML companies embracing futuristic vibes

@@ -1,48 +1,49 @@
-# Daybreak 3D
+# Daybreak 3D Theme
 
-**Mood:** Premium Dimensional
+The Daybreak theme enhanced with floating 3D CSS cubes that respond to mouse movement.
 
-An alternative Daybreak animation using CSS 3D transforms for depth and dimension. More premium and sophisticated, with objects that rotate in 3D space.
+## Design Philosophy
 
----
+Building on Daybreak's clean, bold aesthetic, this variant adds depth through CSS 3D-transformed cubes that float in the hero section. The cubes rotate continuously and tilt in response to cursor position, creating an engaging, interactive experience.
 
-## Visual Identity
+## Color Palette
 
-Same color palette as Daybreak:
+Inherits from Daybreak:
 
-| Element | Value |
-|---------|-------|
-| Background | `#fafafa` (warm white) |
-| Surface | `#ffffff` |
-| Primary Accent | `#ff4d4d` (coral) |
-| Secondary Accent | `#4338ca` (indigo) |
+| Role | Color | Hex |
+|------|-------|-----|
+| Background Primary | Off-White | `#fafafa` |
+| Accent Primary | Coral Red | `#ff4d4d` |
+| Accent Secondary | Deep Indigo | `#4338ca` |
+| Cube Neutral | Light Gray | `#c8c8c8` |
 
-## Hero Visual: 3D Floating Objects
+## Key Visual Elements
 
-CSS 3D transforms creating depth without WebGL:
+- **3D CSS cubes** — Six-faced cubes using `transform-style: preserve-3d`
+- **Mouse-reactive tilt** — Cubes tilt based on cursor position
+- **Continuous rotation** — Smooth Y-axis rotation animation
+- **Floating bob** — Sine-wave vertical movement for organic feel
+- **Perspective depth** — 1000px perspective for natural 3D appearance
 
-**Shape characteristics:**
-- Geometric primitives: cubes, spheres (approximated), tori, cylinders
-- Built with CSS 3D transforms (transform-style: preserve-3d)
-- Soft shadows cast on an invisible "floor" plane
-- Colors: muted coral, indigo, white, light gray
+## Technical Implementation
 
-**Behavior:**
-- Objects slowly rotate on multiple axes
-- Gentle floating motion (subtle up/down bob)
-- Mouse movement tilts the overall perspective slightly
-- Staggered timing creates organic, non-mechanical rhythm
+```javascript
+// Mouse tilt influence
+const tiltX = (mouse.y - 0.5) * 20;
+const tiltY = (mouse.x - 0.5) * 20;
 
-**Technical approach:**
-- Pure CSS 3D transforms (no WebGL/Three.js)
-- Each shape is a div with transformed child faces
-- requestAnimationFrame for smooth rotation updates
-- CSS perspective on container for depth
+// Combined transform
+transform: translateY(bob) rotateX(rot + tiltX) rotateY(rot + tiltY)
+```
 
-## Interaction Style
+## Variants
 
-Same as Daybreak (crisp shadows, coral/indigo buttons).
-
-## Design Rationale
-
-3D objects create a sense of premium craftsmanship and attention to detail. The dimensional depth suggests sophistication and forward-thinking — good for technical audiences who appreciate subtle complexity. The CSS-only approach keeps it lightweight and performant.
+This theme has multiple color variants:
+- `daybreak-3d-teal-gold` — Teal primary with gold accents
+- `daybreak-3d-ocean` — Ocean blue color palette
+- `daybreak-3d-earth` — Warm earthy tones
+- `daybreak-3d-emerald` — Green/emerald theme
+- `daybreak-3d-sunset` — Orange/pink sunset colors
+- `daybreak-3d-forest` — Deep green forest palette
+- `daybreak-3d-slate-rose` — Slate gray with rose accents
+- `daybreak-3d-electric` — Purple/cyan electric colors
