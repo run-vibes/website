@@ -134,6 +134,30 @@ All checks must pass before work is considered done.
 
 This keeps the project progress visible and helps track what's been accomplished across branches.
 
+## Plan Documentation
+
+Plans live in `docs/plans/` using numbered directories:
+
+```
+docs/plans/
+├── 01-scaffolding/
+│   └── design.md
+├── 02-homepage-prototypes/
+│   ├── design.md
+│   └── implementation.md
+└── 03-prototype-refinements/
+    ├── design.md
+    └── implementation.md
+```
+
+**Conventions:**
+- Use sequential numbering: `01-`, `02-`, `03-`, etc.
+- Use kebab-case for directory names
+- Each plan directory contains:
+  - `design.md` — High-level design, decisions, and rationale
+  - `implementation.md` — Detailed step-by-step tasks (when applicable)
+- Reference plans by number in commits and discussions (e.g., "per plan 02")
+
 ## Git Commit Conventions
 
 Follow [Conventional Commits](https://www.conventionalcommits.org/) format:
