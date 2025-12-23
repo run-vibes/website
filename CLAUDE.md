@@ -48,6 +48,33 @@ pnpm deploy
 
 See `docs/PRD.md` for full product requirements.
 
+## Testing Philosophy (TDD)
+
+We follow Test-Driven Development for component and utility code:
+
+1. **Write the failing test first** — Define expected behavior before implementation
+2. **Run the test to verify it fails** — Confirms the test is actually testing something
+3. **Write minimal code to pass** — Only implement what's needed to make the test green
+4. **Run tests to verify they pass** — Confirm implementation is correct
+5. **Commit** — Small, frequent commits after each passing test
+
+**Test structure:**
+- Unit tests live next to components: `Button.test.tsx` beside `Button.tsx`
+- E2E tests in `e2e/` folder for user journey testing
+- Use `@testing-library/react` for component tests (test behavior, not implementation)
+- Use Playwright for E2E tests
+
+**What to test:**
+- Component rendering and variants
+- User interactions (clicks, input)
+- Conditional rendering
+- Props pass-through and className merging
+
+**What NOT to test:**
+- Implementation details (internal state, private methods)
+- Styling (covered by visual review in Ladle)
+- Third-party library behavior
+
 ## Git Conventions
 
 - Do not add "Generated with Claude Code" to commit messages
