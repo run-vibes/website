@@ -28,7 +28,7 @@ docs/plans/
 1. **Draft** — Plan is being written, not yet reviewed
 2. **Ready** — Plan is complete and ready for implementation
 3. **In Progress** — Implementation has started
-4. **Complete** — All tasks finished, verified working
+4. **Complete** — All tasks finished, verified working → [Update PROGRESS.md](../PROGRESS.md)
 
 ## How to Use Plans
 
