@@ -59,6 +59,7 @@ workers/
 ## Documentation
 
 - [Product Requirements (PRD)](docs/PRD.md)
+- [Project Progress](docs/PROGRESS.md)
 - [Planning Conventions](docs/PLAN.md)
 - [Plans Index](docs/plans/README.md)
 
