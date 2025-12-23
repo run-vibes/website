@@ -123,6 +123,17 @@ We follow Test-Driven Development for component and utility code:
 
 All checks must pass before work is considered done.
 
+## Progress Tracking
+
+**REQUIRED:** Before finishing a branch (creating PR or merging), update `docs/PROGRESS.md`:
+
+1. Update task status in the relevant phase/milestone table
+2. Add the PR number to completed tasks
+3. Update the phase progress percentage if significant work was done
+4. Add an entry to the "Recent Updates" section at the bottom
+
+This keeps the project progress visible and helps track what's been accomplished across branches.
+
 ## Git Commit Conventions
 
 Follow [Conventional Commits](https://www.conventionalcommits.org/) format:
