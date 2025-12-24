@@ -49,6 +49,26 @@ deploy:
 deploy-worker:
     cd workers/chat-api && wrangler deploy
 
+# Run chat worker locally
+worker-dev:
+    cd workers/chat-api && wrangler dev
+
+# Create D1 database for chat worker
+worker-db-create:
+    wrangler d1 create vibes-chat
+
+# Run chat worker database migrations
+worker-db-migrate:
+    cd workers/chat-api && wrangler d1 execute vibes-chat --file=./schema.sql
+
+# Run chat worker database migrations (local)
+worker-db-migrate-local:
+    cd workers/chat-api && wrangler d1 execute vibes-chat --local --file=./schema.sql
+
+# Set a chat worker secret (usage: just worker-secret ANTHROPIC_API_KEY)
+worker-secret name:
+    wrangler secret put {{name}}
+
 # Open all prototypes in browser
 prototypes:
     #!/usr/bin/env bash
