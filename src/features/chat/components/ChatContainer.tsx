@@ -1,5 +1,5 @@
 import { cn } from '@/lib/cn'
-import { useEffect, useRef } from 'react'
+import { useCallback, useEffect, useRef, useState } from 'react'
 import { useChat } from '../hooks/useChat'
 import { ChatBubble } from './ChatBubble'
 import { ChatInput } from './ChatInput'
@@ -12,21 +12,37 @@ interface ChatContainerProps {
 export function ChatContainer({ className, apiEndpoint }: ChatContainerProps) {
   const { messages, isLoading, error, sendMessage } = useChat({ apiEndpoint })
   const messagesEndRef = useRef<HTMLDivElement>(null)
+  const containerRef = useRef<HTMLDivElement>(null)
+  const [isExpanded, setIsExpanded] = useState(false)
+  const initialMessageCount = useRef(messages.length)
 
-  // biome-ignore lint/correctness/useExhaustiveDependencies: Intentionally scroll when messages.length changes
+  // Only auto-scroll for new messages after initial render (not on mount)
   useEffect(() => {
-    messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' })
+    if (messages.length > initialMessageCount.current) {
+      messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' })
+    }
   }, [messages.length])
+
+  const handleInputFocus = useCallback(() => {
+    setIsExpanded(true)
+    // On small screens, scroll the chat container into view when input is focused
+    setTimeout(() => {
+      containerRef.current?.scrollIntoView({ behavior: 'smooth', block: 'end' })
+    }, 100)
+  }, [])
 
   return (
     <div
+      ref={containerRef}
       className={cn(
-        'flex flex-col h-[600px] max-h-[80vh] border rounded-xl bg-background',
+        'flex flex-col border rounded-xl bg-background transition-all duration-300',
+        // Compact height initially, expand when focused/interacting
+        isExpanded ? 'h-[500px] max-h-[70vh]' : 'h-[280px] sm:h-[350px]',
         className,
       )}
     >
       {/* Messages Area */}
-      <div className="flex-1 overflow-y-auto p-4 space-y-4">
+      <div className="flex-1 overflow-y-auto p-4 space-y-4 min-h-0">
         {messages.map((message) => (
           <ChatBubble key={message.id} sender={message.role === 'user' ? 'user' : 'assistant'}>
             {message.content}
@@ -38,14 +54,16 @@ export function ChatContainer({ className, apiEndpoint }: ChatContainerProps) {
           </ChatBubble>
         )}
         {error && (
-          <div className="text-center text-sm text-destructive p-2">{error}. Please try again.</div>
+          <div className="text-center text-sm text-destructive p-2">
+            Gremlins in the system. One more time?
+          </div>
         )}
         <div ref={messagesEndRef} />
       </div>
 
       {/* Input Area */}
-      <div className="border-t p-4">
-        <ChatInput onSend={sendMessage} loading={isLoading} />
+      <div className="border-t p-4 shrink-0">
+        <ChatInput onSend={sendMessage} loading={isLoading} onFocus={handleInputFocus} />
       </div>
     </div>
   )
