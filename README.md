@@ -1,5 +1,7 @@
 # Vibes Website
 
+[![CI](https://github.com/run-vibes/website/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/run-vibes/website/actions/workflows/ci.yml)
+
 Marketing website for [Vibes](https://vibes.run) — the studio where AI agents come to life.
 
 ## Tech Stack
