@@ -15,8 +15,29 @@ export const Route = createRootRoute({
         content:
           'Agentic consulting & development studio delivering AI solutions with measurable impact.',
       },
+      // Open Graph
+      { property: 'og:type', content: 'website' },
+      { property: 'og:site_name', content: 'Vibes' },
+      { property: 'og:title', content: 'Vibes - The studio where AI agents come to life' },
+      {
+        property: 'og:description',
+        content:
+          'Agentic consulting & development studio delivering AI solutions with measurable impact.',
+      },
+      { property: 'og:image', content: 'https://vibes.run/og-image.png' },
+      { property: 'og:url', content: 'https://vibes.run' },
+      // Twitter Card
+      { name: 'twitter:card', content: 'summary_large_image' },
+      { name: 'twitter:title', content: 'Vibes - The studio where AI agents come to life' },
+      {
+        name: 'twitter:description',
+        content:
+          'Agentic consulting & development studio delivering AI solutions with measurable impact.',
+      },
+      { name: 'twitter:image', content: 'https://vibes.run/og-image.png' },
     ],
     links: [
+      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
       { rel: 'stylesheet', href: globalCss },
       { rel: 'preconnect', href: 'https://fonts.googleapis.com' },
       { rel: 'preconnect', href: 'https://fonts.gstatic.com', crossOrigin: 'anonymous' },
