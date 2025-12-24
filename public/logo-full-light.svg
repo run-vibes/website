@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 48" fill="none">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@800&amp;display=swap');
+    .slash { font-family: 'JetBrains Mono', monospace; font-weight: 800; font-size: 42px; fill: #71717a; }
+    .vibes { font-family: 'JetBrains Mono', monospace; font-weight: 800; font-size: 42px; fill: #18181b; }
+  </style>
+  <text x="0" y="38" class="slash">/</text>
+  <text x="28" y="38" class="vibes">Vibes</text>
+</svg>
