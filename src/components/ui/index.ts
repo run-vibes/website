@@ -2,6 +2,7 @@
 export { Button } from './Button'
 export { Input } from './Input'
 export { Heading, Text } from './Typography'
+export { Logo } from './Logo'
 
 // Layout
 export { Container } from './Container'

@@ -1,0 +1,748 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vibes Logo Explorations</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&family=Space+Mono:wght@400;700&family=IBM+Plex+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-primary: #0a0a0b;
+      --bg-surface: #111113;
+      --bg-card: #18181b;
+      --text-primary: #fafafa;
+      --text-secondary: #a1a1aa;
+      --text-muted: #71717a;
+      --accent-white: #ffffff;
+      --accent-gray: #666666;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', system-ui, sans-serif;
+      background: var(--bg-primary);
+      color: var(--text-primary);
+      min-height: 100vh;
+      padding: 60px 40px;
+    }
+
+    h1 {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 32px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: -0.02em;
+      margin-bottom: 16px;
+    }
+
+    .subtitle {
+      color: var(--text-secondary);
+      font-size: 18px;
+      margin-bottom: 60px;
+      max-width: 600px;
+    }
+
+    .section {
+      margin-bottom: 80px;
+    }
+
+    .section-title {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 14px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--accent-gray);
+      margin-bottom: 32px;
+      padding-bottom: 16px;
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+    }
+
+    .logo-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 32px;
+    }
+
+    .logo-card {
+      background: var(--bg-card);
+      border-radius: 16px;
+      padding: 40px;
+      border: 1px solid rgba(255,255,255,0.05);
+      transition: all 0.3s ease;
+    }
+
+    .logo-card:hover {
+      border-color: rgba(255,255,255,0.15);
+      transform: translateY(-4px);
+    }
+
+    .logo-display {
+      height: 120px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 24px;
+    }
+
+    .logo-name {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--text-primary);
+      margin-bottom: 8px;
+    }
+
+    .logo-description {
+      font-size: 14px;
+      color: var(--text-muted);
+      line-height: 1.5;
+    }
+
+    /* ═══════════════════════════════════════════════════════════
+       OPTION 2: LETTERMARK + WORDMARK
+       ═══════════════════════════════════════════════════════════ */
+
+    /* 2A: Angular V with motion lines */
+    .logo-2a {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+    .logo-2a .mark {
+      position: relative;
+      width: 48px;
+      height: 48px;
+    }
+    .logo-2a .v-shape {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 48px;
+      font-weight: 800;
+      line-height: 1;
+      color: var(--accent-white);
+    }
+    .logo-2a .motion-lines {
+      position: absolute;
+      left: -12px;
+      top: 50%;
+      transform: translateY(-50%);
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+    .logo-2a .motion-line {
+      height: 2px;
+      background: var(--accent-gray);
+      border-radius: 1px;
+    }
+    .logo-2a .motion-line:nth-child(1) { width: 8px; opacity: 0.3; }
+    .logo-2a .motion-line:nth-child(2) { width: 12px; opacity: 0.5; }
+    .logo-2a .motion-line:nth-child(3) { width: 8px; opacity: 0.3; }
+    .logo-2a .wordmark {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 32px;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+    }
+    .logo-2a .run {
+      color: var(--accent-gray);
+    }
+
+    /* 2B: Geometric V in circle */
+    .logo-2b {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+    .logo-2b .mark {
+      width: 52px;
+      height: 52px;
+      border: 2px solid var(--accent-white);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .logo-2b .v-inner {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 28px;
+      font-weight: 800;
+      color: var(--accent-white);
+      margin-top: 2px;
+    }
+    .logo-2b .wordmark {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 28px;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+    }
+    .logo-2b .dot {
+      color: var(--accent-gray);
+    }
+    .logo-2b .run {
+      color: var(--accent-gray);
+    }
+
+    /* 2C: Slash V (plays on forward motion + code) */
+    .logo-2c {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .logo-2c .mark {
+      display: flex;
+      align-items: center;
+    }
+    .logo-2c .slash {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 44px;
+      font-weight: 300;
+      color: var(--accent-gray);
+      margin-right: -4px;
+    }
+    .logo-2c .v-char {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 44px;
+      font-weight: 800;
+      color: var(--accent-white);
+    }
+    .logo-2c .wordmark {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 28px;
+      font-weight: 600;
+    }
+    .logo-2c .ibes {
+      color: var(--text-secondary);
+    }
+    .logo-2c .run-part {
+      color: var(--accent-gray);
+      font-weight: 500;
+    }
+
+    /* 2D: Stacked with .run underneath */
+    .logo-2d {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 2px;
+    }
+    .logo-2d .main {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .logo-2d .v-mark {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 40px;
+      font-weight: 800;
+      color: var(--accent-white);
+      line-height: 1;
+    }
+    .logo-2d .vibes-text {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 36px;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+    }
+    .logo-2d .run-line {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--accent-gray);
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      margin-left: 54px;
+    }
+
+    /* ═══════════════════════════════════════════════════════════
+       OPTION 3: ABSTRACT MARK + WORDMARK
+       ═══════════════════════════════════════════════════════════ */
+
+    /* 3A: Waveform / Audio visualization */
+    .logo-3a {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+    .logo-3a .mark {
+      display: flex;
+      align-items: center;
+      gap: 3px;
+      height: 40px;
+    }
+    .logo-3a .wave-bar {
+      width: 4px;
+      background: var(--accent-white);
+      border-radius: 2px;
+    }
+    .logo-3a .wave-bar:nth-child(1) { height: 12px; opacity: 0.6; }
+    .logo-3a .wave-bar:nth-child(2) { height: 24px; opacity: 0.8; }
+    .logo-3a .wave-bar:nth-child(3) { height: 40px; }
+    .logo-3a .wave-bar:nth-child(4) { height: 28px; opacity: 0.9; }
+    .logo-3a .wave-bar:nth-child(5) { height: 16px; opacity: 0.7; }
+    .logo-3a .wordmark {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 32px;
+      font-weight: 700;
+    }
+    .logo-3a .run {
+      color: var(--accent-gray);
+    }
+
+    /* 3B: Energy pulse / signal burst */
+    .logo-3b {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+    .logo-3b .mark {
+      position: relative;
+      width: 48px;
+      height: 48px;
+    }
+    .logo-3b .pulse-ring {
+      position: absolute;
+      border: 2px solid var(--accent-white);
+      border-radius: 50%;
+    }
+    .logo-3b .pulse-ring:nth-child(1) {
+      width: 16px; height: 16px;
+      top: 16px; left: 16px;
+    }
+    .logo-3b .pulse-ring:nth-child(2) {
+      width: 32px; height: 32px;
+      top: 8px; left: 8px;
+      opacity: 0.6;
+    }
+    .logo-3b .pulse-ring:nth-child(3) {
+      width: 48px; height: 48px;
+      top: 0; left: 0;
+      opacity: 0.3;
+    }
+    .logo-3b .wordmark {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 32px;
+      font-weight: 700;
+    }
+    .logo-3b .run {
+      color: var(--accent-gray);
+    }
+
+    /* 3C: Forward arrow / motion */
+    .logo-3c {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+    .logo-3c .mark {
+      display: flex;
+      align-items: center;
+    }
+    .logo-3c .arrow-lines {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      margin-right: 8px;
+    }
+    .logo-3c .arrow-line {
+      height: 2px;
+      background: var(--accent-gray);
+      border-radius: 1px;
+    }
+    .logo-3c .arrow-line:nth-child(1) { width: 20px; }
+    .logo-3c .arrow-line:nth-child(2) { width: 28px; }
+    .logo-3c .arrow-line:nth-child(3) { width: 20px; }
+    .logo-3c .arrow-head {
+      width: 0;
+      height: 0;
+      border-top: 12px solid transparent;
+      border-bottom: 12px solid transparent;
+      border-left: 16px solid var(--accent-white);
+    }
+    .logo-3c .wordmark {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 32px;
+      font-weight: 700;
+    }
+    .logo-3c .run {
+      color: var(--accent-gray);
+    }
+
+    /* 3D: Geometric cube (from 3D system) */
+    .logo-3d-cube {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+    .logo-3d-cube .mark {
+      width: 44px;
+      height: 44px;
+      position: relative;
+      transform: rotate(45deg);
+    }
+    .logo-3d-cube .cube-face {
+      position: absolute;
+      border: 2px solid var(--accent-white);
+    }
+    .logo-3d-cube .cube-face:nth-child(1) {
+      width: 30px; height: 30px;
+      top: 7px; left: 7px;
+    }
+    .logo-3d-cube .cube-face:nth-child(2) {
+      width: 30px; height: 30px;
+      top: 0; left: 0;
+      opacity: 0.4;
+    }
+    .logo-3d-cube .wordmark {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 32px;
+      font-weight: 700;
+    }
+    .logo-3d-cube .run {
+      color: var(--accent-gray);
+    }
+
+    /* 3E: Terminal cursor / code block */
+    .logo-3e {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+    .logo-3e .mark {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      padding: 8px 12px;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.15);
+      border-radius: 6px;
+    }
+    .logo-3e .prompt {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 20px;
+      font-weight: 500;
+      color: var(--accent-gray);
+    }
+    .logo-3e .cursor {
+      width: 10px;
+      height: 24px;
+      background: var(--accent-white);
+      animation: blink 1s step-end infinite;
+    }
+    @keyframes blink {
+      50% { opacity: 0; }
+    }
+    .logo-3e .wordmark {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 32px;
+      font-weight: 700;
+    }
+    .logo-3e .run {
+      color: var(--accent-gray);
+    }
+
+    /* 3F: Stacked bars / loading */
+    .logo-3f {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+    .logo-3f .mark {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+    .logo-3f .bar {
+      height: 6px;
+      background: var(--accent-white);
+      border-radius: 3px;
+    }
+    .logo-3f .bar:nth-child(1) { width: 32px; }
+    .logo-3f .bar:nth-child(2) { width: 24px; opacity: 0.7; }
+    .logo-3f .bar:nth-child(3) { width: 16px; opacity: 0.4; }
+    .logo-3f .wordmark {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 32px;
+      font-weight: 700;
+    }
+    .logo-3f .run {
+      color: var(--accent-gray);
+    }
+
+    /* Size variants section */
+    .size-variants {
+      display: flex;
+      align-items: center;
+      gap: 48px;
+      padding: 40px;
+      background: var(--bg-surface);
+      border-radius: 16px;
+      margin-top: 40px;
+    }
+
+    .size-label {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      margin-bottom: 12px;
+    }
+
+    .favicon-size {
+      width: 32px;
+      height: 32px;
+      background: var(--bg-card);
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .favicon-size .v {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 18px;
+      font-weight: 800;
+    }
+
+    .social-size {
+      width: 48px;
+      height: 48px;
+      background: var(--bg-card);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+  </style>
+</head>
+<body>
+  <h1>Logo Explorations</h1>
+  <p class="subtitle">Exploring lettermark and abstract mark directions for vibes.run — monochrome palette, developer-friendly aesthetic.</p>
+
+  <!-- OPTION 2: LETTERMARK + WORDMARK -->
+  <section class="section">
+    <h2 class="section-title">Option 2: Lettermark + Wordmark</h2>
+    <div class="logo-grid">
+
+      <!-- 2A: Motion V -->
+      <div class="logo-card">
+        <div class="logo-display">
+          <div class="logo-2a">
+            <div class="mark">
+              <span class="v-shape">V</span>
+              <div class="motion-lines">
+                <div class="motion-line"></div>
+                <div class="motion-line"></div>
+                <div class="motion-line"></div>
+              </div>
+            </div>
+            <div class="wordmark">vibes<span class="run">.run</span></div>
+          </div>
+        </div>
+        <div class="logo-name">Motion V</div>
+        <div class="logo-description">Bold V with motion lines suggesting speed and forward movement. Ties into the .run domain concept.</div>
+      </div>
+
+      <!-- 2B: Circle V -->
+      <div class="logo-card">
+        <div class="logo-display">
+          <div class="logo-2b">
+            <div class="mark">
+              <span class="v-inner">V</span>
+            </div>
+            <div class="wordmark">vibes<span class="dot">.</span><span class="run">run</span></div>
+          </div>
+        </div>
+        <div class="logo-name">Contained V</div>
+        <div class="logo-description">V enclosed in a circle — works well as favicon/avatar. Clean and balanced for all sizes.</div>
+      </div>
+
+      <!-- 2C: Slash V -->
+      <div class="logo-card">
+        <div class="logo-display">
+          <div class="logo-2c">
+            <div class="mark">
+              <span class="slash">/</span><span class="v-char">V</span>
+            </div>
+            <div class="wordmark"><span class="ibes">ibes</span><span class="run-part">.run</span></div>
+          </div>
+        </div>
+        <div class="logo-name">Slash V</div>
+        <div class="logo-description">Forward slash + V creates a code/path aesthetic. The slash suggests forward motion and technical roots.</div>
+      </div>
+
+      <!-- 2D: Stacked -->
+      <div class="logo-card">
+        <div class="logo-display">
+          <div class="logo-2d">
+            <div class="main">
+              <span class="v-mark">V</span>
+              <span class="vibes-text">VIBES</span>
+            </div>
+            <div class="run-line">.run</div>
+          </div>
+        </div>
+        <div class="logo-name">Stacked Domain</div>
+        <div class="logo-description">Strong V mark with wordmark, .run as a subtle tagline beneath. Emphasizes the domain as identity.</div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- OPTION 3: ABSTRACT MARK + WORDMARK -->
+  <section class="section">
+    <h2 class="section-title">Option 3: Abstract Mark + Wordmark</h2>
+    <div class="logo-grid">
+
+      <!-- 3A: Waveform -->
+      <div class="logo-card">
+        <div class="logo-display">
+          <div class="logo-3a">
+            <div class="mark">
+              <div class="wave-bar"></div>
+              <div class="wave-bar"></div>
+              <div class="wave-bar"></div>
+              <div class="wave-bar"></div>
+              <div class="wave-bar"></div>
+            </div>
+            <div class="wordmark">vibes<span class="run">.run</span></div>
+          </div>
+        </div>
+        <div class="logo-name">Waveform</div>
+        <div class="logo-description">Audio/vibration waveform — directly connects to "vibes" as energy. Clean, recognizable at small sizes.</div>
+      </div>
+
+      <!-- 3B: Pulse rings -->
+      <div class="logo-card">
+        <div class="logo-display">
+          <div class="logo-3b">
+            <div class="mark">
+              <div class="pulse-ring"></div>
+              <div class="pulse-ring"></div>
+              <div class="pulse-ring"></div>
+            </div>
+            <div class="wordmark">vibes<span class="run">.run</span></div>
+          </div>
+        </div>
+        <div class="logo-name">Energy Pulse</div>
+        <div class="logo-description">Concentric rings radiating outward — suggests energy, signal, and impact spreading from a source.</div>
+      </div>
+
+      <!-- 3C: Forward arrow -->
+      <div class="logo-card">
+        <div class="logo-display">
+          <div class="logo-3c">
+            <div class="mark">
+              <div class="arrow-lines">
+                <div class="arrow-line"></div>
+                <div class="arrow-line"></div>
+                <div class="arrow-line"></div>
+              </div>
+              <div class="arrow-head"></div>
+            </div>
+            <div class="wordmark">vibes<span class="run">.run</span></div>
+          </div>
+        </div>
+        <div class="logo-name">Forward Motion</div>
+        <div class="logo-description">Stylized arrow with motion trails — embodies "run" and forward momentum. Action-oriented.</div>
+      </div>
+
+      <!-- 3D: Cube -->
+      <div class="logo-card">
+        <div class="logo-display">
+          <div class="logo-3d-cube">
+            <div class="mark">
+              <div class="cube-face"></div>
+              <div class="cube-face"></div>
+            </div>
+            <div class="wordmark">vibes<span class="run">.run</span></div>
+          </div>
+        </div>
+        <div class="logo-name">Geometric Cube</div>
+        <div class="logo-description">Isometric cube from the 3D visual system. Connects to the daybreak-hybrid aesthetic.</div>
+      </div>
+
+      <!-- 3E: Terminal -->
+      <div class="logo-card">
+        <div class="logo-display">
+          <div class="logo-3e">
+            <div class="mark">
+              <span class="prompt">$</span>
+              <div class="cursor"></div>
+            </div>
+            <div class="wordmark">vibes<span class="run">.run</span></div>
+          </div>
+        </div>
+        <div class="logo-name">Terminal Prompt</div>
+        <div class="logo-description">Command line aesthetic with blinking cursor. Speaks to developers, suggests "ready to execute".</div>
+      </div>
+
+      <!-- 3F: Loading bars -->
+      <div class="logo-card">
+        <div class="logo-display">
+          <div class="logo-3f">
+            <div class="mark">
+              <div class="bar"></div>
+              <div class="bar"></div>
+              <div class="bar"></div>
+            </div>
+            <div class="wordmark">vibes<span class="run">.run</span></div>
+          </div>
+        </div>
+        <div class="logo-name">Signal Bars</div>
+        <div class="logo-description">Stacked bars suggesting signal strength or progress. Minimal, scales well, tech-forward.</div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Size variants demo -->
+  <section class="section">
+    <h2 class="section-title">Size Considerations</h2>
+    <div class="size-variants">
+      <div>
+        <div class="size-label">Favicon (32px)</div>
+        <div class="favicon-size">
+          <span class="v">V</span>
+        </div>
+      </div>
+      <div>
+        <div class="size-label">Social (48px)</div>
+        <div class="social-size">
+          <div class="logo-3a" style="transform: scale(0.5); transform-origin: center;">
+            <div class="mark">
+              <div class="wave-bar"></div>
+              <div class="wave-bar"></div>
+              <div class="wave-bar"></div>
+              <div class="wave-bar"></div>
+              <div class="wave-bar"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div>
+        <div class="size-label">Full Logo</div>
+        <div class="logo-3a">
+          <div class="mark">
+            <div class="wave-bar"></div>
+            <div class="wave-bar"></div>
+            <div class="wave-bar"></div>
+            <div class="wave-bar"></div>
+            <div class="wave-bar"></div>
+          </div>
+          <div class="wordmark">vibes<span class="run">.run</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</body>
+</html>

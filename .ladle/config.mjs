@@ -2,5 +2,10 @@
 export default {
   stories: 'src/**/*.stories.{js,jsx,ts,tsx}',
   viteConfig: './vite.ladle.config.ts',
-  defaultStory: 'button--default',
+  defaultStory: 'button--primary',
+  addons: {
+    theme: {
+      defaultState: 'dark',
+    },
+  },
 }

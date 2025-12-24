@@ -42,7 +42,8 @@ test.describe('Contact Page', () => {
   test('displays contact info section', async ({ page }) => {
     await page.goto('/contact')
 
-    await expect(page.getByText(/other ways to reach us/i)).toBeVisible()
-    await expect(page.getByRole('link', { name: /hello@vibes\.run/i })).toBeVisible()
+    const main = page.getByRole('main')
+    await expect(main.getByText(/other ways to reach us/i)).toBeVisible()
+    await expect(main.getByRole('link', { name: /hello@vibes\.run/i })).toBeVisible()
   })
 })
