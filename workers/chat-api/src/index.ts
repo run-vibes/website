@@ -12,7 +12,10 @@ import {
 } from './session'
 import type { ChatRequest, ChatResponse, Env, InterviewAnswers, LeadTierValue } from './types'
 
-// In-memory store for interview answers per session
+// In-memory store for interview answers per session.
+// Limited to prevent unbounded growth in long-running isolates.
+// When limit is exceeded, oldest sessions are evicted (Map maintains insertion order).
+const MAX_CACHED_SESSIONS = 1000
 const sessionInterviewAnswers = new Map<string, InterviewAnswers>()
 
 // Valid interview question IDs for type-safe answer storage
@@ -41,6 +44,14 @@ function setStructuredAnswer(
   if (VALID_QUESTION_IDS.has(questionId)) {
     // Type assertion is safe here because we've validated questionId
     ;(answers as Record<string, string>)[questionId] = answer
+  } else {
+    console.warn(`Invalid questionId "${questionId}" for session ${sessionId} - answer discarded`)
+  }
+
+  // Evict oldest sessions if limit exceeded (Map maintains insertion order)
+  while (sessionInterviewAnswers.size >= MAX_CACHED_SESSIONS) {
+    const oldestKey = sessionInterviewAnswers.keys().next().value
+    if (oldestKey) sessionInterviewAnswers.delete(oldestKey)
   }
 
   sessionInterviewAnswers.set(sessionId, answers)
@@ -88,6 +99,11 @@ export default {
 
         // Store/update interview answers for this session
         if (body.interviewAnswers) {
+          // Evict oldest sessions if limit exceeded
+          while (sessionInterviewAnswers.size >= MAX_CACHED_SESSIONS) {
+            const oldestKey = sessionInterviewAnswers.keys().next().value
+            if (oldestKey) sessionInterviewAnswers.delete(oldestKey)
+          }
           const existing = sessionInterviewAnswers.get(session.id) ?? {}
           sessionInterviewAnswers.set(session.id, { ...existing, ...body.interviewAnswers })
         }

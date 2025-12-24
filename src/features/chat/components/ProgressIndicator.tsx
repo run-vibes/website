@@ -1,5 +1,4 @@
 import { cn } from '@/lib/cn'
-import { useMemo } from 'react'
 
 interface ProgressIndicatorProps {
   current: number
@@ -8,29 +7,34 @@ interface ProgressIndicatorProps {
   className?: string
 }
 
+interface DotConfig {
+  key: string
+  index: number
+  state: 'completed' | 'current' | 'upcoming'
+}
+
+function buildDots(total: number, current: number): DotConfig[] {
+  return Array.from({ length: total }, (_, i) => ({
+    key: `progress-dot-${i}`,
+    index: i,
+    state: i < current ? 'completed' : i === current ? 'current' : 'upcoming',
+  }))
+}
+
 export function ProgressIndicator({
   current,
   total,
   showLabel = false,
   className,
 }: ProgressIndicatorProps) {
-  // Memoize dot configs with stable IDs to avoid array index key issues
-  const dots = useMemo(
-    () =>
-      Array.from({ length: total }, (_, i) => ({
-        id: `progress-dot-${i}`,
-        index: i,
-        state: i < current ? 'completed' : i === current ? 'current' : 'upcoming',
-      })),
-    [total, current],
-  )
+  const dots = buildDots(total, current)
 
   return (
     <div className={cn('flex flex-col items-center gap-2', className)}>
       <ol className="flex items-center gap-2" aria-label="Interview progress">
         {dots.map((dot) => (
           <li
-            key={dot.id}
+            key={dot.key}
             data-state={dot.state}
             className={cn(
               'w-2 h-2 rounded-full transition-all',
