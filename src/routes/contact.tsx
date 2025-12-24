@@ -5,7 +5,7 @@ import { Section } from '@/components/ui/Section'
 import { Heading, Text } from '@/components/ui/Typography'
 import { ChatContainer } from '@/features/chat/components/ChatContainer'
 import { createFileRoute } from '@tanstack/react-router'
-import { useState } from 'react'
+import { useCallback, useRef, useState } from 'react'
 
 export const Route = createFileRoute('/contact')({
   component: ContactPage,
@@ -13,6 +13,15 @@ export const Route = createFileRoute('/contact')({
 
 function ContactPage() {
   const [showForm, setShowForm] = useState(false)
+  const toggleRef = useRef<HTMLDivElement>(null)
+
+  // Scroll the toggle link into view when chat input is focused
+  // This positions the toggle just above the iOS keyboard, keeping the whole chat visible
+  const handleChatFocus = useCallback(() => {
+    setTimeout(() => {
+      toggleRef.current?.scrollIntoView({ behavior: 'smooth', block: 'end' })
+    }, 300) // Delay for iOS keyboard animation
+  }, [])
 
   return (
     <>
@@ -29,10 +38,13 @@ function ContactPage() {
 
           {/* Chat Interface */}
           <div className="max-w-2xl mx-auto">
-            <ChatContainer apiEndpoint={import.meta.env.VITE_CHAT_API_URL || '/api/chat'} />
+            <ChatContainer
+              apiEndpoint={import.meta.env.VITE_CHAT_API_URL || '/api/chat'}
+              onInputFocus={handleChatFocus}
+            />
 
             {/* Fallback Form Toggle */}
-            <div className="mt-6 text-center">
+            <div ref={toggleRef} className="mt-6 text-center">
               <button
                 type="button"
                 onClick={() => setShowForm(!showForm)}
