@@ -96,6 +96,11 @@ export function formatLeadEmail(
 `
 }
 
+function truncate(text: string | null, maxLength: number): string {
+  if (!text) return ''
+  return text.length > maxLength ? `${text.slice(0, maxLength)}...` : text
+}
+
 export async function notifyTeam(
   resendApiKey: string,
   notificationEmail: string,
@@ -107,7 +112,9 @@ export async function notifyTeam(
   },
   prdDraft: string,
 ): Promise<void> {
-  const subject = `New Lead: ${lead.company ?? lead.name ?? 'Unknown'} — ${lead.projectSummary?.slice(0, 50) ?? 'New inquiry'}${(lead.projectSummary?.length ?? 0) > 50 ? '...' : ''}`
+  const sender = lead.company ?? lead.name ?? 'Unknown'
+  const summary = truncate(lead.projectSummary, 50) || 'New inquiry'
+  const subject = `New Lead: ${sender} — ${summary}`
 
   await sendEmail(resendApiKey, {
     to: notificationEmail,
