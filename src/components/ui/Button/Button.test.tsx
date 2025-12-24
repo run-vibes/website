@@ -10,17 +10,17 @@ describe('Button', () => {
 
   it('applies primary variant by default', () => {
     render(<Button>Button</Button>)
-    expect(screen.getByRole('button')).toHaveClass('bg-primary-500')
+    expect(screen.getByRole('button')).toHaveClass('bg-accent')
   })
 
   it('applies secondary variant', () => {
     render(<Button variant="secondary">Button</Button>)
-    expect(screen.getByRole('button')).toHaveClass('bg-neutral-100')
+    expect(screen.getByRole('button')).toHaveClass('bg-transparent', 'border-2')
   })
 
   it('applies ghost variant', () => {
     render(<Button variant="ghost">Button</Button>)
-    expect(screen.getByRole('button')).toHaveClass('hover:bg-neutral-100')
+    expect(screen.getByRole('button')).toHaveClass('hover:bg-muted')
   })
 
   it('applies size classes', () => {
