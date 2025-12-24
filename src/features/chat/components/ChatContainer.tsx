@@ -11,15 +11,15 @@ interface ChatContainerProps {
 
 export function ChatContainer({ className, apiEndpoint }: ChatContainerProps) {
   const { messages, isLoading, error, sendMessage } = useChat({ apiEndpoint })
-  const messagesEndRef = useRef<HTMLDivElement>(null)
+  const messagesAreaRef = useRef<HTMLDivElement>(null)
   const containerRef = useRef<HTMLDivElement>(null)
   const [isExpanded, setIsExpanded] = useState(false)
   const initialMessageCount = useRef(messages.length)
 
-  // Only auto-scroll for new messages after initial render (not on mount)
+  // Scroll within the messages area (not the page) when new messages arrive
   useEffect(() => {
-    if (messages.length > initialMessageCount.current) {
-      messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' })
+    if (messages.length > initialMessageCount.current && messagesAreaRef.current) {
+      messagesAreaRef.current.scrollTop = messagesAreaRef.current.scrollHeight
     }
   }, [messages.length])
 
@@ -42,7 +42,7 @@ export function ChatContainer({ className, apiEndpoint }: ChatContainerProps) {
       )}
     >
       {/* Messages Area */}
-      <div className="flex-1 overflow-y-auto p-4 space-y-4 min-h-0">
+      <div ref={messagesAreaRef} className="flex-1 overflow-y-auto p-4 space-y-4 min-h-0">
         {messages.map((message) => (
           <ChatBubble key={message.id} sender={message.role === 'user' ? 'user' : 'assistant'}>
             {message.content}
@@ -58,7 +58,6 @@ export function ChatContainer({ className, apiEndpoint }: ChatContainerProps) {
             Gremlins in the system. One more time?
           </div>
         )}
-        <div ref={messagesEndRef} />
       </div>
 
       {/* Input Area */}
