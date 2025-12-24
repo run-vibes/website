@@ -52,8 +52,19 @@ pnpm deploy
 **Using Just (task runner):**
 ```bash
 just                   # List available commands
+just install           # Install dependencies
 just dev               # Start dev server
+just ladle             # Start Ladle component preview
+just typecheck         # Run TypeScript checking
+just lint              # Run Biome linter
+just format            # Format code with Biome
 just check             # Run all checks (typecheck, lint, test)
+just test              # Run unit tests
+just e2e               # Run E2E tests
+just build             # Build for production
+just deploy            # Deploy to Cloudflare Pages
+just deploy-worker     # Deploy chat worker
+just prototypes        # Open all design prototypes in browser
 ```
 
 ## Architecture
@@ -145,9 +156,11 @@ docs/plans/
 ├── 02-homepage-prototypes/
 │   ├── design.md
 │   └── implementation.md
-└── 03-prototype-refinements/
-    ├── design.md
-    └── implementation.md
+├── 03-prototype-refinements/
+│   ├── design.md
+│   └── implementation.md
+└── 04-daybreak-hybrid/
+    └── design.md
 ```
 
 **Conventions:**
