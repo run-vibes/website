@@ -22,6 +22,9 @@ docs/plans/
 | # | Name | Status | Description |
 |---|------|--------|-------------|
 | 01 | [scaffolding](./01-scaffolding/) | Complete | Initial project setup: dev environment, component library, deployment pipeline |
+| 02 | [homepage-prototypes](./02-homepage-prototypes/) | Complete | Visual prototypes: Midnight (particles), Daybreak (geometric), Aurora (gradient mesh) |
+| 03 | [prototype-refinements](./03-prototype-refinements/) | Complete | Light/dark variants and animation alternatives for Midnight and Daybreak |
+| 04 | [daybreak-hybrid](./04-daybreak-hybrid/) | Complete | Hybrid 2D/3D dark theme with 5 color variants |
 
 ## Plan Lifecycle
 

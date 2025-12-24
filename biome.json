@@ -32,7 +32,8 @@
       "*.gen.ts",
       "/nix/**",
       "test-results",
-      "playwright-report"
+      "playwright-report",
+      "prototypes"
     ]
   }
 }
