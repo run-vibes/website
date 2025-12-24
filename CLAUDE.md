@@ -81,6 +81,29 @@ just prototypes               # Open design prototypes in browser
 - Chat interface for lead capture (rate-limited via Cloudflare Workers)
 - Static site generation for performance
 
+## Security
+
+See `docs/SECURITY.md` for complete security guidelines. Key points:
+
+**Never commit:**
+- API keys (`ANTHROPIC_API_KEY`, `RESEND_API_KEY`)
+- `.env`, `.env.local`, `.dev.vars` files
+
+**Safe to commit:**
+- D1 database IDs (identifiers, not credentials)
+- Worker/Pages project names
+- `wrangler.toml` / `wrangler.jsonc` config files
+
+**Setting secrets:**
+```bash
+# Worker secrets (interactive prompt)
+cd workers/chat-api
+npx wrangler secret put ANTHROPIC_API_KEY
+
+# GitHub Actions secrets
+# Configure in repository Settings > Secrets
+```
+
 ## Brand Direction
 
 - Bold and energetic visual style

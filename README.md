@@ -145,6 +145,8 @@ just worker-deploy production
    - `CLOUDFLARE_API_TOKEN` - API token with Pages + Workers + D1 permissions
    - `CLOUDFLARE_ACCOUNT_ID` - Your Cloudflare account ID
 
+See [docs/SECURITY.md](docs/SECURITY.md) for complete security guidelines.
+
 ## Project Structure
 
 ```

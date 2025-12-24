@@ -143,11 +143,18 @@ Track the progress of phases, milestones, and tasks for the Vibes website.
 
 | Task | Status | PR |
 |------|--------|-----|
-| Reorganize just tasks (noun-verb pattern) | 🔄 In Progress | — |
-| Add staging environment to wrangler config | 🔄 In Progress | — |
-| Add Pages deployment to CI workflow | 🔄 In Progress | — |
-| Add manual worker deploy workflow | 🔄 In Progress | — |
-| Update deployment documentation | 🔄 In Progress | — |
+| Reorganize just tasks (noun-verb pattern) | ✅ Done | #19 |
+| Add staging environment to wrangler config | ✅ Done | #19 |
+| Simplify CI workflow (Pages via Cloudflare GitHub integration) | ✅ Done | #19 |
+| Add manual worker deploy workflow | ✅ Done | #19 |
+| Security review and documentation | ✅ Done | #19 |
+| Update deployment documentation | ✅ Done | #19 |
+
+### Future Work
+
+| Task | Status | Notes |
+|------|--------|-------|
+| Chat on PR previews | ⬜ Future | Deploy staging worker, configure `VITE_CHAT_API_URL` for preview env |
 
 ---
 
@@ -231,6 +238,13 @@ Track the progress of phases, milestones, and tasks for the Vibes website.
 ---
 
 ## Recent Updates
+
+### 2025-12-24 (CI/CD Automation)
+- Simplified CI workflow - Cloudflare's GitHub integration handles Pages deployment (#19)
+- Added staging environment for chat worker
+- Security review and documentation (`docs/SECURITY.md`)
+- Restored D1 database IDs and deployed production chat worker
+- Added manual worker deployment workflow
 
 ### 2025-12-24 (Phase 2 Complete)
 - **Phase 2 Brand Identity completed!**
