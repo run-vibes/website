@@ -5,6 +5,7 @@ import type { ComponentProps, ElementType } from 'react'
 const headingVariants = cva('font-heading font-bold tracking-tight', {
   variants: {
     size: {
+      '3xl': 'text-6xl md:text-7xl',
       '2xl': 'text-5xl md:text-6xl',
       xl: 'text-4xl md:text-5xl',
       lg: 'text-3xl md:text-4xl',
@@ -37,6 +38,7 @@ export function Heading({ level = 1, size, className, children, ...props }: Head
 const textVariants = cva('', {
   variants: {
     size: {
+      xl: 'text-xl',
       lg: 'text-lg',
       md: 'text-base',
       sm: 'text-sm',
