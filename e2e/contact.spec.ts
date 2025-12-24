@@ -8,7 +8,7 @@ test.describe('Contact Page', () => {
     await expect(page.getByRole('heading', { name: /let's talk/i })).toBeVisible()
 
     // Check welcome message
-    await expect(page.getByText(/what are you looking to build/i)).toBeVisible()
+    await expect(page.getByText(/what's the vision/i)).toBeVisible()
 
     // Check input and send button
     await expect(page.getByPlaceholder(/type a message/i)).toBeVisible()

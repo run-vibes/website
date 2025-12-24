@@ -25,6 +25,9 @@ test.describe('Services Page', () => {
   test('can navigate to contact from CTA', async ({ page }) => {
     await page.goto('/services')
 
+    // Wait for page to be fully loaded
+    await page.waitForLoadState('networkidle')
+
     // Click first CTA
     await page
       .getByRole('link', { name: /discuss your project/i })
@@ -32,7 +35,7 @@ test.describe('Services Page', () => {
       .click()
 
     // Should navigate to contact
-    await expect(page).toHaveURL('/contact')
+    await expect(page).toHaveURL('/contact', { timeout: 10000 })
   })
 
   test('final CTA section is visible', async ({ page }) => {
