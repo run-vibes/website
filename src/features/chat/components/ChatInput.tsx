@@ -1,5 +1,5 @@
 import { cn } from '@/lib/cn'
-import { useRef, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import type { FormEvent } from 'react'
 
 interface ChatInputProps {
@@ -12,6 +12,15 @@ interface ChatInputProps {
 export function ChatInput({ onSend, loading, className, onFocus }: ChatInputProps) {
   const [value, setValue] = useState('')
   const inputRef = useRef<HTMLInputElement>(null)
+  const wasLoading = useRef(false)
+
+  // Refocus input when loading finishes
+  useEffect(() => {
+    if (wasLoading.current && !loading) {
+      inputRef.current?.focus()
+    }
+    wasLoading.current = loading ?? false
+  }, [loading])
 
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault()
@@ -19,8 +28,6 @@ export function ChatInput({ onSend, loading, className, onFocus }: ChatInputProp
     if (trimmed && !loading) {
       onSend(trimmed)
       setValue('')
-      // Keep focus on input after sending (delay to run after button click is processed)
-      setTimeout(() => inputRef.current?.focus(), 0)
     }
   }
 
