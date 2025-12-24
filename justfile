@@ -41,8 +41,8 @@ e2e:
 build:
     pnpm build
 
-# Deploy to Cloudflare Pages
-deploy:
+# Deploy to Cloudflare Pages (production)
+pages-deploy:
     pnpm deploy
 
 # Set up local environment (copies .env.example to .env)
@@ -56,8 +56,8 @@ setup-env:
         echo "Edit .env to configure VITE_CHAT_API_URL"
     fi
 
-# Set VITE_CHAT_API_URL on Cloudflare Pages (usage: just pages-env-chat-api https://your-worker.workers.dev/chat)
-pages-env-chat-api url:
+# Set environment variable on Cloudflare Pages (usage: just pages-env VITE_CHAT_API_URL https://your-worker.workers.dev/chat)
+pages-env name value:
     #!/usr/bin/env bash
     if [ -z "$CLOUDFLARE_ACCOUNT_ID" ] || [ -z "$CLOUDFLARE_API_TOKEN" ]; then
         echo "Error: Set CLOUDFLARE_ACCOUNT_ID and CLOUDFLARE_API_TOKEN environment variables"
@@ -71,15 +71,28 @@ pages-env-chat-api url:
             "deployment_configs": {
                 "production": {
                     "env_vars": {
-                        "VITE_CHAT_API_URL": {"value": "{{url}}"}
+                        "{{name}}": {"value": "{{value}}"}
                     }
                 }
             }
         }' | jq .
 
+# Deploy preview to Cloudflare Pages
+pages-preview:
+    pnpm build
+    wrangler pages deploy dist --project-name=website
+
 # Deploy chat worker
-deploy-worker:
-    cd workers/chat-api && wrangler deploy
+worker-deploy env:
+    #!/usr/bin/env bash
+    if [ "{{env}}" = "production" ]; then
+        cd workers/chat-api && wrangler deploy
+    elif [ "{{env}}" = "staging" ]; then
+        cd workers/chat-api && wrangler deploy --env staging
+    else
+        echo "Error: env must be 'staging' or 'production'"
+        exit 1
+    fi
 
 # Run chat worker locally
 worker-dev:
@@ -90,16 +103,30 @@ worker-db-create:
     wrangler d1 create vibes-chat
 
 # Run chat worker database migrations
-worker-db-migrate:
-    cd workers/chat-api && wrangler d1 execute vibes-chat --file=./schema.sql
-
-# Run chat worker database migrations (local)
-worker-db-migrate-local:
-    cd workers/chat-api && wrangler d1 execute vibes-chat --local --file=./schema.sql
+worker-migrate env:
+    #!/usr/bin/env bash
+    if [ "{{env}}" = "production" ]; then
+        cd workers/chat-api && wrangler d1 execute vibes-chat --file=./schema.sql
+    elif [ "{{env}}" = "staging" ]; then
+        cd workers/chat-api && wrangler d1 execute vibes-chat-staging --file=./schema.sql
+    elif [ "{{env}}" = "local" ]; then
+        cd workers/chat-api && wrangler d1 execute vibes-chat --local --file=./schema.sql
+    else
+        echo "Error: env must be 'staging', 'production', or 'local'"
+        exit 1
+    fi
 
 # Set a chat worker secret (usage: just worker-secret ANTHROPIC_API_KEY)
-worker-secret name:
-    wrangler secret put {{name}}
+worker-secret name env="production":
+    #!/usr/bin/env bash
+    if [ "{{env}}" = "production" ]; then
+        cd workers/chat-api && wrangler secret put {{name}}
+    elif [ "{{env}}" = "staging" ]; then
+        cd workers/chat-api && wrangler secret put {{name}} --env staging
+    else
+        echo "Error: env must be 'staging' or 'production'"
+        exit 1
+    fi
 
 # Open all prototypes in browser
 prototypes:
