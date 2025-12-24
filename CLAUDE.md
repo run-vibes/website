@@ -242,3 +242,19 @@ refactor: extract validation logic to shared utility
 - [ ] Manual test: login flow works end-to-end
 - [ ] Manual test: session persists across page refresh
 ```
+
+## GitHub Actions Conventions
+
+**Pin action versions explicitly.** Never use `@main` or `@master` — always use version tags.
+
+```yaml
+# Good
+- uses: actions/checkout@v4
+- uses: DeterminateSystems/nix-installer-action@v21
+
+# Bad
+- uses: actions/checkout@main
+- uses: some-org/some-action@master
+```
+
+**Why:** Using `@main` can introduce breaking changes unexpectedly. Pinned versions ensure reproducible builds.
