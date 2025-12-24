@@ -1,8 +1,8 @@
 import { useCallback, useMemo, useState } from 'react'
 import {
+  type InterviewQuestion,
   getPostContactQuestions,
   getStructuredQuestions,
-  type InterviewQuestion,
 } from '../config/questions'
 
 export interface InterviewAnswers {

@@ -138,9 +138,7 @@ export async function callClaude(
   newMessage: string,
   interviewAnswers?: InterviewAnswers,
 ): Promise<string> {
-  const interviewContext = interviewAnswers
-    ? buildContextFromAnswers(interviewAnswers)
-    : undefined
+  const interviewContext = interviewAnswers ? buildContextFromAnswers(interviewAnswers) : undefined
   const systemPrompt = buildSystemPrompt(interviewContext)
 
   const messages: ClaudeMessage[] = conversationHistory

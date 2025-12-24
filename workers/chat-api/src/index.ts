@@ -63,8 +63,8 @@ export default {
         // Handle structured phase (no Claude call needed)
         if (body.phase === 'structured' && body.structuredAnswer) {
           const answers = sessionInterviewAnswers.get(session.id) ?? {}
-          answers[body.structuredAnswer.questionId as keyof InterviewAnswers] =
-            body.structuredAnswer.answer as never
+          answers[body.structuredAnswer.questionId as keyof InterviewAnswers] = body
+            .structuredAnswer.answer as never
           sessionInterviewAnswers.set(session.id, answers)
 
           const response: ChatResponse = {
@@ -76,8 +76,8 @@ export default {
         // Handle post_contact phase (budget question)
         if (body.phase === 'post_contact' && body.structuredAnswer) {
           const answers = sessionInterviewAnswers.get(session.id) ?? {}
-          answers[body.structuredAnswer.questionId as keyof InterviewAnswers] =
-            body.structuredAnswer.answer as never
+          answers[body.structuredAnswer.questionId as keyof InterviewAnswers] = body
+            .structuredAnswer.answer as never
           sessionInterviewAnswers.set(session.id, answers)
 
           const score = calculateLeadScore(answers)

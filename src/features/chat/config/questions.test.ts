@@ -2,8 +2,8 @@ import { describe, expect, it } from 'vitest'
 import {
   INTERVIEW_QUESTIONS,
   getQuestionById,
-  getStructuredQuestions,
   getResponseStarters,
+  getStructuredQuestions,
 } from './questions'
 
 describe('INTERVIEW_QUESTIONS', () => {
