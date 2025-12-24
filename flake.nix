@@ -18,7 +18,12 @@
             pnpm
             nodePackages.wrangler
             just
+            jetbrains-mono
           ];
+
+          FONTCONFIG_FILE = pkgs.makeFontsConf {
+            fontDirectories = [ pkgs.jetbrains-mono ];
+          };
 
           # System libraries required by Playwright browsers
           LD_LIBRARY_PATH = pkgs.lib.makeLibraryPath (with pkgs; [
