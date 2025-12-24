@@ -135,6 +135,22 @@ Track the progress of phases, milestones, and tasks for the Vibes website.
 
 ---
 
+## CI/CD Automation
+
+**Goal:** Automated deployment to Cloudflare with staging environment for PR previews.
+
+### Milestones
+
+| Task | Status | PR |
+|------|--------|-----|
+| Reorganize just tasks (noun-verb pattern) | 🔄 In Progress | — |
+| Add staging environment to wrangler config | 🔄 In Progress | — |
+| Add Pages deployment to CI workflow | 🔄 In Progress | — |
+| Add manual worker deploy workflow | 🔄 In Progress | — |
+| Update deployment documentation | 🔄 In Progress | — |
+
+---
+
 ## Phase 3: Content & Credibility
 
 **Goal:** Industry pages, case studies, about page, newsletter integration.

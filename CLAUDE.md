@@ -51,24 +51,28 @@ pnpm deploy
 
 **Using Just (task runner):**
 ```bash
-just                   # List available commands
-just install           # Install dependencies
-just dev               # Start dev server
-just ladle             # Start Ladle component preview
-just typecheck         # Run TypeScript checking
-just lint              # Run Biome linter
-just format            # Format code with Biome
-just check             # Run all checks (typecheck, lint, test)
-just test              # Run unit tests
-just e2e               # Run E2E tests
-just build             # Build for production
-just deploy            # Deploy to Cloudflare Pages
-just deploy-worker     # Deploy chat worker
-just worker-dev        # Run chat worker locally
-just worker-db-create  # Create D1 database
-just worker-db-migrate # Run database migrations
-just worker-secret NAME # Set a worker secret
-just prototypes        # Open all design prototypes in browser
+just                          # List available commands
+just install                  # Install dependencies
+just dev                      # Start dev server
+just ladle                    # Start component preview
+just setup-env                # Create .env from template
+just typecheck                # Run TypeScript checking
+just lint                     # Run Biome linter
+just format                   # Format code with Biome
+just check                    # Run all checks (typecheck, lint, test)
+just test                     # Run unit tests
+just e2e                      # Run E2E tests
+just build                    # Build for production
+just pages-deploy             # Deploy to Cloudflare Pages (production)
+just pages-preview            # Deploy Pages preview
+just pages-env NAME VALUE     # Set Pages environment variable
+just worker-dev               # Run chat worker locally
+just worker-deploy ENV        # Deploy worker (staging|production)
+just worker-migrate ENV       # Run D1 migrations (staging|production|local)
+just worker-db-create         # Create production D1 database
+just worker-db-create-staging # Create staging D1 database
+just worker-secret NAME [ENV] # Set a worker secret
+just prototypes               # Open design prototypes in browser
 ```
 
 ## Architecture
