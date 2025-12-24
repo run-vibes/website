@@ -3,7 +3,7 @@ import { Container } from '@/components/ui/Container'
 import { Input } from '@/components/ui/Input'
 import { Section } from '@/components/ui/Section'
 import { Heading, Text } from '@/components/ui/Typography'
-import { ChatContainer } from '@/features/chat/components/ChatContainer'
+import { InterviewContainer } from '@/features/chat/components/InterviewContainer'
 import { createFileRoute } from '@tanstack/react-router'
 import { useCallback, useRef, useState } from 'react'
 
@@ -38,7 +38,7 @@ function ContactPage() {
 
           {/* Chat Interface */}
           <div className="max-w-2xl mx-auto">
-            <ChatContainer
+            <InterviewContainer
               apiEndpoint={import.meta.env.VITE_CHAT_API_URL || '/api/chat'}
               onInputFocus={handleChatFocus}
             />
