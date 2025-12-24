@@ -25,7 +25,7 @@ export default defineConfig({
   ],
 
   webServer: {
-    command: process.env.CI ? 'npx serve dist -l 3000' : 'pnpm dev',
+    command: process.env.CI ? 'npx serve dist -s -p 3000' : 'pnpm dev',
     url: 'http://localhost:3000',
     reuseExistingServer: !process.env.CI,
   },
