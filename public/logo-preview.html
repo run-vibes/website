@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vibes Logo Preview</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: system-ui, sans-serif; }
+    .preview-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      min-height: 100vh;
+    }
+    .preview-section {
+      padding: 60px;
+      display: flex;
+      flex-direction: column;
+      gap: 40px;
+    }
+    .dark-bg {
+      background: #0a0a0b;
+      color: #fafafa;
+    }
+    .light-bg {
+      background: #fafafa;
+      color: #18181b;
+    }
+    h2 {
+      font-size: 14px;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      opacity: 0.6;
+      margin-bottom: 8px;
+    }
+    .logo-row {
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+    .logo-item {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .logo-label {
+      font-size: 12px;
+      opacity: 0.5;
+    }
+    img {
+      max-width: 100%;
+      height: auto;
+    }
+    .mark img {
+      width: 64px;
+      height: 64px;
+    }
+    .full img {
+      height: 48px;
+      width: auto;
+    }
+  </style>
+</head>
+<body>
+  <div class="preview-grid">
+    <div class="preview-section dark-bg">
+      <h2>Dark Background</h2>
+      <div class="logo-row">
+        <div class="logo-item mark">
+          <span class="logo-label">Mark (64px)</span>
+          <img src="logo-mark-dark.svg" alt="Vibes mark - dark">
+        </div>
+        <div class="logo-item full">
+          <span class="logo-label">Full Logo</span>
+          <img src="logo-full-dark.svg" alt="Vibes full logo - dark">
+        </div>
+      </div>
+    </div>
+    <div class="preview-section light-bg">
+      <h2>Light Background</h2>
+      <div class="logo-row">
+        <div class="logo-item mark">
+          <span class="logo-label">Mark (64px)</span>
+          <img src="logo-mark-light.svg" alt="Vibes mark - light">
+        </div>
+        <div class="logo-item full">
+          <span class="logo-label">Full Logo</span>
+          <img src="logo-full-light.svg" alt="Vibes full logo - light">
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
