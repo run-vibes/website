@@ -36,7 +36,7 @@ jobs:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
           workingDirectory: workers/chat-api
-          command: deploy ${{ inputs.environment == 'staging' && '--env staging' || '' }}
+          command: deploy --config wrangler.toml ${{ inputs.environment == 'staging' && '--env staging' || '' }}
 
       - name: Run Migrations
         uses: cloudflare/wrangler-action@v3
@@ -44,4 +44,4 @@ jobs:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
           workingDirectory: workers/chat-api
-          command: d1 execute ${{ inputs.environment == 'staging' && 'vibes-chat-staging' || 'vibes-chat' }} --file=./schema.sql
+          command: d1 execute ${{ inputs.environment == 'staging' && 'vibes-chat-staging' || 'vibes-chat' }} --remote --config wrangler.toml --file=./schema.sql
