@@ -34,7 +34,7 @@ export function formatLeadEmail(
     projectSummary: string | null
   },
   prdDraft: string,
-  conversationUrl?: string
+  conversationUrl?: string,
 ): string {
   return `
 <!DOCTYPE html>
@@ -105,7 +105,7 @@ export async function notifyTeam(
     company: string | null
     projectSummary: string | null
   },
-  prdDraft: string
+  prdDraft: string,
 ): Promise<void> {
   const subject = `New Lead: ${lead.company ?? lead.name ?? 'Unknown'} — ${lead.projectSummary?.slice(0, 50) ?? 'New inquiry'}${(lead.projectSummary?.length ?? 0) > 50 ? '...' : ''}`
 

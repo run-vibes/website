@@ -17,8 +17,7 @@ export function useChat(options: UseChatOptions = {}) {
     {
       id: 'welcome',
       role: 'assistant',
-      content:
-        "Hi! I'm here to learn about your project. What are you looking to build with AI?",
+      content: "Hi! I'm here to learn about your project. What are you looking to build with AI?",
       timestamp: new Date(),
     },
   ])
@@ -73,7 +72,7 @@ export function useChat(options: UseChatOptions = {}) {
         setIsLoading(false)
       }
     },
-    [apiEndpoint, sessionId]
+    [apiEndpoint, sessionId],
   )
 
   const clearMessages = useCallback(() => {

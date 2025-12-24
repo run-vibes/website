@@ -10,7 +10,7 @@ test.describe('Home Page', () => {
     await page.goto('/')
 
     await expect(
-      page.getByRole('heading', { name: /the studio where ai agents come to life/i })
+      page.getByRole('heading', { name: /the studio where ai agents come to life/i }),
     ).toBeVisible()
 
     await expect(page.getByRole('link', { name: /let's talk/i })).toBeVisible()
@@ -50,7 +50,10 @@ test.describe('Home Page', () => {
   test('CTA navigates to contact page', async ({ page }) => {
     await page.goto('/')
 
-    await page.getByRole('link', { name: /let's talk/i }).first().click()
+    await page
+      .getByRole('link', { name: /let's talk/i })
+      .first()
+      .click()
 
     await expect(page).toHaveURL('/contact')
   })

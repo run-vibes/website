@@ -42,7 +42,7 @@ interface ClaudeResponse {
 export async function callClaude(
   apiKey: string,
   conversationHistory: Message[],
-  newMessage: string
+  newMessage: string,
 ): Promise<string> {
   const messages: ClaudeMessage[] = conversationHistory
     .filter((m) => m.role !== 'system')

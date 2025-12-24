@@ -8,6 +8,7 @@ const sectionVariants = cva('', {
       sm: 'py-8 md:py-12',
       md: 'py-16 md:py-20',
       lg: 'py-24 md:py-32',
+      xl: 'py-32 md:py-40',
     },
   },
   defaultVariants: {
