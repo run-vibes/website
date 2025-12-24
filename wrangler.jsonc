@@ -5,13 +5,5 @@
 	"compatibility_flags": [
 		"nodejs_compat"
 	],
-	"main": "@tanstack/react-start/server-entry",
-	"d1_databases": [
-		{
-			"binding": "vibes_chat",
-			"database_name": "vibes-chat",
-			"database_id": "3eae3419-16e3-4a98-86e4-46d8a4fe9e19",
-			"remote": true
-		}
-	]
+	"main": "@tanstack/react-start/server-entry"
 }
