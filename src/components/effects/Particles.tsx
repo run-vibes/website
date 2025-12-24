@@ -5,28 +5,19 @@ interface ParticlesProps extends Omit<ComponentProps<'div'>, 'children'> {
   count?: number
 }
 
-export function Particles({ count = 25, className, ...props }: ParticlesProps) {
-  const particles = Array.from({ length: count }, (_, i) => {
-    const left = `${(i * 4) % 100}%`
-    const duration = 15 + (i % 10)
-    const delay = -(i * 0.8)
-    const isAccent = i % 2 === 0
+// Pre-generate stable particle configs to avoid array index key issues
+function generateParticleConfigs(count: number) {
+  return Array.from({ length: count }, (_, i) => ({
+    id: `particle-${i}`,
+    left: `${(i * 4) % 100}%`,
+    duration: 15 + (i % 10),
+    delay: -(i * 0.8),
+    isAccent: i % 2 === 0,
+  }))
+}
 
-    return (
-      <div
-        key={i}
-        data-particle
-        className="absolute w-[3px] h-[3px] rounded-full opacity-0"
-        style={{
-          left,
-          background: isAccent ? 'var(--color-accent-primary)' : 'var(--color-accent-secondary)',
-          boxShadow: `0 0 6px ${isAccent ? 'var(--color-accent-primary)' : 'var(--color-accent-secondary)'}`,
-          animation: `float-up ${duration}s linear infinite`,
-          animationDelay: `${delay}s`,
-        }}
-      />
-    )
-  })
+export function Particles({ count = 25, className, ...props }: ParticlesProps) {
+  const particles = generateParticleConfigs(count)
 
   return (
     <div
@@ -53,7 +44,22 @@ export function Particles({ count = 25, className, ...props }: ParticlesProps) {
           }
         }
       `}</style>
-      {particles}
+      {particles.map((particle) => (
+        <div
+          key={particle.id}
+          data-particle
+          className="absolute w-[3px] h-[3px] rounded-full opacity-0"
+          style={{
+            left: particle.left,
+            background: particle.isAccent
+              ? 'var(--color-accent-primary)'
+              : 'var(--color-accent-secondary)',
+            boxShadow: `0 0 6px ${particle.isAccent ? 'var(--color-accent-primary)' : 'var(--color-accent-secondary)'}`,
+            animation: `float-up ${particle.duration}s linear infinite`,
+            animationDelay: `${particle.delay}s`,
+          }}
+        />
+      ))}
     </div>
   )
 }
