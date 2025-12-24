@@ -139,9 +139,11 @@ All checks must pass before work is considered done.
 **REQUIRED:** Before finishing a branch (creating PR or merging), update `docs/PROGRESS.md`:
 
 1. Update task status in the relevant phase/milestone table
-2. Add the PR number to completed tasks
+2. Add a **linked PR reference** to completed tasks using the format: `[#N](https://github.com/run-vibes/website/pull/N)`
 3. Update the phase progress percentage if significant work was done
-4. Add an entry to the "Recent Updates" section at the bottom
+4. Add an entry to the "Recent Updates" section at the bottom with linked PRs
+
+**Always use linked PR references**, not just `#N`. This makes the progress doc navigable.
 
 This keeps the project progress visible and helps track what's been accomplished across branches.
 
@@ -159,8 +161,14 @@ docs/plans/
 ├── 03-prototype-refinements/
 │   ├── design.md
 │   └── implementation.md
-└── 04-daybreak-hybrid/
-    └── design.md
+├── 04-daybreak-hybrid/
+│   └── design.md
+├── 05-phase1-completion/
+│   ├── design.md
+│   └── implementation.md
+└── 06-brand-design/
+    ├── design.md
+    └── implementation.md
 ```
 
 **Conventions:**
