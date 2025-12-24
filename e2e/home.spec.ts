@@ -13,14 +13,15 @@ test.describe('Home Page', () => {
       page.getByRole('heading', { name: /the studio where ai agents come to life/i }),
     ).toBeVisible()
 
-    await expect(page.getByRole('link', { name: /let's talk/i })).toBeVisible()
-    await expect(page.getByRole('link', { name: /see our services/i })).toBeVisible()
+    const main = page.getByRole('main')
+    await expect(main.getByRole('link', { name: /let's talk/i })).toBeVisible()
+    await expect(main.getByRole('link', { name: /see our services/i })).toBeVisible()
   })
 
   test('displays navigation', async ({ page }) => {
     await page.goto('/')
     await expect(page.getByRole('navigation')).toBeVisible()
-    await expect(page.getByRole('link', { name: 'Vibes' })).toBeVisible()
+    await expect(page.getByRole('link', { name: /vibes logo/i })).toBeVisible()
   })
 
   test('displays footer', async ({ page }) => {
@@ -50,10 +51,8 @@ test.describe('Home Page', () => {
   test('CTA navigates to contact page', async ({ page }) => {
     await page.goto('/')
 
-    await page
-      .getByRole('link', { name: /let's talk/i })
-      .first()
-      .click()
+    const main = page.getByRole('main')
+    await main.getByRole('link', { name: /let's talk/i }).click()
 
     await expect(page).toHaveURL('/contact')
   })

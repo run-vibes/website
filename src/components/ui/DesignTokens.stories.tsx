@@ -156,8 +156,7 @@ export const BorderRadius: Story = () => (
     <h2 className="font-heading text-xl mb-4">Border Radius</h2>
     <div className="flex gap-6">
       {[
-        { name: 'sm', value: '4px' },
-        { name: 'DEFAULT', value: '6px' },
+        { name: 'sm', value: '6px' },
         { name: 'md', value: '8px' },
         { name: 'lg', value: '12px' },
         { name: 'xl', value: '16px' },

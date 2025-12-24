@@ -25,10 +25,10 @@ export default {
         destructive: 'var(--color-error)',
         success: 'var(--color-success)',
         warning: 'var(--color-warning)',
-        // Legacy support
+        // Legacy support - foreground colors are for text ON that background
         primary: {
           DEFAULT: 'var(--color-accent-primary)',
-          foreground: 'var(--color-bg-primary)',
+          foreground: 'var(--color-bg-primary)', // Dark text on white primary bg
         },
         secondary: {
           DEFAULT: 'var(--color-accent-secondary)',
