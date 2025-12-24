@@ -42,9 +42,9 @@ test.describe('Home Page', () => {
     await page.goto('/')
 
     await expect(page.getByRole('heading', { name: /how we work/i })).toBeVisible()
-    await expect(page.getByText(/discover/i)).toBeVisible()
-    await expect(page.getByText(/design/i).first()).toBeVisible()
-    await expect(page.getByText(/deliver/i)).toBeVisible()
+    await expect(page.getByRole('heading', { name: /discover/i })).toBeVisible()
+    await expect(page.getByRole('heading', { name: /design/i })).toBeVisible()
+    await expect(page.getByRole('heading', { name: /deliver/i })).toBeVisible()
   })
 
   test('CTA navigates to contact page', async ({ page }) => {
