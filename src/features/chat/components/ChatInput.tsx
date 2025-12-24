@@ -6,9 +6,10 @@ interface ChatInputProps {
   onSend: (message: string) => void
   loading?: boolean
   className?: string
+  onFocus?: () => void
 }
 
-export function ChatInput({ onSend, loading, className }: ChatInputProps) {
+export function ChatInput({ onSend, loading, className, onFocus }: ChatInputProps) {
   const [value, setValue] = useState('')
 
   const handleSubmit = (e: FormEvent) => {
@@ -26,6 +27,7 @@ export function ChatInput({ onSend, loading, className }: ChatInputProps) {
         type="text"
         value={value}
         onChange={(e) => setValue(e.target.value)}
+        onFocus={onFocus}
         placeholder="Type a message..."
         disabled={loading}
         className="flex-1 rounded-full border border-input bg-background px-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-ring disabled:opacity-50"

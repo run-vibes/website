@@ -17,7 +17,7 @@ export function useChat(options: UseChatOptions = {}) {
     {
       id: 'welcome',
       role: 'assistant',
-      content: "Hi! I'm here to learn about your project. What are you looking to build with AI?",
+      content: "Howdy! What's the vision? Let's talk about bringing your AI project to life.",
       timestamp: new Date(),
     },
   ])
