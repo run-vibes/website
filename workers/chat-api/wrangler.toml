@@ -11,7 +11,7 @@ NOTIFICATION_EMAIL = "hello@vibes.run"
 [[d1_databases]]
 binding = "DB"
 database_name = "vibes-chat"
-database_id = "placeholder" # Replace after running: wrangler d1 create vibes-chat
+database_id = "3eae3419-16e3-4a98-86e4-46d8a4fe9e19"
 
 # Staging environment
 [env.staging]
@@ -25,4 +25,4 @@ NOTIFICATION_EMAIL = ""
 [[env.staging.d1_databases]]
 binding = "DB"
 database_name = "vibes-chat-staging"
-database_id = "placeholder" # Replace after running: wrangler d1 create vibes-chat-staging
+database_id = "4af6d5f4-8700-4b38-aba6-041c7b5fd2bf"
