@@ -6,33 +6,36 @@ function initScrollAnimations(options = {}) {
     selector = '[data-animate]',
     threshold = 0.1,
     rootMargin = '0px 0px -50px 0px',
-    staggerDelay = 100
-  } = options;
+    staggerDelay = 100,
+  } = options
 
-  const elements = document.querySelectorAll(selector);
+  const elements = document.querySelectorAll(selector)
 
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach((entry) => {
-      if (entry.isIntersecting) {
-        const el = entry.target;
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          const el = entry.target
 
-        // Handle staggered children
-        if (el.hasAttribute('data-stagger')) {
-          const children = el.querySelectorAll('[data-animate-child]');
-          children.forEach((child, index) => {
-            setTimeout(() => {
-              child.classList.add('visible');
-            }, index * staggerDelay);
-          });
+          // Handle staggered children
+          if (el.hasAttribute('data-stagger')) {
+            const children = el.querySelectorAll('[data-animate-child]')
+            children.forEach((child, index) => {
+              setTimeout(() => {
+                child.classList.add('visible')
+              }, index * staggerDelay)
+            })
+          }
+
+          el.classList.add('visible')
+          observer.unobserve(el)
         }
+      })
+    },
+    { threshold, rootMargin },
+  )
 
-        el.classList.add('visible');
-        observer.unobserve(el);
-      }
-    });
-  }, { threshold, rootMargin });
-
-  elements.forEach((el) => observer.observe(el));
+  elements.forEach((el) => observer.observe(el))
 }
 
 /**
@@ -40,48 +43,48 @@ function initScrollAnimations(options = {}) {
  */
 const easing = {
   // Smooth deceleration
-  easeOutCubic: (t) => 1 - Math.pow(1 - t, 3),
+  easeOutCubic: (t) => 1 - (1 - t) ** 3,
   // Smooth acceleration then deceleration
-  easeInOutCubic: (t) => t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2,
+  easeInOutCubic: (t) => (t < 0.5 ? 4 * t * t * t : 1 - (-2 * t + 2) ** 3 / 2),
   // Bouncy deceleration
-  easeOutBack: (t) => 1 + 2.70158 * Math.pow(t - 1, 3) + 1.70158 * Math.pow(t - 1, 2),
+  easeOutBack: (t) => 1 + 2.70158 * (t - 1) ** 3 + 1.70158 * (t - 1) ** 2,
   // Dreamy float
-  easeOutQuart: (t) => 1 - Math.pow(1 - t, 4)
-};
+  easeOutQuart: (t) => 1 - (1 - t) ** 4,
+}
 
 /**
  * Linear interpolation
  */
 function lerp(start, end, factor) {
-  return start + (end - start) * factor;
+  return start + (end - start) * factor
 }
 
 /**
  * Map value from one range to another
  */
 function mapRange(value, inMin, inMax, outMin, outMax) {
-  return ((value - inMin) * (outMax - outMin)) / (inMax - inMin) + outMin;
+  return ((value - inMin) * (outMax - outMin)) / (inMax - inMin) + outMin
 }
 
 /**
  * Clamp value between min and max
  */
 function clamp(value, min, max) {
-  return Math.min(Math.max(value, min), max);
+  return Math.min(Math.max(value, min), max)
 }
 
 /**
  * Throttle function calls
  */
 function throttle(func, limit) {
-  let inThrottle;
-  return function(...args) {
+  let inThrottle
+  return function (...args) {
     if (!inThrottle) {
-      func.apply(this, args);
-      inThrottle = true;
-      setTimeout(() => inThrottle = false, limit);
+      func.apply(this, args)
+      inThrottle = true
+      setTimeout(() => (inThrottle = false), limit)
     }
-  };
+  }
 }
 
 /**
@@ -89,9 +92,9 @@ function throttle(func, limit) {
  */
 function onReady(callback) {
   if (document.readyState !== 'loading') {
-    callback();
+    callback()
   } else {
-    document.addEventListener('DOMContentLoaded', callback);
+    document.addEventListener('DOMContentLoaded', callback)
   }
 }
 
@@ -104,6 +107,6 @@ if (typeof window !== 'undefined') {
     mapRange,
     clamp,
     throttle,
-    onReady
-  };
+    onReady,
+  }
 }
