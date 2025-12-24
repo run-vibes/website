@@ -49,7 +49,7 @@
     <!-- V -->
     <path d="M-150 -80H-130L-90 40L-50 -80H-30L-80 80H-100L-150 -80Z" fill="#ffffff"/>
     <!-- i -->
-    <text x="-10" y="70" font-family="JetBrains Mono, monospace" font-weight="800" font-size="120" fill="#ffffff">ibes</text>
+    <text x="-25" y="70" font-family="JetBrains Mono, monospace" font-weight="800" font-size="120" fill="#ffffff">ibes</text>
   </g>
 
   <!-- Tagline -->
