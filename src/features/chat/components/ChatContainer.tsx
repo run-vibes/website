@@ -25,10 +25,10 @@ export function ChatContainer({ className, apiEndpoint }: ChatContainerProps) {
 
   const handleInputFocus = useCallback(() => {
     setIsExpanded(true)
-    // On mobile, scroll the input area into view above the keyboard
+    // On mobile, scroll input into view only if needed (won't scroll if already visible)
     // Delay allows iOS keyboard animation to complete
     setTimeout(() => {
-      inputAreaRef.current?.scrollIntoView({ behavior: 'smooth', block: 'center' })
+      inputAreaRef.current?.scrollIntoView({ behavior: 'smooth', block: 'nearest' })
     }, 300)
   }, [])
 
@@ -36,8 +36,8 @@ export function ChatContainer({ className, apiEndpoint }: ChatContainerProps) {
     <div
       className={cn(
         'flex flex-col border rounded-xl bg-background transition-all duration-300',
-        // Compact height initially, expand when focused/interacting
-        isExpanded ? 'h-[500px] max-h-[70vh]' : 'h-[280px] sm:h-[350px]',
+        // Compact height initially, expand when focused (smaller on mobile to stay above keyboard)
+        isExpanded ? 'h-[320px] sm:h-[500px] max-h-[50vh] sm:max-h-[70vh]' : 'h-[280px] sm:h-[350px]',
         className,
       )}
     >
