@@ -49,6 +49,104 @@ pnpm format      # Biome formatting
 pnpm build
 ```
 
+## Deployment
+
+### Environments
+
+| Environment | Pages URL | Worker URL | D1 Database |
+|-------------|-----------|------------|-------------|
+| Production | vibes.run | vibes-chat-api.workers.dev | vibes-chat |
+| Staging | *.website.pages.dev | vibes-chat-api-staging.workers.dev | vibes-chat-staging |
+
+### Automatic Deployments (CI)
+
+- **Pull requests:** Pages preview deploys automatically, points to staging worker
+- **Merge to main:** Production Pages deploys automatically
+
+Worker deployments are manual (see below).
+
+### Manual Worker Deployment
+
+Use the GitHub Actions workflow or just tasks:
+
+```bash
+# Via GitHub Actions (recommended)
+# Go to Actions → Deploy Worker → Run workflow → Select environment
+
+# Via just tasks (requires CLOUDFLARE_API_TOKEN)
+just worker-deploy staging
+just worker-deploy production
+```
+
+### Just Tasks Reference
+
+**Development:**
+| Task | Description |
+|------|-------------|
+| `just dev` | Start frontend dev server |
+| `just ladle` | Start component preview |
+| `just setup-env` | Create .env from .env.example |
+
+**Quality:**
+| Task | Description |
+|------|-------------|
+| `just check` | Run all checks (typecheck, lint, test) |
+| `just typecheck` | TypeScript type checking |
+| `just lint` | Biome linting |
+| `just format` | Biome formatting |
+| `just test` | Unit tests |
+| `just e2e` | E2E tests |
+
+**Build & Deploy:**
+| Task | Description |
+|------|-------------|
+| `just build` | Build for production |
+| `just pages-deploy` | Deploy Pages (production) |
+| `just pages-preview` | Deploy Pages preview |
+| `just pages-env NAME VALUE` | Set Pages env variable |
+
+**Worker:**
+| Task | Description |
+|------|-------------|
+| `just worker-dev` | Run worker locally |
+| `just worker-deploy ENV` | Deploy worker (staging\|production) |
+| `just worker-migrate ENV` | Run D1 migrations (staging\|production\|local) |
+| `just worker-db-create` | Create production D1 database |
+| `just worker-db-create-staging` | Create staging D1 database |
+| `just worker-secret NAME [ENV]` | Set worker secret |
+
+### Initial Setup (One-time)
+
+1. **Create D1 databases:**
+   ```bash
+   just worker-db-create          # Creates vibes-chat
+   just worker-db-create-staging  # Creates vibes-chat-staging
+   ```
+
+2. **Update wrangler.toml** with the database IDs from step 1
+
+3. **Run initial migrations:**
+   ```bash
+   just worker-migrate staging
+   just worker-migrate production
+   ```
+
+4. **Set secrets:**
+   ```bash
+   # Production
+   just worker-secret ANTHROPIC_API_KEY
+   just worker-secret RESEND_API_KEY
+
+   # Staging (no RESEND_API_KEY - emails disabled)
+   just worker-secret ANTHROPIC_API_KEY staging
+   ```
+
+5. **Set GitHub secrets:**
+   - `CLOUDFLARE_API_TOKEN` - API token with Pages + Workers + D1 permissions
+   - `CLOUDFLARE_ACCOUNT_ID` - Your Cloudflare account ID
+
+See [docs/SECURITY.md](docs/SECURITY.md) for complete security guidelines.
+
 ## Project Structure
 
 ```

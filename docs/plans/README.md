@@ -27,6 +27,7 @@ docs/plans/
 | 04 | [daybreak-hybrid](./04-daybreak-hybrid/) | Complete | Hybrid 2D/3D dark theme with 5 color variants |
 | 05 | [phase1-completion](./05-phase1-completion/) | Complete | Services, Contact, and Home page expansion for MVP |
 | 06 | [brand-design](./06-brand-design/) | Complete | Daybreak-hybrid-mono theme implementation across site |
+| 07 | [ci-cd-automation](./07-ci-cd-automation/) | Ready | Automated Cloudflare deployment with staging environment |
 
 ## Plan Lifecycle
 

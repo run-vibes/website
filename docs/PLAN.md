@@ -563,3 +563,32 @@ Claude: "Great choice. Next: Typography..."
 Claude: [Writes design document, commits to branch]
         "Design documented. Ready to set up for implementation?"
 ```
+
+---
+
+## Database Migrations
+
+### Idempotent SQL Convention
+
+All schema changes in `workers/chat-api/schema.sql` must be idempotent (safe to run repeatedly):
+
+```sql
+-- Tables: use IF NOT EXISTS
+CREATE TABLE IF NOT EXISTS my_table (...);
+
+-- Indexes: use IF NOT EXISTS
+CREATE INDEX IF NOT EXISTS idx_name ON table(column);
+
+-- Columns: SQLite doesn't support IF NOT EXISTS for columns
+-- Use a migration script that checks first, or accept the error
+```
+
+### Running Migrations
+
+```bash
+just worker-migrate local      # Local development
+just worker-migrate staging    # Staging environment
+just worker-migrate production # Production environment
+```
+
+Migrations run automatically after worker deploys via CI.

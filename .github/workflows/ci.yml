@@ -86,6 +86,11 @@ jobs:
           name: build-output
           path: dist/
 
+      - name: Create Wrangler deploy config
+        run: |
+          mkdir -p .wrangler/deploy
+          echo '{"configPath":"../../dist/server/wrangler.json","auxiliaryWorkers":[]}' > .wrangler/deploy/config.json
+
       - name: Run E2E tests
         run: just e2e
 
