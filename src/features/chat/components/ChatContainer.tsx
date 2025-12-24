@@ -12,7 +12,7 @@ interface ChatContainerProps {
 export function ChatContainer({ className, apiEndpoint }: ChatContainerProps) {
   const { messages, isLoading, error, sendMessage } = useChat({ apiEndpoint })
   const messagesAreaRef = useRef<HTMLDivElement>(null)
-  const containerRef = useRef<HTMLDivElement>(null)
+  const inputAreaRef = useRef<HTMLDivElement>(null)
   const [isExpanded, setIsExpanded] = useState(false)
   const initialMessageCount = useRef(messages.length)
 
@@ -25,15 +25,15 @@ export function ChatContainer({ className, apiEndpoint }: ChatContainerProps) {
 
   const handleInputFocus = useCallback(() => {
     setIsExpanded(true)
-    // On small screens, scroll the chat container into view when input is focused
+    // On mobile, scroll the input area into view above the keyboard
+    // Delay allows iOS keyboard animation to complete
     setTimeout(() => {
-      containerRef.current?.scrollIntoView({ behavior: 'smooth', block: 'end' })
-    }, 100)
+      inputAreaRef.current?.scrollIntoView({ behavior: 'smooth', block: 'center' })
+    }, 300)
   }, [])
 
   return (
     <div
-      ref={containerRef}
       className={cn(
         'flex flex-col border rounded-xl bg-background transition-all duration-300',
         // Compact height initially, expand when focused/interacting
@@ -61,7 +61,7 @@ export function ChatContainer({ className, apiEndpoint }: ChatContainerProps) {
       </div>
 
       {/* Input Area */}
-      <div className="border-t p-4 shrink-0">
+      <div ref={inputAreaRef} className="border-t p-4 shrink-0">
         <ChatInput onSend={sendMessage} loading={isLoading} onFocus={handleInputFocus} />
       </div>
     </div>

@@ -41,7 +41,7 @@ export function ChatInput({ onSend, loading, className, onFocus }: ChatInputProp
         onFocus={onFocus}
         placeholder="Type a message..."
         disabled={loading}
-        className="flex-1 rounded-full border border-input bg-background px-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-ring disabled:opacity-50"
+        className="flex-1 rounded-full border border-input bg-background px-4 py-2 text-base focus:outline-none focus:ring-2 focus:ring-ring disabled:opacity-50"
       />
       <button
         type="submit"
