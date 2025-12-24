@@ -45,6 +45,38 @@ build:
 deploy:
     pnpm deploy
 
+# Set up local environment (copies .env.example to .env)
+setup-env:
+    #!/usr/bin/env bash
+    if [ -f .env ]; then
+        echo ".env already exists. Edit it directly or remove it first."
+    else
+        cp .env.example .env
+        echo "Created .env from .env.example"
+        echo "Edit .env to configure VITE_CHAT_API_URL"
+    fi
+
+# Set VITE_CHAT_API_URL on Cloudflare Pages (usage: just pages-env-chat-api https://your-worker.workers.dev/chat)
+pages-env-chat-api url:
+    #!/usr/bin/env bash
+    if [ -z "$CLOUDFLARE_ACCOUNT_ID" ] || [ -z "$CLOUDFLARE_API_TOKEN" ]; then
+        echo "Error: Set CLOUDFLARE_ACCOUNT_ID and CLOUDFLARE_API_TOKEN environment variables"
+        echo "Get these from: https://dash.cloudflare.com/profile/api-tokens"
+        exit 1
+    fi
+    curl -X PATCH "https://api.cloudflare.com/client/v4/accounts/$CLOUDFLARE_ACCOUNT_ID/pages/projects/website" \
+        -H "Authorization: Bearer $CLOUDFLARE_API_TOKEN" \
+        -H "Content-Type: application/json" \
+        --data '{
+            "deployment_configs": {
+                "production": {
+                    "env_vars": {
+                        "VITE_CHAT_API_URL": {"value": "{{url}}"}
+                    }
+                }
+            }
+        }' | jq .
+
 # Deploy chat worker
 deploy-worker:
     cd workers/chat-api && wrangler deploy
