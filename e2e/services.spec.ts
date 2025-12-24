@@ -26,7 +26,10 @@ test.describe('Services Page', () => {
     await page.goto('/services')
 
     // Click first CTA
-    await page.getByRole('link', { name: /discuss your project/i }).first().click()
+    await page
+      .getByRole('link', { name: /discuss your project/i })
+      .first()
+      .click()
 
     // Should navigate to contact
     await expect(page).toHaveURL('/contact')

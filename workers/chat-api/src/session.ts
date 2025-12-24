@@ -1,4 +1,4 @@
-import type { Session, Message } from './types'
+import type { Message, Session } from './types'
 
 export function generateSessionId(): string {
   return crypto.randomUUID()
@@ -6,7 +6,7 @@ export function generateSessionId(): string {
 
 export function hashIP(ip: string): string {
   const encoder = new TextEncoder()
-  const data = encoder.encode(ip + 'vibes-salt')
+  const data = encoder.encode(`${ip}vibes-salt`)
   return Array.from(new Uint8Array(data))
     .map((b) => b.toString(16).padStart(2, '0'))
     .join('')
@@ -16,7 +16,7 @@ export function hashIP(ip: string): string {
 export async function getOrCreateSession(
   db: D1Database,
   sessionId: string | undefined,
-  ipHash: string
+  ipHash: string,
 ): Promise<Session> {
   if (sessionId) {
     const existing = await db
@@ -44,13 +44,10 @@ export async function getOrCreateSession(
   }
 }
 
-export async function incrementMessageCount(
-  db: D1Database,
-  sessionId: string
-): Promise<number> {
+export async function incrementMessageCount(db: D1Database, sessionId: string): Promise<number> {
   await db
     .prepare(
-      "UPDATE sessions SET message_count = message_count + 1, updated_at = datetime('now') WHERE id = ?"
+      "UPDATE sessions SET message_count = message_count + 1, updated_at = datetime('now') WHERE id = ?",
     )
     .bind(sessionId)
     .run()
@@ -67,7 +64,7 @@ export async function saveMessage(
   db: D1Database,
   sessionId: string,
   role: 'user' | 'assistant' | 'system',
-  content: string
+  content: string,
 ): Promise<void> {
   await db
     .prepare('INSERT INTO messages (session_id, role, content) VALUES (?, ?, ?)')
@@ -77,7 +74,7 @@ export async function saveMessage(
 
 export async function getConversationHistory(
   db: D1Database,
-  sessionId: string
+  sessionId: string,
 ): Promise<Message[]> {
   const result = await db
     .prepare('SELECT * FROM messages WHERE session_id = ? ORDER BY created_at ASC')
@@ -90,7 +87,7 @@ export async function getConversationHistory(
 export async function checkRateLimit(
   db: D1Database,
   sessionId: string,
-  maxMessages: number
+  maxMessages: number,
 ): Promise<{ allowed: boolean; remaining: number }> {
   const session = await db
     .prepare('SELECT message_count FROM sessions WHERE id = ?')

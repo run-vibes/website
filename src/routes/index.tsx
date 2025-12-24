@@ -4,7 +4,7 @@ import { Container } from '@/components/ui/Container'
 import { Grid } from '@/components/ui/Grid'
 import { Section } from '@/components/ui/Section'
 import { Heading, Text } from '@/components/ui/Typography'
-import { createFileRoute, Link } from '@tanstack/react-router'
+import { Link, createFileRoute } from '@tanstack/react-router'
 
 export const Route = createFileRoute('/')({
   component: HomePage,

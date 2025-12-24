@@ -2,7 +2,7 @@ import { Button } from '@/components/ui/Button'
 import { Container } from '@/components/ui/Container'
 import { Section } from '@/components/ui/Section'
 import { Heading, Text } from '@/components/ui/Typography'
-import { createFileRoute, Link } from '@tanstack/react-router'
+import { Link, createFileRoute } from '@tanstack/react-router'
 
 export const Route = createFileRoute('/services')({
   component: ServicesPage,
@@ -101,11 +101,7 @@ function ServicesPage() {
 
       {/* Service Sections */}
       {services.map((service, index) => (
-        <Section
-          key={service.id}
-          id={service.id}
-          className={index % 2 === 1 ? 'bg-muted/30' : ''}
-        >
+        <Section key={service.id} id={service.id} className={index % 2 === 1 ? 'bg-muted/30' : ''}>
           <Container>
             <div className="grid md:grid-cols-2 gap-12 items-start">
               <div>

@@ -1,15 +1,15 @@
-import type { Env, ChatRequest, ChatResponse } from './types'
+import { callClaude, cleanResponse, isLeadComplete } from './claude'
+import { notifyTeam } from './email'
+import { extractLeadFromConversation, generatePRDDraft, saveLead } from './leads'
 import {
+  checkRateLimit,
+  getConversationHistory,
   getOrCreateSession,
+  hashIP,
   incrementMessageCount,
   saveMessage,
-  getConversationHistory,
-  checkRateLimit,
-  hashIP,
 } from './session'
-import { callClaude, isLeadComplete, cleanResponse } from './claude'
-import { extractLeadFromConversation, generatePRDDraft, saveLead } from './leads'
-import { notifyTeam } from './email'
+import type { ChatRequest, ChatResponse, Env } from './types'
 
 function getCorsHeaders(origin: string): Record<string, string> {
   return {
@@ -62,7 +62,7 @@ export default {
         const session = await getOrCreateSession(env.DB, body.sessionId, ipHash)
 
         // Check rate limit
-        const maxMessages = parseInt(env.MAX_MESSAGES_PER_SESSION, 10) || 20
+        const maxMessages = Number.parseInt(env.MAX_MESSAGES_PER_SESSION, 10) || 20
         const { allowed } = await checkRateLimit(env.DB, session.id, maxMessages)
 
         if (!allowed) {
@@ -74,7 +74,7 @@ export default {
               sessionId: session.id,
             },
             200,
-            origin
+            origin,
           )
         }
 
@@ -98,7 +98,7 @@ export default {
             // Extract lead data
             const lead = await extractLeadFromConversation(
               env.ANTHROPIC_API_KEY,
-              await getConversationHistory(env.DB, session.id)
+              await getConversationHistory(env.DB, session.id),
             )
 
             // Generate PRD draft
@@ -130,7 +130,7 @@ export default {
         return jsonResponse(
           { error: 'Internal server error', message: 'Something went wrong. Please try again.' },
           500,
-          origin
+          origin,
         )
       }
     }

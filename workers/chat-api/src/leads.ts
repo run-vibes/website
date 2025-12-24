@@ -14,7 +14,7 @@ interface ExtractedLead {
 
 export async function extractLeadFromConversation(
   apiKey: string,
-  conversationHistory: Message[]
+  conversationHistory: Message[],
 ): Promise<ExtractedLead> {
   const conversationText = conversationHistory
     .map((m) => `${m.role.toUpperCase()}: ${m.content}`)
@@ -86,32 +86,32 @@ export function generatePRDDraft(lead: ExtractedLead): string {
 
   if (lead.projectSummary) {
     sections.push('## Overview\n')
-    sections.push(lead.projectSummary + '\n')
+    sections.push(`${lead.projectSummary}\n`)
   }
 
   if (lead.problem) {
     sections.push('## Problem Statement\n')
-    sections.push(lead.problem + '\n')
+    sections.push(`${lead.problem}\n`)
   }
 
   if (lead.vision) {
     sections.push('## Vision / Success Criteria\n')
-    sections.push(lead.vision + '\n')
+    sections.push(`${lead.vision}\n`)
   }
 
   if (lead.users) {
     sections.push('## Target Users\n')
-    sections.push(lead.users + '\n')
+    sections.push(`${lead.users}\n`)
   }
 
   if (lead.capabilities) {
     sections.push('## Key Capabilities\n')
-    sections.push(lead.capabilities + '\n')
+    sections.push(`${lead.capabilities}\n`)
   }
 
   if (lead.constraints) {
     sections.push('## Constraints & Requirements\n')
-    sections.push(lead.constraints + '\n')
+    sections.push(`${lead.constraints}\n`)
   }
 
   sections.push('## Contact Information\n')
@@ -126,7 +126,7 @@ export async function saveLead(
   db: D1Database,
   sessionId: string,
   lead: ExtractedLead,
-  prdDraft: string
+  prdDraft: string,
 ): Promise<void> {
   await db
     .prepare(
@@ -142,7 +142,7 @@ export async function saveLead(
          users = excluded.users,
          capabilities = excluded.capabilities,
          constraints = excluded.constraints,
-         prd_draft = excluded.prd_draft`
+         prd_draft = excluded.prd_draft`,
     )
     .bind(
       sessionId,
@@ -155,7 +155,7 @@ export async function saveLead(
       lead.users,
       lead.capabilities,
       lead.constraints,
-      prdDraft
+      prdDraft,
     )
     .run()
 }

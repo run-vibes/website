@@ -1,4 +1,5 @@
 import { cn } from '@/lib/cn'
+import { Slot } from '@radix-ui/react-slot'
 import { type VariantProps, cva } from 'class-variance-authority'
 import type { ComponentProps } from 'react'
 
@@ -8,6 +9,8 @@ const cardVariants = cva('rounded-lg', {
       default: 'bg-card text-card-foreground shadow-md',
       outlined: 'border border-border bg-transparent',
       ghost: 'bg-transparent',
+      interactive:
+        'bg-card text-card-foreground shadow-md hover:shadow-lg transition-shadow cursor-pointer',
     },
     padding: {
       none: '',
@@ -22,13 +25,23 @@ const cardVariants = cva('rounded-lg', {
   },
 })
 
-interface CardProps extends Omit<ComponentProps<'div'>, 'ref'>, VariantProps<typeof cardVariants> {}
+interface CardProps extends Omit<ComponentProps<'div'>, 'ref'>, VariantProps<typeof cardVariants> {
+  asChild?: boolean
+}
 
-export function Card({ variant, padding, className, children, ...props }: CardProps) {
+export function Card({
+  variant,
+  padding,
+  className,
+  children,
+  asChild = false,
+  ...props
+}: CardProps) {
+  const Comp = asChild ? Slot : 'div'
   return (
-    <div className={cn(cardVariants({ variant, padding }), className)} {...props}>
+    <Comp className={cn(cardVariants({ variant, padding }), className)} {...props}>
       {children}
-    </div>
+    </Comp>
   )
 }
 
