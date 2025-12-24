@@ -56,14 +56,14 @@ export default {
 
         // Get client IP for session management
         const clientIP = request.headers.get('CF-Connecting-IP') ?? 'unknown'
-        const ipHash = hashIP(clientIP)
+        const ipHash = await hashIP(clientIP)
 
         // Get or create session
         const session = await getOrCreateSession(env.DB, body.sessionId, ipHash)
 
         // Check rate limit
-        const maxMessages = Number.parseInt(env.MAX_MESSAGES_PER_SESSION, 10) || 20
-        const { allowed } = await checkRateLimit(env.DB, session.id, maxMessages)
+        const maxMessagesPerSession = Number.parseInt(env.MAX_MESSAGES_PER_SESSION, 10) || 20
+        const { allowed } = await checkRateLimit(env.DB, session.id, maxMessagesPerSession)
 
         if (!allowed) {
           return jsonResponse(
