@@ -19,8 +19,8 @@ export function ChatInput({ onSend, loading, className, onFocus }: ChatInputProp
     if (trimmed && !loading) {
       onSend(trimmed)
       setValue('')
-      // Keep focus on input after sending
-      inputRef.current?.focus()
+      // Keep focus on input after sending (delay to run after button click is processed)
+      setTimeout(() => inputRef.current?.focus(), 0)
     }
   }
 
