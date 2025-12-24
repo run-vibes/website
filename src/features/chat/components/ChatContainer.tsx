@@ -7,12 +7,12 @@ import { ChatInput } from './ChatInput'
 interface ChatContainerProps {
   className?: string
   apiEndpoint?: string
+  onInputFocus?: () => void
 }
 
-export function ChatContainer({ className, apiEndpoint }: ChatContainerProps) {
+export function ChatContainer({ className, apiEndpoint, onInputFocus }: ChatContainerProps) {
   const { messages, isLoading, error, sendMessage } = useChat({ apiEndpoint })
   const messagesAreaRef = useRef<HTMLDivElement>(null)
-  const inputAreaRef = useRef<HTMLDivElement>(null)
   const [isExpanded, setIsExpanded] = useState(false)
   const initialMessageCount = useRef(messages.length)
 
@@ -25,12 +25,9 @@ export function ChatContainer({ className, apiEndpoint }: ChatContainerProps) {
 
   const handleInputFocus = useCallback(() => {
     setIsExpanded(true)
-    // On mobile, scroll input into view only if needed (won't scroll if already visible)
-    // Delay allows iOS keyboard animation to complete
-    setTimeout(() => {
-      inputAreaRef.current?.scrollIntoView({ behavior: 'smooth', block: 'nearest' })
-    }, 300)
-  }, [])
+    // Let parent handle page scroll (positions toggle link above keyboard)
+    onInputFocus?.()
+  }, [onInputFocus])
 
   return (
     <div
@@ -63,7 +60,7 @@ export function ChatContainer({ className, apiEndpoint }: ChatContainerProps) {
       </div>
 
       {/* Input Area */}
-      <div ref={inputAreaRef} className="border-t p-4 shrink-0">
+      <div className="border-t p-4 shrink-0">
         <ChatInput onSend={sendMessage} loading={isLoading} onFocus={handleInputFocus} />
       </div>
     </div>
