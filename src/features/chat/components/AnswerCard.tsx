@@ -1,8 +1,9 @@
 import { cn } from '@/lib/cn'
+import type { LucideIcon } from 'lucide-react'
 import type { ComponentProps } from 'react'
 
 interface AnswerCardProps extends Omit<ComponentProps<'button'>, 'onSelect'> {
-  icon: string
+  icon: LucideIcon
   label: string
   value: string
   selected?: boolean
@@ -10,7 +11,7 @@ interface AnswerCardProps extends Omit<ComponentProps<'button'>, 'onSelect'> {
 }
 
 export function AnswerCard({
-  icon,
+  icon: Icon,
   label,
   value,
   selected = false,
@@ -37,9 +38,10 @@ export function AnswerCard({
       )}
       {...props}
     >
-      <span className="text-3xl" aria-hidden="true">
-        {icon}
-      </span>
+      <Icon
+        className={cn('w-8 h-8 stroke-[1.5]', selected ? 'text-accent' : 'text-muted-foreground')}
+        aria-hidden="true"
+      />
       <span className="text-sm font-medium text-center leading-tight">{label}</span>
     </button>
   )
