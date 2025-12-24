@@ -14,9 +14,9 @@ dev:
 ladle:
     pnpm ladle
 
-# Run type checking
+# Run type checking (using tsgo - TypeScript in Go)
 typecheck:
-    pnpm typecheck
+    tsgo
 
 # Run linting
 lint:

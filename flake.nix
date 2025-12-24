@@ -18,6 +18,7 @@
             pnpm
             nodePackages.wrangler
             just
+            typescript-go
           ];
 
           # System libraries required by Playwright browsers
