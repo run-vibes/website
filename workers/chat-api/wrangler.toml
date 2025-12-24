@@ -2,12 +2,27 @@ name = "vibes-chat-api"
 main = "src/index.ts"
 compatibility_date = "2024-01-01"
 
+# Production (default)
 [vars]
 ALLOWED_ORIGIN = "https://www.vibes.run"
 MAX_MESSAGES_PER_SESSION = "20"
-NOTIFICATION_EMAIL = "team@vibes.run"
+NOTIFICATION_EMAIL = "hello@vibes.run"
 
 [[d1_databases]]
 binding = "DB"
 database_name = "vibes-chat"
 database_id = "placeholder" # Replace after running: wrangler d1 create vibes-chat
+
+# Staging environment
+[env.staging]
+name = "vibes-chat-api-staging"
+
+[env.staging.vars]
+ALLOWED_ORIGIN = "*"
+MAX_MESSAGES_PER_SESSION = "20"
+NOTIFICATION_EMAIL = ""
+
+[[env.staging.d1_databases]]
+binding = "DB"
+database_name = "vibes-chat-staging"
+database_id = "placeholder" # Replace after running: wrangler d1 create vibes-chat-staging

@@ -102,6 +102,10 @@ worker-dev:
 worker-db-create:
     wrangler d1 create vibes-chat
 
+# Create staging D1 database (one-time setup)
+worker-db-create-staging:
+    wrangler d1 create vibes-chat-staging
+
 # Run chat worker database migrations
 worker-migrate env:
     #!/usr/bin/env bash
