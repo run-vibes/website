@@ -1,5 +1,5 @@
 import { cn } from '@/lib/cn'
-import { useState } from 'react'
+import { useRef, useState } from 'react'
 import type { FormEvent } from 'react'
 
 interface ChatInputProps {
@@ -11,6 +11,7 @@ interface ChatInputProps {
 
 export function ChatInput({ onSend, loading, className, onFocus }: ChatInputProps) {
   const [value, setValue] = useState('')
+  const inputRef = useRef<HTMLInputElement>(null)
 
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault()
@@ -18,12 +19,15 @@ export function ChatInput({ onSend, loading, className, onFocus }: ChatInputProp
     if (trimmed && !loading) {
       onSend(trimmed)
       setValue('')
+      // Keep focus on input after sending
+      inputRef.current?.focus()
     }
   }
 
   return (
     <form onSubmit={handleSubmit} className={cn('flex gap-2', className)}>
       <input
+        ref={inputRef}
         type="text"
         value={value}
         onChange={(e) => setValue(e.target.value)}
