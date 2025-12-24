@@ -23,8 +23,7 @@ function ContactPage() {
               Let's Talk
             </Heading>
             <Text size="lg" variant="muted" className="max-w-xl mx-auto">
-              Tell us about your project. Our AI assistant will help us understand your needs and
-              connect you with the right team.
+              Whether it's a rough idea or a detailed plan, we want to hear it.
             </Text>
           </div>
 
