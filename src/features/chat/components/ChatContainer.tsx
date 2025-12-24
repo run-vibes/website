@@ -37,7 +37,9 @@ export function ChatContainer({ className, apiEndpoint }: ChatContainerProps) {
       className={cn(
         'flex flex-col border rounded-xl bg-background transition-all duration-300',
         // Compact height initially, expand when focused (smaller on mobile to stay above keyboard)
-        isExpanded ? 'h-[320px] sm:h-[500px] max-h-[50vh] sm:max-h-[70vh]' : 'h-[280px] sm:h-[350px]',
+        isExpanded
+          ? 'h-[320px] sm:h-[500px] max-h-[50vh] sm:max-h-[70vh]'
+          : 'h-[280px] sm:h-[350px]',
         className,
       )}
     >
