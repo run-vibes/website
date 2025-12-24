@@ -16,7 +16,7 @@ ladle:
 
 # Run type checking (using tsgo - TypeScript in Go)
 typecheck:
-    tsgo
+    tsgo --project ./tsconfig.json
 
 # Run linting
 lint:
