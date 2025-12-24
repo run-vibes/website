@@ -55,7 +55,7 @@ export function ChatContainer({ className, apiEndpoint }: ChatContainerProps) {
         )}
         {error && (
           <div className="text-center text-sm text-destructive p-2">
-            Gremlins in the system. One more time?
+            Gremlins in the system prevented us from sending your message. Please try again.
           </div>
         )}
       </div>
