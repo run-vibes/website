@@ -52,8 +52,19 @@ pnpm deploy
 **Using Just (task runner):**
 ```bash
 just                   # List available commands
+just install           # Install dependencies
 just dev               # Start dev server
+just ladle             # Start Ladle component preview
+just typecheck         # Run TypeScript checking
+just lint              # Run Biome linter
+just format            # Format code with Biome
 just check             # Run all checks (typecheck, lint, test)
+just test              # Run unit tests
+just e2e               # Run E2E tests
+just build             # Build for production
+just deploy            # Deploy to Cloudflare Pages
+just deploy-worker     # Deploy chat worker
+just prototypes        # Open all design prototypes in browser
 ```
 
 ## Architecture
@@ -133,6 +144,32 @@ All checks must pass before work is considered done.
 4. Add an entry to the "Recent Updates" section at the bottom
 
 This keeps the project progress visible and helps track what's been accomplished across branches.
+
+## Plan Documentation
+
+Plans live in `docs/plans/` using numbered directories:
+
+```
+docs/plans/
+├── 01-scaffolding/
+│   └── design.md
+├── 02-homepage-prototypes/
+│   ├── design.md
+│   └── implementation.md
+├── 03-prototype-refinements/
+│   ├── design.md
+│   └── implementation.md
+└── 04-daybreak-hybrid/
+    └── design.md
+```
+
+**Conventions:**
+- Use sequential numbering: `01-`, `02-`, `03-`, etc.
+- Use kebab-case for directory names
+- Each plan directory contains:
+  - `design.md` — High-level design, decisions, and rationale
+  - `implementation.md` — Detailed step-by-step tasks (when applicable)
+- Reference plans by number in commits and discussions (e.g., "per plan 02")
 
 ## Git Commit Conventions
 

@@ -48,3 +48,12 @@ deploy:
 # Deploy chat worker
 deploy-worker:
     cd workers/chat-api && wrangler deploy
+
+# Open all prototypes in browser
+prototypes:
+    #!/usr/bin/env bash
+    for dir in prototypes/*/; do
+        if [ -f "${dir}index.html" ]; then
+            xdg-open "${dir}index.html" 2>/dev/null || open "${dir}index.html" 2>/dev/null
+        fi
+    done
