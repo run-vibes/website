@@ -149,6 +149,7 @@ We follow Test-Driven Development for component and utility code:
    - `pnpm typecheck` — TypeScript type checking
    - `pnpm lint` — Biome linting
    - `pnpm test` — Unit tests
+   - `just e2e` — End-to-end tests
 
 2. **`just dev`** — Verify dev server starts:
    - Confirm no startup errors
@@ -158,10 +159,6 @@ We follow Test-Driven Development for component and utility code:
    - Verify components render correctly in isolation
    - Check variants and edge cases visually
    - Confirm no visual regressions
-
-4. **`just e2e`** — End-to-end tests:
-   - Run Playwright tests against the built app
-   - Verify critical user journeys work
 
 All checks must pass before work is considered done.
 
