@@ -4,13 +4,10 @@ compatibility_date = "2024-01-01"
 
 [vars]
 ALLOWED_ORIGIN = "https://www.vibes.run"
+MAX_MESSAGES_PER_SESSION = "20"
+NOTIFICATION_EMAIL = "team@vibes.run"
 
-# Rate limiting
-[placement]
-mode = "smart"
-
-# D1 Database (uncomment when ready)
-# [[d1_databases]]
-# binding = "DB"
-# database_name = "vibes-chat"
-# database_id = "your-database-id"
+[[d1_databases]]
+binding = "DB"
+database_name = "vibes-chat"
+database_id = "placeholder" # Replace after running: wrangler d1 create vibes-chat
