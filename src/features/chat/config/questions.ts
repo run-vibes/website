@@ -55,7 +55,11 @@ export const INTERVIEW_QUESTIONS: InterviewQuestion[] = [
     options: [
       { value: 'full_ownership', label: 'Give us the keys — full ownership', icon: '🎯' },
       { value: 'embedded', label: 'Collaborate closely — embedded partnership', icon: '🤝' },
-      { value: 'knowledge_transfer', label: 'Teach us to fish — knowledge transfer focus', icon: '🎓' },
+      {
+        value: 'knowledge_transfer',
+        label: 'Teach us to fish — knowledge transfer focus',
+        icon: '🎓',
+      },
     ],
   },
   // Qualification
@@ -127,16 +131,8 @@ const RESPONSE_STARTERS: Record<string, string[]> = {
     "We've been struggling with...",
     'Our customers keep asking for...',
   ],
-  vision: [
-    'If this worked, we could...',
-    'The dream scenario is...',
-    "We'd measure success by...",
-  ],
-  users: [
-    'Our internal team needs...',
-    'Our customers want...',
-    'Both internal and external...',
-  ],
+  vision: ['If this worked, we could...', 'The dream scenario is...', "We'd measure success by..."],
+  users: ['Our internal team needs...', 'Our customers want...', 'Both internal and external...'],
 }
 
 export function getResponseStarters(promptType: string): string[] {

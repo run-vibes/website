@@ -7,12 +7,25 @@ interface ChatInputProps {
   loading?: boolean
   className?: string
   onFocus?: () => void
+  value?: string
+  onChange?: (value: string) => void
 }
 
-export function ChatInput({ onSend, loading, className, onFocus }: ChatInputProps) {
-  const [value, setValue] = useState('')
+export function ChatInput({
+  onSend,
+  loading,
+  className,
+  onFocus,
+  value: controlledValue,
+  onChange: controlledOnChange,
+}: ChatInputProps) {
+  const [internalValue, setInternalValue] = useState('')
   const inputRef = useRef<HTMLInputElement>(null)
   const wasLoading = useRef(false)
+
+  // Use controlled value if provided, otherwise use internal state
+  const value = controlledValue ?? internalValue
+  const setValue = controlledOnChange ?? setInternalValue
 
   // Refocus input when loading finishes
   useEffect(() => {
