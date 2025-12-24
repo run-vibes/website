@@ -1,3 +1,7 @@
+export { AnswerCard } from './AnswerCard'
 export { ChatBubble } from './ChatBubble'
 export { ChatContainer } from './ChatContainer'
 export { ChatInput } from './ChatInput'
+export { InterviewQuestion } from './InterviewQuestion'
+export { ProgressIndicator } from './ProgressIndicator'
+export { ResponseStarter } from './ResponseStarter'
