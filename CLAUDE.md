@@ -64,6 +64,10 @@ just e2e               # Run E2E tests
 just build             # Build for production
 just deploy            # Deploy to Cloudflare Pages
 just deploy-worker     # Deploy chat worker
+just worker-dev        # Run chat worker locally
+just worker-db-create  # Create D1 database
+just worker-db-migrate # Run database migrations
+just worker-secret NAME # Set a worker secret
 just prototypes        # Open all design prototypes in browser
 ```
 
