@@ -15,6 +15,38 @@ import type { ChatRequest, ChatResponse, Env, InterviewAnswers, LeadTierValue } 
 // In-memory store for interview answers per session
 const sessionInterviewAnswers = new Map<string, InterviewAnswers>()
 
+// Valid interview question IDs for type-safe answer storage
+const VALID_QUESTION_IDS = new Set([
+  'intent',
+  'role',
+  'ai_maturity',
+  'working_style',
+  'timeline',
+  'company_size',
+  'industry',
+  'budget_range',
+])
+
+/**
+ * Safely stores a structured answer in the session's interview answers.
+ * Validates that the questionId is a known interview field before storing.
+ */
+function setStructuredAnswer(
+  sessionId: string,
+  questionId: string,
+  answer: string,
+): InterviewAnswers {
+  const answers = sessionInterviewAnswers.get(sessionId) ?? {}
+
+  if (VALID_QUESTION_IDS.has(questionId)) {
+    // Type assertion is safe here because we've validated questionId
+    ;(answers as Record<string, string>)[questionId] = answer
+  }
+
+  sessionInterviewAnswers.set(sessionId, answers)
+  return answers
+}
+
 function getCorsHeaders(origin: string): Record<string, string> {
   return {
     'Access-Control-Allow-Origin': origin,
@@ -62,10 +94,11 @@ export default {
 
         // Handle structured phase (no Claude call needed)
         if (body.phase === 'structured' && body.structuredAnswer) {
-          const answers = sessionInterviewAnswers.get(session.id) ?? {}
-          answers[body.structuredAnswer.questionId as keyof InterviewAnswers] = body
-            .structuredAnswer.answer as never
-          sessionInterviewAnswers.set(session.id, answers)
+          setStructuredAnswer(
+            session.id,
+            body.structuredAnswer.questionId,
+            body.structuredAnswer.answer,
+          )
 
           const response: ChatResponse = {
             sessionId: session.id,
@@ -75,10 +108,11 @@ export default {
 
         // Handle post_contact phase (budget question)
         if (body.phase === 'post_contact' && body.structuredAnswer) {
-          const answers = sessionInterviewAnswers.get(session.id) ?? {}
-          answers[body.structuredAnswer.questionId as keyof InterviewAnswers] = body
-            .structuredAnswer.answer as never
-          sessionInterviewAnswers.set(session.id, answers)
+          const answers = setStructuredAnswer(
+            session.id,
+            body.structuredAnswer.questionId,
+            body.structuredAnswer.answer,
+          )
 
           const score = calculateLeadScore(answers)
           const tier = getLeadTier(score)

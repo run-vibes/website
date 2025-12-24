@@ -1,4 +1,5 @@
 import { cn } from '@/lib/cn'
+import { useMemo } from 'react'
 
 interface ProgressIndicatorProps {
   current: number
@@ -7,22 +8,22 @@ interface ProgressIndicatorProps {
   className?: string
 }
 
-// Pre-generate stable dot configs to avoid array index key issues
-function generateDotConfigs(total: number, current: number) {
-  return Array.from({ length: total }, (_, i) => ({
-    id: `progress-dot-${i}`,
-    index: i,
-    state: i < current ? 'completed' : i === current ? 'current' : 'upcoming',
-  }))
-}
-
 export function ProgressIndicator({
   current,
   total,
   showLabel = false,
   className,
 }: ProgressIndicatorProps) {
-  const dots = generateDotConfigs(total, current)
+  // Memoize dot configs with stable IDs to avoid array index key issues
+  const dots = useMemo(
+    () =>
+      Array.from({ length: total }, (_, i) => ({
+        id: `progress-dot-${i}`,
+        index: i,
+        state: i < current ? 'completed' : i === current ? 'current' : 'upcoming',
+      })),
+    [total, current],
+  )
 
   return (
     <div className={cn('flex flex-col items-center gap-2', className)}>

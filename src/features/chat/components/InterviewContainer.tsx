@@ -33,6 +33,7 @@ export function InterviewContainer({
   const { messages, isLoading, error, sendMessage } = useChat({
     apiEndpoint,
     interviewAnswers: answers,
+    onLeadExtracted: () => setContactCollected(true),
   })
 
   const messagesAreaRef = useRef<HTMLDivElement>(null)
@@ -46,25 +47,6 @@ export function InterviewContainer({
       messagesAreaRef.current.scrollTop = messagesAreaRef.current.scrollHeight
     }
   }, [messages.length])
-
-  // Check if lead is complete (contact collected)
-  useEffect(() => {
-    const lastAssistantMessage = [...messages].reverse().find((m) => m.role === 'assistant')
-    if (lastAssistantMessage) {
-      // Check if conversation indicates contact was collected
-      const hasEmail = messages.some(
-        (m) => m.role === 'user' && m.content.includes('@') && m.content.includes('.'),
-      )
-      const hasThankYou =
-        lastAssistantMessage.content.toLowerCase().includes('thank') ||
-        lastAssistantMessage.content.toLowerCase().includes('touch') ||
-        lastAssistantMessage.content.toLowerCase().includes('reach out')
-
-      if (hasEmail && hasThankYou && phase === 'chat') {
-        setContactCollected(true)
-      }
-    }
-  }, [messages, phase, setContactCollected])
 
   const handleInputFocus = useCallback(() => {
     setIsExpanded(true)
