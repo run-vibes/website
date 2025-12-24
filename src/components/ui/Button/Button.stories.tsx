@@ -5,6 +5,8 @@ export const Primary: Story = () => <Button>Primary Button</Button>
 
 export const Secondary: Story = () => <Button variant="secondary">Secondary Button</Button>
 
+export const Outline: Story = () => <Button variant="outline">Outline Button</Button>
+
 export const Ghost: Story = () => <Button variant="ghost">Ghost Button</Button>
 
 export const Sizes: Story = () => (

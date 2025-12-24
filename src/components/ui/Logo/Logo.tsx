@@ -32,12 +32,7 @@ export function Logo({ variant = 'full', size, className, ...props }: LogoProps)
       {...props}
     >
       <span className="text-accent">/V</span>
-      {variant === 'full' && (
-        <>
-          <span className="text-accent-secondary">ibes</span>
-          <span className="text-accent-secondary opacity-60">.run</span>
-        </>
-      )}
+      {variant === 'full' && <span className="text-accent-secondary">ibes</span>}
     </div>
   )
 }
