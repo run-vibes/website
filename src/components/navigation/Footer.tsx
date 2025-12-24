@@ -1,5 +1,6 @@
 import { Container, Logo } from '@/components/ui'
 import { cn } from '@/lib/cn'
+import { Link } from '@tanstack/react-router'
 
 interface FooterProps {
   className?: string
@@ -17,6 +18,12 @@ export function Footer({ className }: FooterProps) {
             &copy; {currentYear} Vibes. All rights reserved.
           </p>
           <div className="flex gap-6">
+            <Link
+              to="/brand"
+              className="font-mono text-sm text-muted-foreground transition-colors hover:text-foreground"
+            >
+              Brand
+            </Link>
             <a
               href="mailto:hello@vibes.run"
               className="font-mono text-sm text-muted-foreground transition-colors hover:text-foreground"
