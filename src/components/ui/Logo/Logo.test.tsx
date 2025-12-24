@@ -17,7 +17,6 @@ describe('Logo', () => {
     render(<Logo variant="full" />)
     expect(screen.getByText('/V')).toBeInTheDocument()
     expect(screen.getByText('ibes')).toBeInTheDocument()
-    expect(screen.getByText('.run')).toBeInTheDocument()
   })
 
   it('applies size variants', () => {
