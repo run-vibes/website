@@ -40,7 +40,7 @@ function HomePage() {
   return (
     <>
       {/* Hero Section */}
-      <Section size="xl" className="bg-gradient-to-b from-background to-muted/20">
+      <Section size="xl" className="pt-32">
         <Container size="md" className="text-center">
           <Heading size="3xl" className="mb-6">
             The studio where AI agents come to life
@@ -53,7 +53,7 @@ function HomePage() {
             <Button size="lg" asChild>
               <Link to="/contact">Let's Talk</Link>
             </Button>
-            <Button variant="outline" size="lg" asChild>
+            <Button variant="secondary" size="lg" asChild>
               <Link to="/services">See Our Services</Link>
             </Button>
           </div>
@@ -61,9 +61,9 @@ function HomePage() {
       </Section>
 
       {/* Social Proof Bar */}
-      <Section size="sm" className="border-y bg-muted/30">
+      <Section size="sm" className="border-y border-border bg-muted/30">
         <Container>
-          <Text variant="muted" className="text-center text-sm">
+          <Text variant="muted" className="text-center font-mono text-xs uppercase tracking-wider">
             Trusted by innovative teams building the future with AI
           </Text>
         </Container>
@@ -135,7 +135,9 @@ function HomePage() {
               },
             ].map((item) => (
               <div key={item.step} className="text-center">
-                <div className="text-4xl font-bold text-primary mb-4">{item.step}</div>
+                <div className="font-heading text-4xl font-extrabold text-accent mb-4">
+                  {item.step}
+                </div>
                 <Heading level={3} size="md" className="mb-2">
                   {item.title}
                 </Heading>
@@ -147,15 +149,15 @@ function HomePage() {
       </Section>
 
       {/* Final CTA */}
-      <Section size="lg" className="bg-primary text-primary-foreground">
+      <Section size="lg" className="border-t border-border">
         <Container size="sm" className="text-center">
           <Heading level={2} size="xl" className="mb-4">
             Ready to bring your AI vision to life?
           </Heading>
-          <Text size="lg" className="mb-8 opacity-90">
+          <Text size="lg" variant="muted" className="mb-8">
             Tell us about your project and let's explore what's possible together.
           </Text>
-          <Button variant="secondary" size="lg" asChild>
+          <Button size="lg" asChild>
             <Link to="/contact">Start a Conversation</Link>
           </Button>
         </Container>

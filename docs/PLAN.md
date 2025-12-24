@@ -283,3 +283,283 @@ Before implementing, verify:
 - [ ] TDD pattern used for testable code
 - [ ] Verification steps are explicit
 - [ ] File paths are complete and accurate
+
+---
+
+## Brand Design & Visual Design
+
+This section describes how to collaborate with Claude Code on brand identity, visual design systems, and theme development.
+
+### When to Use This Process
+
+Use the brand design process when:
+
+- Creating or updating logo/identity systems
+- Defining or revising color palettes
+- Establishing typography hierarchies
+- Building visual effect systems (particles, gradients, textures)
+- Theming an application (light/dark mode, brand variants)
+- Creating design prototypes for stakeholder review
+
+### The Iterative Question Approach
+
+Brand design is subjective and benefits from an **iterative, question-driven** approach rather than presenting a complete solution upfront.
+
+**Process flow:**
+
+1. **Gather context** — Read existing brand docs, prototypes, PRD, design tokens
+2. **Ask one question at a time** — Don't overwhelm with multiple decisions
+3. **Prefer multiple choice** — Easier to respond than open-ended questions
+4. **Create visual explorations** — Build HTML/CSS prototypes to show options
+5. **Present design in sections** — 200-300 words per section, validate each
+6. **Document decisions** — Write up the final design with rationale
+
+### Example Questions & Prompts
+
+#### Color Direction
+
+```
+The current palette is [X]. Would you like to:
+
+1. **Keep it as-is** — [Description of current approach]
+2. **Add an accent color** — Keep the base but introduce [examples]
+3. **Warm/cool shift** — Adjust the temperature of neutrals
+4. **Complete revision** — Explore entirely new directions
+
+Which resonates?
+```
+
+#### Logo Direction
+
+```
+For "[Brand Name]" as a brand, I see a few approaches:
+
+1. **Pure wordmark** — The name styled typographically, no symbol
+2. **Lettermark + wordmark** — A stylized initial that works alone at small sizes
+3. **Abstract mark + wordmark** — A conceptual symbol paired with the name
+
+Which direction feels right?
+```
+
+#### Typography Pairing
+
+```
+The prototype uses:
+- **Display:** [Font A] (monospace/serif/sans)
+- **Body:** [Font B] (sans-serif)
+
+Do you want to:
+
+1. **Keep [Font A] + [Font B]** — [Rationale for why it works]
+2. **Explore alternatives for display** — [Alternative options]
+3. **Add a third font** — For special use cases like [example]
+```
+
+#### Visual Effects
+
+```
+The prototype has several effect layers. Which should carry over?
+
+| Layer | Description | Performance Impact |
+|-------|-------------|-------------------|
+| **Effect A** | [Description] | [Low/Medium/High] |
+| **Effect B** | [Description] | [Low/Medium/High] |
+
+Options:
+1. **Full effects** — All layers, complete experience
+2. **Subtle only** — CSS-only effects, no JavaScript
+3. **Hero only** — Full effects on hero, minimal elsewhere
+4. **Start minimal** — Add effects incrementally
+```
+
+### Key Terminology
+
+| Term | Definition |
+|------|------------|
+| **Wordmark** | Logo that is purely typographic (the brand name styled) |
+| **Lettermark** | Logo using initials or a single letter |
+| **Logomark** | Abstract symbol or icon representing the brand |
+| **Design tokens** | Named values for colors, spacing, typography (CSS variables) |
+| **Color palette** | The defined set of colors for a brand |
+| **Typography hierarchy** | The system of font sizes, weights, and styles |
+| **Primary/Secondary accent** | Main brand color vs. supporting color |
+| **Neutral palette** | Grays and near-whites/blacks for backgrounds and text |
+| **Effect layers** | Visual overlays like noise, gradients, particles |
+| **Monospace** | Fixed-width font where all characters have equal width |
+| **Sans-serif** | Font without decorative strokes (clean, modern) |
+| **Display font** | Font used for headlines and large text |
+| **Body font** | Font used for paragraphs and readable content |
+
+### Prototype-Based Exploration
+
+For visual decisions, **show don't tell**. Create HTML/CSS prototypes that stakeholders can view in the browser.
+
+**Prototype location:** `prototypes/[exploration-name]/`
+
+**Prototype structure:**
+```
+prototypes/
+├── logo-explorations/
+│   └── index.html        # Multiple logo concepts in one page
+├── color-variants/
+│   ├── warm/index.html
+│   ├── cool/index.html
+│   └── mono/index.html
+└── theme-name/
+    ├── index.html        # Full page prototype
+    ├── styles.css        # Theme CSS with custom properties
+    └── README.md         # Variant documentation
+```
+
+**Opening prototypes:**
+```bash
+# Open a specific prototype
+xdg-open prototypes/logo-explorations/index.html
+
+# Open all prototypes (if configured)
+just prototypes
+```
+
+### Design Document Template (Brand)
+
+```markdown
+# Brand Design: [Theme/Direction Name]
+
+**Date:** YYYY-MM-DD
+**Status:** Draft | Approved
+**Branch:** `branch-name`
+
+---
+
+## Summary
+
+[1-2 sentences describing the brand direction]
+
+---
+
+## Identity
+
+### Logo System
+
+| Element | Description |
+|---------|-------------|
+| **Primary mark** | [Description] |
+| **Wordmark** | [Description] |
+| **Favicon** | [Description] |
+
+### Color Palette
+
+\`\`\`css
+:root {
+  --bg-primary: #value;
+  --accent-primary: #value;
+  /* ... */
+}
+\`\`\`
+
+| Role | Value | Usage |
+|------|-------|-------|
+| Background | `#hex` | [Where used] |
+| Primary | `#hex` | [Where used] |
+
+---
+
+## Typography
+
+### Font Stack
+
+\`\`\`css
+--font-display: 'Font Name', fallback, generic;
+--font-body: 'Font Name', fallback, generic;
+\`\`\`
+
+### Hierarchy
+
+| Element | Font | Weight | Size | Style |
+|---------|------|--------|------|-------|
+| Hero headline | [Font] | [Weight] | [Size] | [Style notes] |
+
+---
+
+## Visual Effects
+
+[Describe effect layers, implementation approach, performance notes]
+
+---
+
+## Implementation Approach
+
+### Phase A: [First Phase]
+
+1. [Step]
+2. [Step]
+
+### Phase B: [Second Phase]
+
+1. [Step]
+2. [Step]
+
+---
+
+## Design Decisions
+
+### Why [Decision]?
+
+[Rationale explaining the choice]
+```
+
+### Workflow Summary
+
+1. **Start with brainstorming skill:**
+   ```
+   /superpowers:brainstorm
+   ```
+
+2. **Gather context:** Read PRD, existing tokens, prototypes
+
+3. **Ask questions one at a time:** Color → Logo → Typography → Effects
+
+4. **Create visual explorations:** Build prototypes stakeholders can see
+
+5. **Present design in sections:** Validate each before moving on
+
+6. **Document decisions:** Write the brand design document
+
+7. **Commit to branch:** Keep design work in a dedicated branch
+
+8. **Create implementation plan:** After approval, detail the tasks
+
+### Example Session Flow
+
+```
+User: Create a brand design plan for the new theme
+
+Claude: [Reads existing docs, prototypes, tokens]
+
+Claude: "The current palette is X. Would you like to:
+        1. Keep as-is
+        2. Add accent color
+        3. Warm up the grays"
+
+User: "Keep as-is for now"
+
+Claude: "Next: Logo direction. I see a few approaches:
+        1. Pure wordmark
+        2. Lettermark + wordmark
+        3. Abstract mark + wordmark"
+
+User: "Can you show me examples of 2 and 3?"
+
+Claude: [Creates prototypes/logo-explorations/index.html]
+        "I've created 10 concepts. Take a look and let me know
+        which directions resonate."
+
+User: "I like the Slash V concept"
+
+Claude: "Great choice. Next: Typography..."
+
+[Continue until all decisions made]
+
+Claude: [Writes design document, commits to branch]
+        "Design documented. Ready to set up for implementation?"
+```

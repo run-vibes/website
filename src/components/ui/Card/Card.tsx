@@ -3,14 +3,14 @@ import { Slot } from '@radix-ui/react-slot'
 import { type VariantProps, cva } from 'class-variance-authority'
 import type { ComponentProps } from 'react'
 
-const cardVariants = cva('rounded-lg', {
+const cardVariants = cva('rounded-xl border transition-all', {
   variants: {
     variant: {
-      default: 'bg-card text-card-foreground shadow-md',
-      outlined: 'border border-border bg-transparent',
-      ghost: 'bg-transparent',
+      default: 'bg-card text-card-foreground border-border shadow-md',
+      outlined: 'border-border bg-transparent',
+      ghost: 'bg-transparent border-transparent',
       interactive:
-        'bg-card text-card-foreground shadow-md hover:shadow-lg transition-shadow cursor-pointer',
+        'bg-card text-card-foreground border-border shadow-md hover:border-accent/20 hover:shadow-glow cursor-pointer hover:-translate-y-1',
     },
     padding: {
       none: '',
@@ -55,7 +55,10 @@ export function CardHeader({ className, children, ...props }: Omit<ComponentProp
 
 export function CardTitle({ className, children, ...props }: Omit<ComponentProps<'h3'>, 'ref'>) {
   return (
-    <h3 className={cn('text-xl font-semibold tracking-tight', className)} {...props}>
+    <h3
+      className={cn('font-heading text-xl font-bold uppercase tracking-tight', className)}
+      {...props}
+    >
       {children}
     </h3>
   )

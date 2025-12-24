@@ -1,6 +1,29 @@
 import type { Story } from '@ladle/react'
 import { Heading, Text } from './Typography'
 
+export const FontFamilies: Story = () => (
+  <div className="space-y-8">
+    <div>
+      <Text size="sm" variant="muted" className="mb-2">
+        Headings use JetBrains Mono (monospace)
+      </Text>
+      <Heading size="xl">THE QUICK BROWN FOX</Heading>
+    </div>
+    <div>
+      <Text size="sm" variant="muted" className="mb-2">
+        Body text uses Inter (sans-serif)
+      </Text>
+      <Text size="lg">The quick brown fox jumps over the lazy dog.</Text>
+    </div>
+    <div>
+      <Text size="sm" variant="muted" className="mb-2">
+        Code uses JetBrains Mono (monospace)
+      </Text>
+      <code className="font-mono text-lg text-accent-secondary">const agent = new AIAgent()</code>
+    </div>
+  </div>
+)
+
 export const HeadingSizes: Story = () => (
   <div className="space-y-4">
     <Heading size="2xl">Heading 2XL</Heading>

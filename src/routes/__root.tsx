@@ -1,3 +1,4 @@
+import { EffectsContainer } from '@/components/effects'
 import { Footer, Navbar } from '@/components/navigation'
 import globalCss from '@/styles/global.css?url'
 import { HeadContent, Outlet, Scripts, createRootRoute } from '@tanstack/react-router'
@@ -15,7 +16,11 @@ export const Route = createRootRoute({
           'Agentic consulting & development studio delivering AI solutions with measurable impact.',
       },
     ],
-    links: [{ rel: 'stylesheet', href: globalCss }],
+    links: [
+      { rel: 'stylesheet', href: globalCss },
+      { rel: 'preconnect', href: 'https://fonts.googleapis.com' },
+      { rel: 'preconnect', href: 'https://fonts.gstatic.com', crossOrigin: 'anonymous' },
+    ],
   }),
   component: RootComponent,
   shellComponent: RootDocument,
@@ -23,13 +28,16 @@ export const Route = createRootRoute({
 
 function RootComponent() {
   return (
-    <div className="flex min-h-screen flex-col">
-      <Navbar />
-      <main className="flex-1">
-        <Outlet />
-      </main>
-      <Footer />
-    </div>
+    <>
+      <EffectsContainer />
+      <div className="relative z-10 flex min-h-screen flex-col">
+        <Navbar />
+        <main className="flex-1">
+          <Outlet />
+        </main>
+        <Footer />
+      </div>
+    </>
   )
 }
 
@@ -39,7 +47,7 @@ function RootDocument({ children }: { children: ReactNode }) {
       <head>
         <HeadContent />
       </head>
-      <body className="min-h-screen bg-background font-body text-foreground antialiased">
+      <body className="min-h-screen bg-background font-sans text-foreground antialiased">
         {children}
         <Scripts />
       </body>
