@@ -25,6 +25,8 @@ docs/plans/
 | 02 | [homepage-prototypes](./02-homepage-prototypes/) | Complete | Visual prototypes: Midnight (particles), Daybreak (geometric), Aurora (gradient mesh) |
 | 03 | [prototype-refinements](./03-prototype-refinements/) | Complete | Light/dark variants and animation alternatives for Midnight and Daybreak |
 | 04 | [daybreak-hybrid](./04-daybreak-hybrid/) | Complete | Hybrid 2D/3D dark theme with 5 color variants |
+| 05 | [phase1-completion](./05-phase1-completion/) | Complete | Services, Contact, and Home page expansion for MVP |
+| 06 | [brand-design](./06-brand-design/) | Complete | Daybreak-hybrid-mono theme implementation across site |
 
 ## Plan Lifecycle
 

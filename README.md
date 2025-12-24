@@ -4,6 +4,13 @@
 
 Marketing website for [Vibes](https://vibes.run) — the studio where AI agents come to life.
 
+## Features
+
+- **AI-powered chat** — Conversational contact form powered by Claude API
+- **Daybreak design system** — Monochrome geometric aesthetic with subtle animations
+- **Static site generation** — Fast page loads via TanStack Start + Cloudflare Pages
+- **Visual effects** — Geometric grids, noise overlays, and scanlines
+
 ## Tech Stack
 
 - **Framework:** TanStack Start (static site generation)
@@ -48,7 +55,8 @@ pnpm build
 src/
 ├── components/
 │   ├── ui/           # Reusable UI components (Button, Card, etc.)
-│   └── navigation/   # Navigation components (Navbar, Footer)
+│   ├── navigation/   # Navigation components (Navbar, Footer)
+│   └── effects/      # Visual effects (GeometricGrid, NoiseOverlay, etc.)
 ├── features/
 │   └── chat/         # Chat feature components
 ├── routes/           # TanStack Start file-based routes
