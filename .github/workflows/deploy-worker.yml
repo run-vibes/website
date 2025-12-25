@@ -44,4 +44,4 @@ jobs:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
           workingDirectory: workers/chat-api
-          command: d1 execute ${{ inputs.environment == 'staging' && 'vibes-chat-staging' || 'vibes-chat' }} --remote --config wrangler.toml --file=./schema.sql
+          command: d1 migrations apply ${{ inputs.environment == 'staging' && 'vibes-chat-staging' || 'vibes-chat' }} --remote --config wrangler.toml
