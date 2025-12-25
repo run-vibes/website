@@ -1,6 +1,5 @@
 import { render, screen } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
-import { Search, Target } from 'lucide-react'
 import { describe, expect, it, vi } from 'vitest'
 import { InterviewQuestion } from './InterviewQuestion'
 
@@ -10,8 +9,8 @@ const mockQuestion = {
   subtitle: 'Choose one',
   phase: 'opener' as const,
   options: [
-    { value: 'a', label: 'Option A', icon: Target },
-    { value: 'b', label: 'Option B', icon: Search },
+    { value: 'a', label: 'Option A' },
+    { value: 'b', label: 'Option B' },
   ],
 }
 

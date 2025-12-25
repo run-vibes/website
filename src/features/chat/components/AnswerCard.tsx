@@ -1,9 +1,9 @@
 import { cn } from '@/lib/cn'
-import type { LucideIcon } from 'lucide-react'
 import type { ComponentProps } from 'react'
 
 interface AnswerCardProps extends Omit<ComponentProps<'button'>, 'onSelect'> {
-  icon: LucideIcon
+  /** Letter prefix like "A", "B", "C" */
+  prefix: string
   label: string
   value: string
   selected?: boolean
@@ -11,7 +11,7 @@ interface AnswerCardProps extends Omit<ComponentProps<'button'>, 'onSelect'> {
 }
 
 export function AnswerCard({
-  icon: Icon,
+  prefix,
   label,
   value,
   selected = false,
@@ -27,22 +27,24 @@ export function AnswerCard({
       disabled={disabled}
       onClick={() => onSelect(value)}
       className={cn(
-        'flex flex-col items-center gap-2 p-4 rounded-xl border-2 transition-all',
-        'hover:shadow-md hover:-translate-y-0.5',
+        'flex items-center gap-3 px-4 py-3 rounded-lg border transition-all text-left w-full',
+        'hover:bg-accent/5',
         'focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2',
-        selected
-          ? 'border-accent bg-accent/10 shadow-md'
-          : 'border-border bg-card hover:border-accent/50',
-        disabled && 'opacity-50 cursor-not-allowed hover:translate-y-0 hover:shadow-none',
+        selected ? 'border-accent bg-accent/10' : 'border-border hover:border-accent/50',
+        disabled && 'opacity-50 cursor-not-allowed',
         className,
       )}
       {...props}
     >
-      <Icon
-        className={cn('w-8 h-8 stroke-[1.5]', selected ? 'text-accent' : 'text-muted-foreground')}
-        aria-hidden="true"
-      />
-      <span className="text-sm font-medium text-center leading-tight">{label}</span>
+      <span
+        className={cn(
+          'flex-shrink-0 w-7 h-7 rounded-full flex items-center justify-center text-sm font-semibold',
+          selected ? 'bg-accent text-accent-foreground' : 'bg-muted text-muted-foreground',
+        )}
+      >
+        {prefix}
+      </span>
+      <span className="text-sm">{label}</span>
     </button>
   )
 }

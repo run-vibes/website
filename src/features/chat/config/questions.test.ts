@@ -34,7 +34,6 @@ describe('INTERVIEW_QUESTIONS', () => {
       for (const opt of q.options) {
         expect(opt).toHaveProperty('value')
         expect(opt).toHaveProperty('label')
-        expect(opt).toHaveProperty('icon')
       }
     }
   })
