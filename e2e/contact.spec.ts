@@ -1,18 +1,38 @@
 import { expect, test } from '@playwright/test'
 
 test.describe('Contact Page', () => {
-  test('displays chat interface', async ({ page }) => {
+  test('displays interview interface', async ({ page }) => {
     await page.goto('/contact')
 
     // Check heading
     await expect(page.getByRole('heading', { name: /let's talk/i })).toBeVisible()
 
-    // Check welcome message
-    await expect(page.getByText(/what's the vision/i)).toBeVisible()
+    // Check welcome message in chat interface
+    await expect(page.getByText(/I'm here to learn/i)).toBeVisible()
 
-    // Check input and send button
-    await expect(page.getByPlaceholder(/type a message/i)).toBeVisible()
-    await expect(page.getByRole('button', { name: /send/i })).toBeVisible()
+    // Check first question appears as chat message
+    await expect(page.getByText(/what brings you to vibes today/i)).toBeVisible()
+
+    // Check suggestion chips are visible (answer options)
+    await expect(page.getByRole('button', { name: /specific AI project/i })).toBeVisible()
+    await expect(page.getByRole('button', { name: /exploring/i })).toBeVisible()
+  })
+
+  // Note: This test is skipped due to hydration timing issues with TanStack Start
+  // The interview navigation works correctly when JavaScript is fully hydrated
+  test.skip('can navigate through interview questions', async ({ page }) => {
+    await page.goto('/contact')
+
+    // Wait for first question to be visible in chat
+    await expect(page.getByText(/what brings you to vibes today/i)).toBeVisible()
+
+    // Click suggestion chip to answer first question
+    const firstOption = page.getByRole('button', { name: /specific AI project/i })
+    await expect(firstOption).toBeVisible()
+    await firstOption.click()
+
+    // User's answer should appear as chat message, then second question
+    await expect(page.getByText(/what's your perspective/i)).toBeVisible({ timeout: 10000 })
   })
 
   // Note: This test is skipped due to hydration timing issues with TanStack Start
@@ -30,13 +50,6 @@ test.describe('Contact Page', () => {
     await expect(submitButton).toBeVisible({ timeout: 10000 })
     await expect(page.locator('input[name="name"]')).toBeVisible()
     await expect(page.locator('input[name="email"]')).toBeVisible()
-  })
-
-  test('send button is disabled when input is empty', async ({ page }) => {
-    await page.goto('/contact')
-
-    const sendButton = page.getByRole('button', { name: /send/i })
-    await expect(sendButton).toBeDisabled()
   })
 
   test('displays contact info section', async ({ page }) => {

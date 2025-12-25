@@ -9,15 +9,18 @@ export interface Message {
 
 interface UseChatOptions {
   apiEndpoint?: string
+  interviewAnswers?: Record<string, string>
+  onLeadExtracted?: () => void
 }
 
 export function useChat(options: UseChatOptions = {}) {
-  const { apiEndpoint = '/api/chat' } = options
+  const { apiEndpoint = '/api/chat', interviewAnswers, onLeadExtracted } = options
   const [messages, setMessages] = useState<Message[]>([
     {
       id: 'welcome',
       role: 'assistant',
-      content: "Howdy! What's the vision? Let's talk about bringing your AI project to life.",
+      content:
+        "Great to connect! Based on what you've shared, I'd love to learn more about what you're looking to build. What's the main challenge you're trying to solve?",
       timestamp: new Date(),
     },
   ])
@@ -45,6 +48,8 @@ export function useChat(options: UseChatOptions = {}) {
           body: JSON.stringify({
             message: content,
             sessionId,
+            phase: 'chat',
+            interviewAnswers,
           }),
         })
 
@@ -66,13 +71,18 @@ export function useChat(options: UseChatOptions = {}) {
         }
 
         setMessages((prev) => [...prev, assistantMessage])
+
+        // Notify when lead is extracted (backend confirmed contact collection)
+        if (data.leadExtracted && onLeadExtracted) {
+          onLeadExtracted()
+        }
       } catch (err) {
         setError(err instanceof Error ? err.message : 'Something went wrong')
       } finally {
         setIsLoading(false)
       }
     },
-    [apiEndpoint, sessionId],
+    [apiEndpoint, sessionId, interviewAnswers, onLeadExtracted],
   )
 
   const clearMessages = useCallback(() => {

@@ -1,6 +1,7 @@
 import { callClaude, cleanResponse, isLeadComplete } from './claude'
 import { notifyTeam } from './email'
 import { extractLeadFromConversation, generatePRDDraft, saveLead } from './leads'
+import { calculateLeadScore, getLeadTier } from './scoring'
 import {
   checkRateLimit,
   getConversationHistory,
@@ -9,7 +10,53 @@ import {
   incrementMessageCount,
   saveMessage,
 } from './session'
-import type { ChatRequest, ChatResponse, Env } from './types'
+import type { ChatRequest, ChatResponse, Env, InterviewAnswers, LeadTierValue } from './types'
+
+// In-memory store for interview answers per session.
+// Limited to prevent unbounded growth in long-running isolates.
+// When limit is exceeded, oldest sessions are evicted (Map maintains insertion order).
+const MAX_CACHED_SESSIONS = 1000
+const sessionInterviewAnswers = new Map<string, InterviewAnswers>()
+
+// Valid interview question IDs for type-safe answer storage
+const VALID_QUESTION_IDS = new Set([
+  'intent',
+  'role',
+  'ai_maturity',
+  'working_style',
+  'timeline',
+  'company_size',
+  'industry',
+  'budget_range',
+])
+
+/**
+ * Safely stores a structured answer in the session's interview answers.
+ * Validates that the questionId is a known interview field before storing.
+ */
+function setStructuredAnswer(
+  sessionId: string,
+  questionId: string,
+  answer: string,
+): InterviewAnswers {
+  const answers = sessionInterviewAnswers.get(sessionId) ?? {}
+
+  if (VALID_QUESTION_IDS.has(questionId)) {
+    // Type assertion is safe here because we've validated questionId
+    ;(answers as Record<string, string>)[questionId] = answer
+  } else {
+    console.warn(`Invalid questionId "${questionId}" for session ${sessionId} - answer discarded`)
+  }
+
+  // Evict oldest sessions if limit exceeded (Map maintains insertion order)
+  while (sessionInterviewAnswers.size >= MAX_CACHED_SESSIONS) {
+    const oldestKey = sessionInterviewAnswers.keys().next().value
+    if (oldestKey) sessionInterviewAnswers.delete(oldestKey)
+  }
+
+  sessionInterviewAnswers.set(sessionId, answers)
+  return answers
+}
 
 function getCorsHeaders(origin: string): Record<string, string> {
   return {
@@ -33,35 +80,73 @@ export default {
   async fetch(request: Request, env: Env): Promise<Response> {
     const origin = env.ALLOWED_ORIGIN
 
-    // CORS preflight
     if (request.method === 'OPTIONS') {
       return new Response(null, { headers: getCorsHeaders(origin) })
     }
 
     const url = new URL(request.url)
 
-    // Health check
     if (url.pathname === '/health') {
       return jsonResponse({ status: 'ok', timestamp: new Date().toISOString() }, 200, origin)
     }
 
-    // Chat endpoint
     if (url.pathname === '/chat' && request.method === 'POST') {
       try {
         const body = (await request.json()) as ChatRequest
+        const clientIP = request.headers.get('CF-Connecting-IP') ?? 'unknown'
+        const ipHash = await hashIP(clientIP)
+        const session = await getOrCreateSession(env.DB, body.sessionId, ipHash)
 
+        // Store/update interview answers for this session
+        if (body.interviewAnswers) {
+          // Evict oldest sessions if limit exceeded
+          while (sessionInterviewAnswers.size >= MAX_CACHED_SESSIONS) {
+            const oldestKey = sessionInterviewAnswers.keys().next().value
+            if (oldestKey) sessionInterviewAnswers.delete(oldestKey)
+          }
+          const existing = sessionInterviewAnswers.get(session.id) ?? {}
+          sessionInterviewAnswers.set(session.id, { ...existing, ...body.interviewAnswers })
+        }
+
+        // Handle structured phase (no Claude call needed)
+        if (body.phase === 'structured' && body.structuredAnswer) {
+          setStructuredAnswer(
+            session.id,
+            body.structuredAnswer.questionId,
+            body.structuredAnswer.answer,
+          )
+
+          const response: ChatResponse = {
+            sessionId: session.id,
+          }
+          return jsonResponse(response, 200, origin)
+        }
+
+        // Handle post_contact phase (budget question)
+        if (body.phase === 'post_contact' && body.structuredAnswer) {
+          const answers = setStructuredAnswer(
+            session.id,
+            body.structuredAnswer.questionId,
+            body.structuredAnswer.answer,
+          )
+
+          const score = calculateLeadScore(answers)
+          const tier = getLeadTier(score)
+
+          const response: ChatResponse = {
+            sessionId: session.id,
+            leadScore: score,
+            leadTier: tier,
+            nextPhase: 'complete',
+          }
+          return jsonResponse(response, 200, origin)
+        }
+
+        // Chat phase - requires message
         if (!body.message?.trim()) {
           return jsonResponse({ error: 'Message is required' }, 400, origin)
         }
 
-        // Get client IP for session management
-        const clientIP = request.headers.get('CF-Connecting-IP') ?? 'unknown'
-        const ipHash = await hashIP(clientIP)
-
-        // Get or create session
-        const session = await getOrCreateSession(env.DB, body.sessionId, ipHash)
-
-        // Check rate limit
         const maxMessagesPerSession = Number.parseInt(env.MAX_MESSAGES_PER_SESSION, 10) || 20
         const { allowed } = await checkRateLimit(env.DB, session.id, maxMessagesPerSession)
 
@@ -78,38 +163,42 @@ export default {
           )
         }
 
-        // Save user message
         await saveMessage(env.DB, session.id, 'user', body.message)
         await incrementMessageCount(env.DB, session.id)
 
-        // Get conversation history
         const history = await getConversationHistory(env.DB, session.id)
+        const interviewAnswers = sessionInterviewAnswers.get(session.id)
+        const response = await callClaude(
+          env.ANTHROPIC_API_KEY,
+          history,
+          body.message,
+          interviewAnswers,
+        )
 
-        // Call Claude
-        const response = await callClaude(env.ANTHROPIC_API_KEY, history, body.message)
-
-        // Save assistant response
         await saveMessage(env.DB, session.id, 'assistant', response)
 
-        // Check if lead is complete
         let leadExtracted = false
+        let leadScore: number | undefined
+        let leadTier: LeadTierValue | undefined
+
         if (isLeadComplete(response)) {
           try {
-            // Extract lead data
             const lead = await extractLeadFromConversation(
               env.ANTHROPIC_API_KEY,
               await getConversationHistory(env.DB, session.id),
             )
 
-            // Generate PRD draft
             const prdDraft = generatePRDDraft(lead)
+            const result = await saveLead(env.DB, session.id, lead, prdDraft, interviewAnswers)
+            leadScore = result.score
+            leadTier = result.tier as LeadTierValue
 
-            // Save lead to database
-            await saveLead(env.DB, session.id, lead, prdDraft)
-
-            // Send notification email
             if (env.RESEND_API_KEY && env.NOTIFICATION_EMAIL) {
-              await notifyTeam(env.RESEND_API_KEY, env.NOTIFICATION_EMAIL, lead, prdDraft)
+              await notifyTeam(env.RESEND_API_KEY, env.NOTIFICATION_EMAIL, lead, prdDraft, {
+                interviewAnswers,
+                leadScore,
+                leadTier,
+              })
             }
 
             leadExtracted = true
@@ -122,6 +211,9 @@ export default {
           message: cleanResponse(response),
           sessionId: session.id,
           leadExtracted,
+          leadScore,
+          leadTier,
+          nextPhase: leadExtracted ? 'post_contact' : undefined,
         }
 
         return jsonResponse(chatResponse, 200, origin)

@@ -1,4 +1,5 @@
-import type { Message } from './types'
+import { calculateLeadScore, getLeadTier } from './scoring'
+import type { InterviewAnswers, Message } from './types'
 
 interface ExtractedLead {
   name: string | null
@@ -127,22 +128,42 @@ export async function saveLead(
   sessionId: string,
   lead: ExtractedLead,
   prdDraft: string,
-): Promise<void> {
+  interviewAnswers?: InterviewAnswers,
+): Promise<{ score: number; tier: string }> {
+  const score = interviewAnswers ? calculateLeadScore(interviewAnswers) : 0
+  const tier = getLeadTier(score)
+
   await db
     .prepare(
-      `INSERT INTO leads (session_id, name, email, company, project_summary, problem, vision, users, capabilities, constraints, prd_draft)
-       VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
-       ON CONFLICT(session_id) DO UPDATE SET
-         name = excluded.name,
-         email = excluded.email,
-         company = excluded.company,
-         project_summary = excluded.project_summary,
-         problem = excluded.problem,
-         vision = excluded.vision,
-         users = excluded.users,
-         capabilities = excluded.capabilities,
-         constraints = excluded.constraints,
-         prd_draft = excluded.prd_draft`,
+      `INSERT INTO leads (
+        session_id, name, email, company, project_summary, problem, vision,
+        users, capabilities, constraints, prd_draft,
+        intent, role, ai_maturity, working_style, timeline, company_size,
+        industry, budget_range, lead_score, lead_tier, interview_answers
+      )
+      VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+      ON CONFLICT(session_id) DO UPDATE SET
+        name = excluded.name,
+        email = excluded.email,
+        company = excluded.company,
+        project_summary = excluded.project_summary,
+        problem = excluded.problem,
+        vision = excluded.vision,
+        users = excluded.users,
+        capabilities = excluded.capabilities,
+        constraints = excluded.constraints,
+        prd_draft = excluded.prd_draft,
+        intent = excluded.intent,
+        role = excluded.role,
+        ai_maturity = excluded.ai_maturity,
+        working_style = excluded.working_style,
+        timeline = excluded.timeline,
+        company_size = excluded.company_size,
+        industry = excluded.industry,
+        budget_range = excluded.budget_range,
+        lead_score = excluded.lead_score,
+        lead_tier = excluded.lead_tier,
+        interview_answers = excluded.interview_answers`,
     )
     .bind(
       sessionId,
@@ -156,6 +177,19 @@ export async function saveLead(
       lead.capabilities,
       lead.constraints,
       prdDraft,
+      interviewAnswers?.intent ?? null,
+      interviewAnswers?.role ?? null,
+      interviewAnswers?.ai_maturity ?? null,
+      interviewAnswers?.working_style ?? null,
+      interviewAnswers?.timeline ?? null,
+      interviewAnswers?.company_size ?? null,
+      interviewAnswers?.industry ?? null,
+      interviewAnswers?.budget_range ?? null,
+      score,
+      tier,
+      interviewAnswers ? JSON.stringify(interviewAnswers) : null,
     )
     .run()
+
+  return { score, tier }
 }

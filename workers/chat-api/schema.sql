@@ -31,6 +31,18 @@ CREATE TABLE IF NOT EXISTS leads (
   capabilities TEXT,
   constraints TEXT,
   prd_draft TEXT,
+  -- Structured interview answers
+  intent TEXT,
+  role TEXT,
+  ai_maturity TEXT,
+  working_style TEXT,
+  timeline TEXT,
+  company_size TEXT,
+  industry TEXT,
+  budget_range TEXT,
+  lead_score INTEGER,
+  lead_tier TEXT,
+  interview_answers TEXT,
   created_at TEXT DEFAULT (datetime('now')),
   FOREIGN KEY (session_id) REFERENCES sessions(id)
 );
@@ -41,3 +53,5 @@ CREATE INDEX IF NOT EXISTS idx_sessions_created_at ON sessions(created_at);
 CREATE INDEX IF NOT EXISTS idx_messages_session_id ON messages(session_id);
 CREATE INDEX IF NOT EXISTS idx_leads_email ON leads(email);
 CREATE INDEX IF NOT EXISTS idx_leads_created_at ON leads(created_at);
+CREATE INDEX IF NOT EXISTS idx_leads_lead_tier ON leads(lead_tier);
+CREATE INDEX IF NOT EXISTS idx_leads_lead_score ON leads(lead_score);

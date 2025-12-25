@@ -29,6 +29,7 @@
       ".vinxi",
       ".output",
       ".tanstack",
+      ".wrangler",
       "*.gen.ts",
       "/nix/**",
       "test-results",
