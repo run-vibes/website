@@ -7,14 +7,14 @@ test.describe('Contact Page', () => {
     // Check heading
     await expect(page.getByRole('heading', { name: /let's talk/i })).toBeVisible()
 
-    // Check interview question (first question in the flow)
+    // Check welcome message in chat interface
+    await expect(page.getByText(/I'm here to learn/i)).toBeVisible()
+
+    // Check first question appears as chat message
     await expect(page.getByText(/what brings you to vibes today/i)).toBeVisible()
 
-    // Check progress indicator
-    await expect(page.getByText(/question 1 of 7/i)).toBeVisible()
-
-    // Check answer cards are visible
-    await expect(page.getByRole('button', { name: /specific.*project/i })).toBeVisible()
+    // Check suggestion chips are visible (answer options)
+    await expect(page.getByRole('button', { name: /specific AI project/i })).toBeVisible()
     await expect(page.getByRole('button', { name: /exploring/i })).toBeVisible()
   })
 
@@ -23,17 +23,16 @@ test.describe('Contact Page', () => {
   test.skip('can navigate through interview questions', async ({ page }) => {
     await page.goto('/contact')
 
-    // Wait for first question to be visible
+    // Wait for first question to be visible in chat
     await expect(page.getByText(/what brings you to vibes today/i)).toBeVisible()
 
-    // Answer first question
-    const firstOption = page.getByRole('button', { name: /I have a specific AI project in mind/i })
+    // Click suggestion chip to answer first question
+    const firstOption = page.getByRole('button', { name: /specific AI project/i })
     await expect(firstOption).toBeVisible()
     await firstOption.click()
 
-    // Should show second question
+    // User's answer should appear as chat message, then second question
     await expect(page.getByText(/what's your perspective/i)).toBeVisible({ timeout: 10000 })
-    await expect(page.getByText(/question 2 of 7/i)).toBeVisible()
   })
 
   // Note: This test is skipped due to hydration timing issues with TanStack Start
