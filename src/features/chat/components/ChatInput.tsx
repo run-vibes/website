@@ -9,6 +9,7 @@ interface ChatInputProps {
   onFocus?: () => void
   value?: string
   onChange?: (value: string) => void
+  placeholder?: string
 }
 
 export function ChatInput({
@@ -18,6 +19,7 @@ export function ChatInput({
   onFocus,
   value: controlledValue,
   onChange: controlledOnChange,
+  placeholder = 'Type a message...',
 }: ChatInputProps) {
   const [internalValue, setInternalValue] = useState('')
   const inputRef = useRef<HTMLInputElement>(null)
@@ -52,7 +54,7 @@ export function ChatInput({
         value={value}
         onChange={(e) => setValue(e.target.value)}
         onFocus={onFocus}
-        placeholder="Type a message..."
+        placeholder={placeholder}
         disabled={loading}
         className="flex-1 rounded-full border border-input bg-background px-4 py-2 text-base focus:outline-none focus:ring-2 focus:ring-ring disabled:opacity-50"
       />

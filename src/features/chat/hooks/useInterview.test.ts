@@ -122,4 +122,101 @@ describe('useInterview', () => {
     })
     expect(result.current.progress).toEqual({ current: 1, total: 7 })
   })
+
+  describe('messages array', () => {
+    it('starts with welcome message and first question', () => {
+      const { result } = renderHook(() => useInterview())
+      expect(result.current.messages).toHaveLength(2)
+      expect(result.current.messages[0].role).toBe('assistant')
+      expect(result.current.messages[0].content).toContain("I'm here to learn")
+      expect(result.current.messages[1].role).toBe('assistant')
+      expect(result.current.messages[1].content).toContain('brings you')
+    })
+
+    it('adds user message and next question when answering', () => {
+      const { result } = renderHook(() => useInterview())
+      act(() => {
+        result.current.answerQuestion('intent', 'specific_project', 'I have a project')
+      })
+      expect(result.current.messages).toHaveLength(4)
+      expect(result.current.messages[2].role).toBe('user')
+      expect(result.current.messages[2].content).toBe('I have a project')
+      expect(result.current.messages[3].role).toBe('assistant')
+    })
+
+    it('adds transition message when entering chat phase', () => {
+      const { result } = renderHook(() => useInterview())
+      // Answer all 7 structured questions
+      const answers = [
+        ['intent', 'specific_project'],
+        ['role', 'technical'],
+        ['ai_maturity', 'going_steady'],
+        ['working_style', 'embedded'],
+        ['timeline', 'quarter'],
+        ['company_size', 'startup'],
+        ['industry', 'saas'],
+      ]
+      for (const [id, value] of answers) {
+        act(() => {
+          result.current.answerQuestion(id, value)
+        })
+      }
+      const lastMessage = result.current.messages[result.current.messages.length - 1]
+      expect(lastMessage.role).toBe('assistant')
+      expect(lastMessage.content).toContain('tell me more')
+    })
+
+    it('adds budget question when contact collected', () => {
+      const { result } = renderHook(() => useInterview())
+      // Fast-forward to chat phase
+      const answers = [
+        ['intent', 'specific_project'],
+        ['role', 'technical'],
+        ['ai_maturity', 'going_steady'],
+        ['working_style', 'embedded'],
+        ['timeline', 'quarter'],
+        ['company_size', 'startup'],
+        ['industry', 'saas'],
+      ]
+      for (const [id, value] of answers) {
+        act(() => {
+          result.current.answerQuestion(id, value)
+        })
+      }
+      act(() => {
+        result.current.setContactCollected(true)
+      })
+      const lastMessage = result.current.messages[result.current.messages.length - 1]
+      expect(lastMessage.role).toBe('assistant')
+      expect(lastMessage.content).toContain('budget')
+    })
+
+    it('adds completion message after budget answered', () => {
+      const { result } = renderHook(() => useInterview())
+      // Fast-forward through all phases
+      const answers = [
+        ['intent', 'specific_project'],
+        ['role', 'technical'],
+        ['ai_maturity', 'going_steady'],
+        ['working_style', 'embedded'],
+        ['timeline', 'quarter'],
+        ['company_size', 'startup'],
+        ['industry', 'saas'],
+      ]
+      for (const [id, value] of answers) {
+        act(() => {
+          result.current.answerQuestion(id, value)
+        })
+      }
+      act(() => {
+        result.current.setContactCollected(true)
+      })
+      act(() => {
+        result.current.answerQuestion('budget_range', '50k_150k', '$50k - $150k')
+      })
+      const lastMessage = result.current.messages[result.current.messages.length - 1]
+      expect(lastMessage.role).toBe('assistant')
+      expect(lastMessage.content).toContain('reach out')
+    })
+  })
 })
