@@ -123,7 +123,7 @@ export function useInterview(): UseInterviewReturn {
           id: 'completion',
           role: 'assistant',
           content:
-            'Thanks for sharing your vision! A member of the Vibes team will reach out within 24 hours to discuss next steps.',
+            'Thanks for sharing your vision! A member of the Vibes team will reach out to discuss next steps.',
           timestamp: new Date(),
         }
         setMessages((prev) => [...prev, completionMessage])
