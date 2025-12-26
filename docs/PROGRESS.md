@@ -160,9 +160,21 @@ Track the progress of phases, milestones, and tasks for the Vibes website.
 
 ## Phase 3: Content & Credibility
 
-**Goal:** Industry pages, case studies, about page, newsletter integration.
+**Goal:** Industry pages, case studies, about page, newsletter integration, and product showcases.
 
 ### Milestones
+
+#### Integrations
+| Task | Status | PR |
+|------|--------|-----|
+| Newsletter provider setup | ⬜ Not Started | — |
+| Newsletter signup form | ⬜ Not Started | — |
+
+#### Products
+| Product | Status | Description |
+|---------|--------|-------------|
+| [Vibes](https://github.com/run-vibes/vibes) | ⬜ Not Started | Remote control for your Claude Code sessions |
+| Volt | 🔄 In Progress | Volatility analysis, simulation & trade execution system |
 
 #### Industry Pages
 | Page | Status | PR |
@@ -186,12 +198,6 @@ Track the progress of phases, milestones, and tasks for the Vibes website.
 |------|--------|-----|
 | About page | ⬜ Not Started | — |
 | Team section | ⬜ Not Started | — |
-
-#### Integrations
-| Task | Status | PR |
-|------|--------|-----|
-| Newsletter provider setup | ⬜ Not Started | — |
-| Newsletter signup form | ⬜ Not Started | — |
 
 ---
 
