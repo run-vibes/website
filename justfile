@@ -96,7 +96,7 @@ worker-deploy env:
 
 # Run chat worker locally
 worker-dev:
-    cd workers/chat-api && wrangler dev
+    cd workers/chat-api && wrangler dev --config wrangler.toml
 
 # Create D1 database for chat worker
 worker-db-create:

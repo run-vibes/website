@@ -1,4 +1,5 @@
 import { callClaude, cleanResponse, isLeadComplete } from './claude'
+import { addToWaitlist } from './waitlist'
 import { notifyTeam } from './email'
 import { extractLeadFromConversation, generatePRDDraft, saveLead } from './leads'
 import { calculateLeadScore, getLeadTier } from './scoring'
@@ -224,6 +225,30 @@ export default {
           500,
           origin,
         )
+      }
+    }
+
+    if (url.pathname === '/waitlist' && request.method === 'POST') {
+      try {
+        const body = (await request.json()) as { email: string; product: string }
+        const referrer = request.headers.get('Referer') ?? undefined
+        const userAgent = request.headers.get('User-Agent') ?? undefined
+
+        const result = await addToWaitlist(env.DB, {
+          email: body.email,
+          product: body.product,
+          referrer,
+          userAgent,
+        })
+
+        if (!result.success) {
+          return jsonResponse({ error: result.error }, 400, origin)
+        }
+
+        return jsonResponse({ success: true }, 200, origin)
+      } catch (err) {
+        console.error('Waitlist error:', err)
+        return jsonResponse({ error: 'Invalid request' }, 400, origin)
       }
     }
 
