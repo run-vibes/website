@@ -1,7 +1,7 @@
+import { ProductCard } from '@/components/products'
 import { Container } from '@/components/ui/Container'
 import { Section } from '@/components/ui/Section'
 import { Heading, Text } from '@/components/ui/Typography'
-import { ProductCard } from '@/components/products'
 import { createFileRoute } from '@tanstack/react-router'
 
 export const Route = createFileRoute('/products/')({

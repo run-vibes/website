@@ -1,5 +1,5 @@
-import { Button, Container, Heading, Section, Text } from '@/components/ui'
 import { BuiltByVibes, CodeBlock, FeatureGrid } from '@/components/products'
+import { Button, Container, Heading, Section, Text } from '@/components/ui'
 import { createFileRoute } from '@tanstack/react-router'
 
 export const Route = createFileRoute('/products/vibes')({
@@ -54,12 +54,20 @@ function VibesPage() {
 
           <div className="flex items-center justify-center gap-4">
             <Button asChild size="lg">
-              <a href="https://github.com/run-vibes/vibes" target="_blank" rel="noopener noreferrer">
+              <a
+                href="https://github.com/run-vibes/vibes"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
                 Star on GitHub
               </a>
             </Button>
             <Button variant="outline" asChild size="lg">
-              <a href="https://github.com/run-vibes/vibes#readme" target="_blank" rel="noopener noreferrer">
+              <a
+                href="https://github.com/run-vibes/vibes#readme"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
                 Documentation
               </a>
             </Button>

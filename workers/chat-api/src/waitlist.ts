@@ -36,7 +36,12 @@ export async function addToWaitlist(
          VALUES (?, ?, ?, ?)
          ON CONFLICT (email, product) DO NOTHING`,
       )
-      .bind(entry.email.toLowerCase(), entry.product, entry.referrer ?? null, entry.userAgent ?? null)
+      .bind(
+        entry.email.toLowerCase(),
+        entry.product,
+        entry.referrer ?? null,
+        entry.userAgent ?? null,
+      )
       .run()
 
     return { success: true }

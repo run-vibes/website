@@ -13,6 +13,9 @@ import { Route as ServicesRouteImport } from './routes/services'
 import { Route as ContactRouteImport } from './routes/contact'
 import { Route as BrandRouteImport } from './routes/brand'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as ProductsIndexRouteImport } from './routes/products/index'
+import { Route as ProductsVoltRouteImport } from './routes/products/volt'
+import { Route as ProductsVibesRouteImport } from './routes/products/vibes'
 
 const ServicesRoute = ServicesRouteImport.update({
   id: '/services',
@@ -34,18 +37,39 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ProductsIndexRoute = ProductsIndexRouteImport.update({
+  id: '/products/',
+  path: '/products/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ProductsVoltRoute = ProductsVoltRouteImport.update({
+  id: '/products/volt',
+  path: '/products/volt',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ProductsVibesRoute = ProductsVibesRouteImport.update({
+  id: '/products/vibes',
+  path: '/products/vibes',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/brand': typeof BrandRoute
   '/contact': typeof ContactRoute
   '/services': typeof ServicesRoute
+  '/products/vibes': typeof ProductsVibesRoute
+  '/products/volt': typeof ProductsVoltRoute
+  '/products': typeof ProductsIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/brand': typeof BrandRoute
   '/contact': typeof ContactRoute
   '/services': typeof ServicesRoute
+  '/products/vibes': typeof ProductsVibesRoute
+  '/products/volt': typeof ProductsVoltRoute
+  '/products': typeof ProductsIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -53,13 +77,38 @@ export interface FileRoutesById {
   '/brand': typeof BrandRoute
   '/contact': typeof ContactRoute
   '/services': typeof ServicesRoute
+  '/products/vibes': typeof ProductsVibesRoute
+  '/products/volt': typeof ProductsVoltRoute
+  '/products/': typeof ProductsIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/brand' | '/contact' | '/services'
+  fullPaths:
+    | '/'
+    | '/brand'
+    | '/contact'
+    | '/services'
+    | '/products/vibes'
+    | '/products/volt'
+    | '/products'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/brand' | '/contact' | '/services'
-  id: '__root__' | '/' | '/brand' | '/contact' | '/services'
+  to:
+    | '/'
+    | '/brand'
+    | '/contact'
+    | '/services'
+    | '/products/vibes'
+    | '/products/volt'
+    | '/products'
+  id:
+    | '__root__'
+    | '/'
+    | '/brand'
+    | '/contact'
+    | '/services'
+    | '/products/vibes'
+    | '/products/volt'
+    | '/products/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -67,6 +116,9 @@ export interface RootRouteChildren {
   BrandRoute: typeof BrandRoute
   ContactRoute: typeof ContactRoute
   ServicesRoute: typeof ServicesRoute
+  ProductsVibesRoute: typeof ProductsVibesRoute
+  ProductsVoltRoute: typeof ProductsVoltRoute
+  ProductsIndexRoute: typeof ProductsIndexRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -99,6 +151,27 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/products/': {
+      id: '/products/'
+      path: '/products'
+      fullPath: '/products'
+      preLoaderRoute: typeof ProductsIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/products/volt': {
+      id: '/products/volt'
+      path: '/products/volt'
+      fullPath: '/products/volt'
+      preLoaderRoute: typeof ProductsVoltRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/products/vibes': {
+      id: '/products/vibes'
+      path: '/products/vibes'
+      fullPath: '/products/vibes'
+      preLoaderRoute: typeof ProductsVibesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -107,6 +180,9 @@ const rootRouteChildren: RootRouteChildren = {
   BrandRoute: BrandRoute,
   ContactRoute: ContactRoute,
   ServicesRoute: ServicesRoute,
+  ProductsVibesRoute: ProductsVibesRoute,
+  ProductsVoltRoute: ProductsVoltRoute,
+  ProductsIndexRoute: ProductsIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

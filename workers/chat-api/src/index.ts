@@ -1,5 +1,4 @@
 import { callClaude, cleanResponse, isLeadComplete } from './claude'
-import { addToWaitlist } from './waitlist'
 import { notifyTeam } from './email'
 import { extractLeadFromConversation, generatePRDDraft, saveLead } from './leads'
 import { calculateLeadScore, getLeadTier } from './scoring'
@@ -12,6 +11,7 @@ import {
   saveMessage,
 } from './session'
 import type { ChatRequest, ChatResponse, Env, InterviewAnswers, LeadTierValue } from './types'
+import { addToWaitlist } from './waitlist'
 
 // In-memory store for interview answers per session.
 // Limited to prevent unbounded growth in long-running isolates.

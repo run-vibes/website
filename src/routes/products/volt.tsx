@@ -1,5 +1,5 @@
-import { Container, Heading, Section, Text } from '@/components/ui'
 import { BuiltByVibes, StatusBadge, WaitlistForm } from '@/components/products'
+import { Container, Heading, Section, Text } from '@/components/ui'
 import { createFileRoute } from '@tanstack/react-router'
 
 export const Route = createFileRoute('/products/volt')({
@@ -33,8 +33,8 @@ function VoltPage() {
             Volatility analysis, simulation & trade execution
           </Text>
           <Text size="lg" variant="muted" className="max-w-xl mx-auto mb-10">
-            A comprehensive platform for traders who want to analyze options volatility,
-            backtest strategies, and execute with confidence.
+            A comprehensive platform for traders who want to analyze options volatility, backtest
+            strategies, and execute with confidence.
           </Text>
 
           <WaitlistForm product="volt" />
@@ -51,11 +51,7 @@ function VoltPage() {
             {screenshots.map((screenshot) => (
               <div key={screenshot.caption} className="space-y-4">
                 <div className="rounded-xl overflow-hidden border border-border shadow-2xl">
-                  <img
-                    src={screenshot.src}
-                    alt={screenshot.caption}
-                    className="w-full"
-                  />
+                  <img src={screenshot.src} alt={screenshot.caption} className="w-full" />
                 </div>
                 <Text variant="muted" className="text-center text-sm">
                   {screenshot.caption}

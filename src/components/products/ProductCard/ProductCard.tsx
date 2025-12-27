@@ -1,7 +1,7 @@
-import { cn } from '@/lib/cn'
 import { Card, CardContent, Heading, Text } from '@/components/ui'
+import { cn } from '@/lib/cn'
 import { Link } from '@tanstack/react-router'
-import { StatusBadge, type ProductStatus } from '../StatusBadge'
+import { type ProductStatus, StatusBadge } from '../StatusBadge'
 
 interface ProductCardProps {
   name: string

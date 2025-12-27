@@ -1,5 +1,5 @@
-import { cn } from '@/lib/cn'
 import { Button, Input, Text } from '@/components/ui'
+import { cn } from '@/lib/cn'
 import { useState } from 'react'
 
 interface WaitlistFormProps {
@@ -42,7 +42,8 @@ export function WaitlistForm({ product, className }: WaitlistFormProps) {
     return (
       <div className={cn('text-center', className)}>
         <Text className="text-green-400">
-          You're on the list! We'll notify you when {product === 'volt' ? 'Volt' : 'Vibes'} launches.
+          You're on the list! We'll notify you when {product === 'volt' ? 'Volt' : 'Vibes'}{' '}
+          launches.
         </Text>
       </div>
     )
