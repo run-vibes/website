@@ -16,12 +16,7 @@ function VoltPage() {
       {/* Hero with atmospheric background */}
       <Section
         size="xl"
-        className="relative overflow-hidden"
-        style={{
-          backgroundImage: 'url(/images/products/volt-bg.svg)',
-          backgroundSize: 'cover',
-          backgroundPosition: 'center',
-        }}
+        className="relative overflow-hidden bg-[url('/images/products/volt-bg.svg')] bg-cover bg-center"
       >
         <div className="absolute inset-0 bg-gradient-to-b from-background/80 via-background/60 to-background" />
         <Container size="sm" className="relative text-center">
