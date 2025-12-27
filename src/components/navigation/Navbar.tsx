@@ -21,6 +21,12 @@ export function Navbar({ className }: NavbarProps) {
           </Link>
           <div className="flex items-center gap-8">
             <Link
+              to="/products"
+              className="font-heading text-sm font-medium uppercase tracking-wide text-muted-foreground transition-colors hover:text-foreground"
+            >
+              Products
+            </Link>
+            <Link
               to="/services"
               className="font-heading text-sm font-medium uppercase tracking-wide text-muted-foreground transition-colors hover:text-foreground"
             >
