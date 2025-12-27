@@ -2,7 +2,7 @@
 
 Track the progress of phases, milestones, and tasks for the Vibes website.
 
-**Last Updated:** 2025-12-24
+**Last Updated:** 2025-12-26
 
 ---
 
@@ -12,7 +12,7 @@ Track the progress of phases, milestones, and tasks for the Vibes website.
 |-------|------|--------|----------|
 | 1 | Foundation (MVP) | Complete | 100% |
 | 2 | Brand Identity | Complete | 100% |
-| 3 | Content & Credibility | Not Started | 0% |
+| 3 | Content & Credibility | In Progress | 20% |
 | 4 | Insights & Growth | Not Started | 0% |
 | 5 | Polish & Expand | Not Started | 0% |
 
@@ -171,10 +171,18 @@ Track the progress of phases, milestones, and tasks for the Vibes website.
 | Newsletter signup form | ⬜ Not Started | — |
 
 #### Products
-| Product | Status | Description |
-|---------|--------|-------------|
-| [Vibes](https://github.com/run-vibes/vibes) | ⬜ Not Started | Remote control for your Claude Code sessions |
-| Volt | 🔄 In Progress | Volatility analysis, simulation & trade execution system |
+| Product | Page Status | Product Status | Description |
+|---------|-------------|----------------|-------------|
+| [Vibes](https://github.com/run-vibes/vibes) | ✅ Done | 🔄 In Progress | Remote control for your Claude Code sessions |
+| Volt | ✅ Done | 🔄 In Progress | Volatility analysis, simulation & trade execution system |
+
+| Task | Status | PR |
+|------|--------|-----|
+| Products index route (/products) | ✅ Done | [#27](https://github.com/run-vibes/website/pull/27) |
+| Vibes product page (/products/vibes) | ✅ Done | [#27](https://github.com/run-vibes/website/pull/27) |
+| Volt teaser page (/products/volt) | ✅ Done | [#27](https://github.com/run-vibes/website/pull/27) |
+| Waitlist API endpoint | ✅ Done | [#27](https://github.com/run-vibes/website/pull/27) |
+| Product components (StatusBadge, CodeBlock, WaitlistForm, etc.) | ✅ Done | [#27](https://github.com/run-vibes/website/pull/27) |
 
 #### Industry Pages
 | Page | Status | PR |
@@ -244,6 +252,16 @@ Track the progress of phases, milestones, and tasks for the Vibes website.
 ---
 
 ## Recent Updates
+
+### 2025-12-26 (Products Pages)
+- Added product showcase pages for Vibes and Volt ([#27](https://github.com/run-vibes/website/pull/27))
+  - Products index page (/products) with product cards
+  - Vibes product page (/products/vibes) with install command, features, and "How It Works"
+  - Volt teaser page (/products/volt) with atmospheric design and waitlist form
+- Added waitlist API endpoint for email capture
+- Created 6 new product components: StatusBadge, CodeBlock, FeatureGrid, BuiltByVibes, WaitlistForm, ProductCard
+- Added Products link to navbar
+- Updated Phase 3 to In Progress
 
 ### 2025-12-24 (CI/CD Automation)
 - Simplified CI workflow - Cloudflare's GitHub integration handles Pages deployment (#19)
