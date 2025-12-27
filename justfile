@@ -110,11 +110,11 @@ worker-db-create-staging:
 worker-migrate env:
     #!/usr/bin/env bash
     if [ "{{env}}" = "production" ]; then
-        cd workers/chat-api && wrangler d1 migrations apply vibes-chat --remote
+        cd workers/chat-api && wrangler d1 migrations apply vibes-chat --remote --config wrangler.toml
     elif [ "{{env}}" = "staging" ]; then
-        cd workers/chat-api && wrangler d1 migrations apply vibes-chat-staging --remote
+        cd workers/chat-api && wrangler d1 migrations apply vibes-chat-staging --remote --config wrangler.toml
     elif [ "{{env}}" = "local" ]; then
-        cd workers/chat-api && wrangler d1 migrations apply vibes-chat --local
+        cd workers/chat-api && wrangler d1 migrations apply vibes-chat --local --config wrangler.toml
     else
         echo "Error: env must be 'staging', 'production', or 'local'"
         exit 1
